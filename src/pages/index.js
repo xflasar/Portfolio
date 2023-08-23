@@ -21,7 +21,7 @@ export default function App() {
         <span className="anchor" id="Skills"></span>
         <Skills />
         <span className="anchor" id="Projects"></span>
-        <Projects />
+        {/* Until fixed will be disabled! <Projects /> */}
         <span className="anchor" id="Contact"></span>
         <Contact />
       </main>

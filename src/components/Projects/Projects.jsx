@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import '../../assets/components/Projects/Projects.scss'
 
 const Projects = () => {
@@ -20,6 +20,56 @@ const Projects = () => {
     },
     {
       id: 4,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
+      image: "https://i.imgur.com/UqNMhpZ.png",
+      caption: "Tic Tac Toe",
+    },
+    {
+      id: 5,
       image: "https://i.imgur.com/UqNMhpZ.png",
       caption: "Tic Tac Toe",
     },
@@ -49,4 +99,4 @@ const Projects = () => {
   )
 }
 
-export default Projects;
+export default Projects
