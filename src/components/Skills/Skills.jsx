@@ -1,17 +1,31 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import '../../assets/components/Skills/Skills.scss'
 
-const Skills = () => {
-  const skillsData = [
-    { name: 'React.js', url: 'https://reactjs.org/', startDate: '2023-03-5' },
-    { name: 'HTML5', url: 'https://developer.mozilla.org/en-US/docs/Glossary/HTML5', startDate: '2021-06-15' },
-    { name: 'CSS3', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', startDate: '2021-06-15' },
-    { name: 'Node.js', url: 'https://nodejs.org/en/', startDate: '2023-03-5' },
-    { name: 'Java', url: 'https://www.w3schools.com/java/', startDate: '2023-08-1' },
-    { name: 'Vue.js', url: 'https://vuejs.org/', startDate: '2023-08-1' },
-    { name: 'MongoDB', url: 'https://www.mongodb.com/', startDate: '2023-02-15' },
-    { name: 'PostgreSQL', url: 'https://www.postgresql.org/', startDate: '2023-08-1' }
-  ]
+const Skills = ({projects, skills}) => {
+  const [selectedSkill, setSelectedSkill] = useState(null)
+  const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
+
+  const handleSkillClick = (skill) => {
+    setSelectedSkill(skill)
+    GetProjectsFromSkill(skill)
+  }
+
+  const GetProjectsFromSkill = (_skill) => {
+    const foundProjectsMatch = []
+    projects.map((project) => {
+      project.projectSkills.map((skill) => {
+        if (skill === _skill.name) { // This can be problematic with versioning like HTML -> HTML5, CSS -> CSS3
+          return foundProjectsMatch.push(project)
+        }
+        
+      })
+    })
+    setSkillSelectedProjects(foundProjectsMatch)
+  }
+
+  useEffect(() => {
+    console.log(skillSelectedProjects)
+  }, [skillSelectedProjects])
 
   const calculateExperience = (startDate) => {
     const currentDate = new Date()
@@ -30,21 +44,19 @@ const Skills = () => {
     return components.length > 0 ? components.join(', ') : 'Less than a day'
   }
 
-  
-
   return (
     <section className="skills">
       <h1>Skills</h1>
       <div className="skill-cloud">
-        {skillsData.map((skill, index) => {
-          const rotation = (360 / skillsData.length) * index
+        {skills.map((skill, index) => {
+          const rotation = (360 / skills.length) * index
           const radius = 15 // Spacing between items
           const translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180))
           const translateX = radius * Math.sin((rotation - 90) * (Math.PI / 180))
 
           return (
-            <a
-              href={`#skill-${skill.name}`}
+            <div
+              onClick={() => handleSkillClick(skill)}
               key={skill.name}
               className="skill"
               title={`Learning since ${skill.startDate}`}
@@ -55,14 +67,34 @@ const Skills = () => {
             >
               <span className="skill-name">{skill.name}</span>
               <span className="experience">{calculateExperience(skill.startDate)}</span>
-            </a>
+            </div>
           )
         })}
       </div>
       <div className="skill-project-extra">
         <h2> Project Extras</h2>
         <div className="skill-project-extra-content">
-          <p>Here will go projets from selected skill.</p>
+          <div className="skill-project-extra-content-holder">
+            {skillSelectedProjects &&
+              skillSelectedProjects.map((project, index) => (
+                <div className="skill-project-extra-content-item" key={index}>
+                  <img src={project.projectImage} alt={project.projectDescription} />
+                  <a href={project.projectLink} target="_blank" rel="noreferrer">
+                    <div className="content">
+                      <div className="content-title">
+                        <p>
+                          {project.projectName}
+                        </p>
+                      </div>
+                      <div className="content-description">
+                        <p>{project.projectDescription}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))
+            }
+          </div>
         </div>
       </div>
     </section>

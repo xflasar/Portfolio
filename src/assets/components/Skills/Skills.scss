@@ -1,8 +1,12 @@
 @import '../../variables.scss';
 
 .skills {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   color: white;
+  width: 100%;
+
   h1 {
     margin: 0;
     margin-top: 1rem;
@@ -12,15 +16,108 @@
     color: white;
     margin: 0;
   }
+
+  .skill-project-extra {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 80%;
+    top: 1rem;
+    left: 5%;
+    border-radius: 0.5rem;
+    color: white;
+
+    h1 {
+      position: relative;
+      text-align: center;
+      top: -2.5%;
+    }
+
+    &-content, &-content-holder {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      width: 98%;
+      height: 90%;
+      top: 2.5%;
+      left: 1%;
+      overflow-x: auto;
   
-  .skill-project-extra-content {
-    display: grid;
-    grid-template-columns: repeat(1fr);
-    grid-template-rows: repeat(1fr);
-    
-    &-item {
-      background-color: blue;
-      border-radius: 0.5rem;
+      -ms-overflow-style: none;
+  
+      &::-webkit-scrollbar {
+        height: 0.5rem;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: black;
+        border-radius: 5px;
+      }
+      
+      &-item {
+        position: relative;
+        width: 400px;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 1rem;
+        transition: all 0.3s ease-in-out;
+  
+        &:hover {
+          border: 1px solid #ffa600;
+        }
+  
+        a {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          text-decoration: none;
+          color: white;
+        }
+        
+        img {
+          position: relative;
+          object-fit: cover;
+          width: inherit;
+          height: 100%;
+          border-radius: 1rem;
+        }
+  
+        &:last-child {
+          margin-right: 0.5rem;
+        }
+  
+        .content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+  
+          &-title {
+            width: 100%;
+            text-align: center;
+            p {
+              font-size: x-large;
+              overflow-wrap: normal;
+            }
+          }
+
+          &-description {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            border-radius: 0 0 1rem 1rem;
+            background-color: rgba(0,0,0,0.8);
+            p {
+              overflow-wrap: normal;
+            }
+
+          }
+        }
+      }
     }
   }
 
@@ -32,9 +129,11 @@
       align-items: center;
       justify-content: center;
       height: 50vh;
+      top: 1rem;
+      margin-bottom: 1rem;
       position: relative;
-      overflow: hidden; 
-
+      overflow:visible; 
+      
       .skill {
         background-color: $color-primary;
         padding: 0.5rem 1rem;
@@ -67,5 +166,4 @@
     
   }
 }
-  
   
