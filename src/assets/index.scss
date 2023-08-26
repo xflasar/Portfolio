@@ -29,17 +29,6 @@ h1 {
   margin: 0;
 }
 
-section {
-  height: calc(100vh - 150px);
-}
-
-.anchor{
-  display:block;
-  height:100px; /* this is the height of your header */
-  margin-top:-100px; /* this is again negative value of the height of your header */
-  visibility:hidden;
-}
-
 // Style the scroll bar
 ::-webkit-scrollbar {
   width: 0px;

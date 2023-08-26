@@ -109,18 +109,8 @@ const skills = [
 export default function App() {
   return (
     <div className="App">
-      <Header />
-      <span className="anchor" id="Home"></span>
       <main>
         <Home />
-        <span className="anchor" id="About"></span>
-        <About />
-        <span className="anchor" id="Skills"></span>
-        <Skills projects={projects} skills={skills}/>
-        <span className="anchor" id="Projects"></span>
-        {/* Until fixed will be disabled! <Projects projects={projects}/> */}
-        <span className="anchor" id="Contact"></span>
-        <Contact />
       </main>
       <Footer />
     </div>
