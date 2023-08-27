@@ -1,45 +1,56 @@
-import React, { useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import '../../assets/components/Home/Home.scss'
 
 const Home = () => {
-  const bubblesCount = 20
+  const bubblesCountMax = 20
+  let bubblesFreeIndexes = Array.from({ length: bubblesCountMax }, (_, index) => index)
+
+  const [bubbles, setBubbles] = useState([])
 
   const handleBubblePop = (event) => {
-    const target = event.target
-    const bubbles = document.querySelectorAll('.dot')
-
-    bubbles.forEach(bubble => { 
-      if (bubble === target.children[0]) {
-        console.log('popped')
-        bubble.parentElement.remove()
+    if(event.target.getAttribute('name') === 'bubble')
+      {
+        event.target.className += 'popped'
+        setTimeout(() => {
+          event.target.classList.remove('popped')
+        }, 1500)
       }
-    })
   }
 
-  const handleCreateBubbles = () => {
-    const bubbles = []
-    for (let i = 0; i < bubblesCount; i++) {
-      bubbles.push(
-        <div key={i}><button type="button" key={i} className="dot" onClick={() => handleBubblePop()}></button></div>
-      )
+  const handleBubbleCreate = () => {
+    const newBubbles = []
+    const bFreeIndex = bubblesFreeIndexes.length
+    
+    for (let i = 0; i < bFreeIndex; i++){
+      console.log(bubblesFreeIndexes)
+      const newIndex = bubblesFreeIndexes.pop()
+      console.log(bubblesFreeIndexes)
+      console.log(newIndex)
+      const eParent = <div key={newIndex} data-id={newIndex} name='bubble'><button type="button" className=".dot" onClick={() => handleBubblePop()}></button></div>
+      
+      newBubbles.push(eParent)
     }
-    return bubbles;
-  }
 
+    setBubbles(newBubbles)
+  }
+  
+  useEffect(() => {
+    handleBubbleCreate()
+  }, [])
   useEffect(() => {
     document.addEventListener('click', handleBubblePop, {useCapture: true})
-
+    
     return () => {
       document.removeEventListener('click', handleBubblePop)
     }
   }, [])
+  
   return (
     <>
     <div className="wrapper">
-        {handleCreateBubbles()}
-      </div>
+      {bubbles && bubbles.map((bubble) => bubble)}
+    </div>
     <section className="home">
-      
       <h1>Home</h1>
       <div className='links'>
         <ul>
