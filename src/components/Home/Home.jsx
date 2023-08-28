@@ -22,10 +22,7 @@ const Home = () => {
     const bFreeIndex = bubblesFreeIndexes.length
     
     for (let i = 0; i < bFreeIndex; i++){
-      console.log(bubblesFreeIndexes)
       const newIndex = bubblesFreeIndexes.pop()
-      console.log(bubblesFreeIndexes)
-      console.log(newIndex)
       const eParent = <div key={newIndex} data-id={newIndex} name='bubble'><button type="button" className=".dot" onClick={() => handleBubblePop()}></button></div>
       
       newBubbles.push(eParent)
@@ -52,14 +49,27 @@ const Home = () => {
     </div>
     <section className="home">
       <h1>Home</h1>
-      <div className='links'>
-        <ul>
-          <a href='#Home'><li>Home</li></a>
-          <a href='#About'><li>About</li></a>
-          <a href='#Skills'><li>Skills</li></a>
-          <a href='#Projects'><li>Projects</li></a>
-          <a href='#Contact'><li>Contact</li></a>
-        </ul>
+      <div className="holder">
+        <div className="prof-image">
+          <img src="../prof-image.png"/>
+          <div className='links'>
+          <ul>
+            <a href='#Home' className="home-nav"><li>Home</li></a>
+            <a href='#About' className="about-nav"><li>About</li></a>
+            <a href='#Skills' className="skills-nav"><li>Skills</li></a>
+            <a href='#Projects' className="projects-nav"><li>Projects</li></a>
+            <a href='#Contact' className="contact-nav"><li>Contact</li></a>
+          </ul>
+        </div>
+        </div>
+        <h1 className="home-intro-h1">I'm Martin Flasar</h1>
+        <div className="home-intro">
+          <span>
+            FRONTEND DEVELOPER<br/>
+            WITH<br/>
+            A TOUCH OF BACKEND
+          </span>
+        </div>
       </div>
     </section>
     </>
