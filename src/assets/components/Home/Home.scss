@@ -129,15 +129,10 @@
 	      appearance: none;
 	      z-index: 0;
 
-        &.home-nav {
-          position: relative;
-          top: -10%;
-          left: -30%;
-        }
         &.about-nav {
           position: relative;
           top: -5%;
-          left: -5%;
+          left: -20%;
         }
         &.skills-nav {
           position: relative;
@@ -147,12 +142,12 @@
         &.projects-nav {
           position: relative;
           top: 5%;
-          left: -5%;
+          left: 5%;
         }
         &.contact-nav {
           position: relative;
           top: 10%;
-          left: -30%;
+          left: -25%;
         }
 
         &:hover {
@@ -416,4 +411,12 @@ div .dot {
     transform: scale(0);
     opacity: 0;
   }
+}
+
+.overlay-page {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(20, 20, 20, 0.6);
+  z-index: 99;
 }

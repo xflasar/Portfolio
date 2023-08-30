@@ -1,11 +1,6 @@
-import * as React from "react"
-import Home from "../components/Home/Home"
-import About from "../components/About/About"
-import Skills from "../components/Skills/Skills"
-import Projects from "../components/Projects/Projects"
-import Contact from "../components/Contact/Contact"
-import Footer from "../components/Footer/Footer"
-import Header from "../components/Header/Header"
+import * as React from 'react'
+import Home from '../components/Home/Home'
+import Footer from '../components/Footer/Footer'
 import '../assets/index.scss'
 
 const projects = [
@@ -110,7 +105,7 @@ export default function App() {
   return (
     <div className="App">
       <main>
-        <Home />
+        <Home projects={projects} skills={skills} />
       </main>
       <Footer />
     </div>

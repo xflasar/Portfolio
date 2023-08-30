@@ -1,11 +1,16 @@
 @import '../../variables.scss';
 
 .skills {
+  position: relative;
+  background-color: green;
   display: flex;
   flex-direction: column;
   text-align: center;
   color: white;
-  width: 100%;
+  width: 80%;
+  height: 90%;
+  left: 10%;
+  top: 5%;
 
   h1 {
     margin: 0;

@@ -1,11 +1,16 @@
-import React, {useState, useEffect } from "react";
+import React, {useState, useEffect } from 'react';
 import '../../assets/components/Home/Home.scss'
+import About from "../About/About"
+import Skills from "../Skills/Skills"
+import Projects from "../Projects/Projects"
+import Contact from "../Contact/Contact"
 
-const Home = () => {
+const Home = ({projects, skills}) => {
   const bubblesCountMax = 20
   let bubblesFreeIndexes = Array.from({ length: bubblesCountMax }, (_, index) => index)
 
   const [bubbles, setBubbles] = useState([])
+  const [activePage, setActivePage] = useState('')
 
   const handleBubblePop = (event) => {
     if(event.target.getAttribute('name') === 'bubble')
@@ -30,20 +35,65 @@ const Home = () => {
 
     setBubbles(newBubbles)
   }
+
+  const handleNavbar = (page) => {
+    setActivePage(page)
+  }
+
+  const handleNavbarRender = () => {
+    let element = <></>
+    switch (activePage) {
+      case 'about':
+        element = <div className='overlay-page'><About /></div>
+        break
+      case 'skills':
+        element = <div className='overlay-page'><Skills projects={projects} skills={skills} /></div>
+        break
+      case 'projects':
+        element = <div className='overlay-page'><Projects projects={projects} /></div>
+        break
+      case 'contact':
+        element = <div className='overlay-page'><Contact /></div>
+        break
+    }
+    return element
+  }
+
+  const handlePageOutsideClick = (event) => {
+    const clickTarget = event.target
+    if (!clickTarget) return
+
+    const aboutPage = document.querySelector('.about')
+    const aboutLink = document.querySelector('.about-nav')
+    const skillsPage = document.querySelector('.skills')
+    const skillsLink = document.querySelector('.skills-nav')
+    const projectsPage = document.querySelector('.projects')
+    const projectsLink = document.querySelector('.projects-nav')
+    const contactPage = document.querySelector('.contact')
+    const contactLink = document.querySelector('.contact-nav')
+
+    if ((aboutPage && !aboutPage.contains(clickTarget)) && (aboutLink && !aboutLink.contains(clickTarget)) || (skillsPage && !skillsPage.contains(clickTarget)) && (skillsLink && !skillsLink.contains(clickTarget)) || (projectsPage && !projectsPage.contains(clickTarget)) && (projectsLink && !projectsLink.contains(clickTarget)) || (contactPage && !contactPage.contains(clickTarget)) && (contactLink && !contactLink.contains(clickTarget))) {
+      setActivePage('')
+    }
+  }
   
   useEffect(() => {
     handleBubbleCreate()
   }, [])
+
   useEffect(() => {
+    document.addEventListener('click', handlePageOutsideClick)
     document.addEventListener('click', handleBubblePop, {useCapture: true})
     
     return () => {
+      document.removeEventListener('click', handlePageOutsideClick)
       document.removeEventListener('click', handleBubblePop)
     }
   }, [])
   
   return (
     <>
+    {handleNavbarRender()}
     <div className="wrapper">
       {bubbles && bubbles.map((bubble) => bubble)}
     </div>
@@ -54,11 +104,10 @@ const Home = () => {
           <img src="../prof-image.png"/>
           <div className='links'>
           <ul>
-            <a href='#Home' className="home-nav"><li>Home</li></a>
-            <a href='#About' className="about-nav"><li>About</li></a>
-            <a href='#Skills' className="skills-nav"><li>Skills</li></a>
-            <a href='#Projects' className="projects-nav"><li>Projects</li></a>
-            <a href='#Contact' className="contact-nav"><li>Contact</li></a>
+            <a href='#About' className="about-nav" onClick={() => handleNavbar('about')}><li>About</li></a>
+            <a href='#Skills' className="skills-nav" onClick={() => handleNavbar('skills')}><li>Skills</li></a>
+            <a href='#Projects' className="projects-nav" onClick={() => handleNavbar('projects')}><li>Projects</li></a>
+            <a href='#Contact' className="contact-nav" onClick={() => handleNavbar('contact')}><li>Contact</li></a>
           </ul>
         </div>
         </div>
