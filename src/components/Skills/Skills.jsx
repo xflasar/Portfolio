@@ -2,11 +2,9 @@ import React, {useEffect, useState} from "react"
 import '../../assets/components/Skills/Skills.scss'
 
 const Skills = ({projects, skills}) => {
-  const [selectedSkill, setSelectedSkill] = useState(null)
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
 
   const handleSkillClick = (skill) => {
-    setSelectedSkill(skill)
     GetProjectsFromSkill(skill)
   }
 
@@ -14,10 +12,7 @@ const Skills = ({projects, skills}) => {
     const foundProjectsMatch = []
     projects.map((project) => {
       project.projectSkills.map((skill) => {
-        if (skill === _skill.name) { // This can be problematic with versioning like HTML -> HTML5, CSS -> CSS3
-          return foundProjectsMatch.push(project)
-        }
-        
+        if (skill === _skill.name) return foundProjectsMatch.push(project)
       })
     })
     setSkillSelectedProjects(foundProjectsMatch)

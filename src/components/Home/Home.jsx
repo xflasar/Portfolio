@@ -40,7 +40,7 @@ const Home = ({projects, skills}) => {
     setActivePage(page)
   }
 
-  const handleNavbarRender = () => {
+  const handleNavbarPageRender = () => {
     let element = <></>
     switch (activePage) {
       case 'about':
@@ -93,7 +93,7 @@ const Home = ({projects, skills}) => {
   
   return (
     <>
-    {handleNavbarRender()}
+    {handleNavbarPageRender()}
     <div className="wrapper">
       {bubbles && bubbles.map((bubble) => bubble)}
     </div>
