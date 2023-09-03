@@ -29,36 +29,42 @@
     }
   }
 
-  .home-intro {
+  .home-intro-container {
     position: relative;
-    left: 55%;
-    height: 2.5rem;
-    overflow: hidden;
-    width: 25rem;
-    
-    &-h1 {
+    width: 50%;
+    left: 50%;
+    font-size: 4vw;
+    top: -10rem;
+
+    h1 {
+      font-size: 4vw;
+    }
+
+    .home-intro {
       position: relative;
-      left: 55%;
+      height: 5vw;
+      overflow: hidden;
     }
-  }
-  .home-intro > span {
-    position: absolute;
-    top: 0;
-    animation: slide 6s 1s infinite;
-    font-weight: bold;
-    font-size: xx-large;
-    color: white;
-    
-  }
-  @keyframes slide {
-    0% {
-      top: 0rem;
+
+    .home-intro > span {
+      position: absolute;
+      top: 0;
+      animation: slide 6s 1s infinite;
+      font-weight: bold;
+      color: white;
+      
     }
-    40.5% {
-      top: -2.2rem;
-    }
-    85% {
-      top: -4.4rem;
+
+    @keyframes slide {
+      0% {
+        top: 0vw;
+      }
+      40.5% {
+        top: -4.5vw;
+      }
+      85% {
+        top: -9vw;
+      }
     }
   }
 
@@ -430,7 +436,7 @@ div .dot {
     overflow: hidden;
   }
   25% {
-    
+
   }
   50% {
     width: 10%;

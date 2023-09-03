@@ -120,13 +120,16 @@ const Home = ({projects, skills}) => {
           </ul>
         </div>
         </div>
-        <h1 className="home-intro-h1">I'm Martin Flasar</h1>
-        <div className="home-intro">
-          <span>
-            FRONTEND DEVELOPER<br/>
-            WITH<br/>
-            A TOUCH OF BACKEND
-          </span>
+        <div className='home-intro-container'>
+          <h1 className="home-intro-h1">I'm Martin Flasar</h1>
+          <div className="home-intro">
+            <span>
+              FRONTEND DEVELOPER<br/>
+              WITH<br/>
+              
+              A TOUCH OF BACKEND
+            </span>
+          </div>
         </div>
       </div>
     </section>
