@@ -11,6 +11,7 @@ const Home = ({projects, skills}) => {
 
   const [bubbles, setBubbles] = useState([])
   const [activePage, setActivePage] = useState('')
+  const [clickedButton, setClickedButton] = useState(null)
 
   const handleBubblePop = (event) => {
     if(event.target.getAttribute('name') === 'bubble')
@@ -36,24 +37,32 @@ const Home = ({projects, skills}) => {
     setBubbles(newBubbles)
   }
 
-  const handleNavbar = (page) => {
+  const handleNavbar = (event, page) => {
     setActivePage(page)
+    setClickedButton(event.target)
   }
 
   const handleNavbarPageRender = () => {
-    let element = <></>
+    let element = null
+    if(!clickedButton) return
+    const dom = Array.from(document.getElementsByTagName('li')).filter((element) => {
+      return Array.from(element.childNodes).some((child) => {
+        return child.data === clickedButton.innerText;
+      })
+    })
+
     switch (activePage) {
       case 'about':
-        element = <div className='overlay-page'><About /></div>
+        element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><About /></div>
         break
       case 'skills':
-        element = <div className='overlay-page'><Skills projects={projects} skills={skills} /></div>
+        element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><Skills projects={projects} skills={skills} /></div>
         break
       case 'projects':
-        element = <div className='overlay-page'><Projects projects={projects} /></div>
+        element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><Projects projects={projects} /></div>
         break
       case 'contact':
-        element = <div className='overlay-page'><Contact /></div>
+        element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><Contact /></div>
         break
     }
     return element
@@ -104,10 +113,10 @@ const Home = ({projects, skills}) => {
           <img src="../prof-image.png"/>
           <div className='links'>
           <ul>
-            <a href='#About' className="about-nav" onClick={() => handleNavbar('about')}><li>About</li></a>
-            <a href='#Skills' className="skills-nav" onClick={() => handleNavbar('skills')}><li>Skills</li></a>
-            <a href='#Projects' className="projects-nav" onClick={() => handleNavbar('projects')}><li>Projects</li></a>
-            <a href='#Contact' className="contact-nav" onClick={() => handleNavbar('contact')}><li>Contact</li></a>
+            <a href='#About' className="about-nav" onClick={(e) => handleNavbar(e, 'about')}><li>About</li></a>
+            <a href='#Skills' className="skills-nav" onClick={(e) => handleNavbar(e, 'skills')}><li>Skills</li></a>
+            <a href='#Projects' className="projects-nav" onClick={(e) => handleNavbar(e, 'projects')}><li>Projects</li></a>
+            <a href='#Contact' className="contact-nav" onClick={(e) => handleNavbar(e, 'contact')}><li>Contact</li></a>
           </ul>
         </div>
         </div>
