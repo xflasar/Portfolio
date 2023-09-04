@@ -29,7 +29,7 @@ const Home = ({projects, skills}) => {
     
     for (let i = 0; i < bFreeIndex; i++){
       const newIndex = bubblesFreeIndexes.pop()
-      const eParent = <div key={newIndex} data-id={newIndex} name='bubble'><button type="button" className=".dot" onClick={() => handleBubblePop()}></button></div>
+      const eParent = <div key={newIndex} data-id={newIndex} name='bubble'><button type="button" className="dot" onClick={() => handleBubblePop()}></button></div>
       
       newBubbles.push(eParent)
     }
@@ -126,7 +126,7 @@ const Home = ({projects, skills}) => {
             <span>
               FRONTEND DEVELOPER<br/>
               WITH<br/>
-              
+
               A TOUCH OF BACKEND
             </span>
           </div>
