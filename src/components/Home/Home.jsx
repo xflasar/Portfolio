@@ -5,6 +5,9 @@ import Skills from "../Skills/Skills"
 import Projects from "../Projects/Projects"
 import Contact from "../Contact/Contact"
 
+// Needs refactoring
+// custom hooks
+
 const Home = ({projects, skills}) => {
   const bubblesCountMax = 20
   let bubblesFreeIndexes = Array.from({ length: bubblesCountMax }, (_, index) => index)
@@ -42,6 +45,13 @@ const Home = ({projects, skills}) => {
     setClickedButton(event.target)
   }
 
+  const handleAboutCallback = (childValue) => {
+    setActivePage('')
+    setTimeout(() => {
+      setActivePage(childValue)
+    }, 500)
+  }
+
   const handleNavbarPageRender = () => {
     let element = null
     if(!clickedButton) return
@@ -53,7 +63,7 @@ const Home = ({projects, skills}) => {
 
     switch (activePage) {
       case 'about':
-        element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><About /></div>
+        element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><About callback={handleAboutCallback}/></div>
         break
       case 'skills':
         element = <div className='overlay-page' style={{left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px`}}><Skills projects={projects} skills={skills} /></div>
