@@ -1,85 +1,8 @@
-import React from "react"
+import React from 'react'
+import PropTypes from 'prop-types'
 import '../../assets/components/Projects/Projects.scss'
 
-const Projects = () => {
-  const projectData = [
-    {
-      id: 1,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 2,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 3,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 4,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    },
-    {
-      id: 5,
-      image: "https://i.imgur.com/UqNMhpZ.png",
-      caption: "Tic Tac Toe",
-    }
-  ]
-
+const Projects = ({ projectsData }) => {
   const handleItemClick = (project) => () => {
     console.log(project)
   }
@@ -88,7 +11,8 @@ const Projects = () => {
     <section className="projects">
       <h1>Projects</h1>
       <div className="project-grid">
-        {projectData.map((project) => (
+        {console.log(projectsData)}
+        {projectsData.map((project) => (
           <div className="project-item" key={project.id} onClick={handleItemClick(project)}>
             <img src={project.image} alt={project.caption} />
             <div className="caption">{project.caption}</div>
@@ -97,6 +21,10 @@ const Projects = () => {
       </div>
     </section>
   )
+}
+
+Projects.propTypes = {
+  projectsData: PropTypes.array
 }
 
 export default Projects

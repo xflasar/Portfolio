@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import '../../assets/components/Skills/Skills.scss'
 
-const Skills = ({projects, skills}) => {
+const Skills = ({ projectsData, skills }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
 
   const handleSkillClick = (skill) => {
@@ -10,10 +11,12 @@ const Skills = ({projects, skills}) => {
 
   const GetProjectsFromSkill = (_skill) => {
     const foundProjectsMatch = []
-    projects.map((project) => {
+    projectsData.map((project) => {
       project.projectSkills.map((skill) => {
         if (skill === _skill.name) return foundProjectsMatch.push(project)
+        return skill
       })
+      return project
     })
     setSkillSelectedProjects(foundProjectsMatch)
   }
@@ -25,24 +28,24 @@ const Skills = ({projects, skills}) => {
   const calculateExperience = (startDate) => {
     const currentDate = new Date()
     const start = new Date(startDate)
-    
+
     const years = currentDate.getFullYear() - start.getFullYear()
     const months = currentDate.getMonth() - start.getMonth()
     const days = currentDate.getDate() - start.getDate()
-  
+
     const yearString = years > 0 ? `${years} year${years > 1 ? 's' : ''}` : ''
     const monthString = months > 0 ? `${months} month${months > 1 ? 's' : ''}` : ''
     const dayString = days > 0 ? `${days} day${days > 1 ? 's' : ''}` : ''
-  
+
     const components = [yearString, monthString, dayString].filter(component => component !== '')
-  
+
     return components.length > 0 ? components.join(', ') : 'Less than a day'
   }
 
   return (
     <section className="skills">
       <h1>Skills</h1>
-      <div className="skill-cloud">
+      <div className={skillSelectedProjects !== null ? 'skill-cloud non-main' : 'skill-cloud'}>
         {skills.map((skill, index) => {
           const rotation = (360 / skills.length) * index
           const radius = 15 // Spacing between items
@@ -66,12 +69,14 @@ const Skills = ({projects, skills}) => {
           )
         })}
       </div>
-      <div className="skill-project-extra">
+      <div className={skillSelectedProjects ? 'skill-project-extra active' : 'skill-project-extra'}>
         <h2> Project Extras</h2>
         <div className="skill-project-extra-content">
           <div className="skill-project-extra-content-holder">
-            {skillSelectedProjects &&
-              skillSelectedProjects.map((project, index) => (
+            {skillSelectedProjects
+              ? skillSelectedProjects.length === 0
+                ? (<p>No Projects assigned!</p>)
+                : skillSelectedProjects.map((project, index) => (
                 <div className="skill-project-extra-content-item" key={index}>
                   <img src={project.projectImage} alt={project.projectDescription} />
                   <a href={project.projectLink} target="_blank" rel="noreferrer">
@@ -87,13 +92,19 @@ const Skills = ({projects, skills}) => {
                     </div>
                   </a>
                 </div>
-              ))
+                ))
+              : null
             }
           </div>
         </div>
       </div>
     </section>
   )
+}
+
+Skills.propTypes = {
+  projectsData: PropTypes.array,
+  skills: PropTypes.array
 }
 
 export default Skills
