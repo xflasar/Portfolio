@@ -45,8 +45,10 @@
     &.active {
       display: block;
       transition: all ease-in-out 2s;
-      h1 {
+      
+      h2 {
         position: relative;
+        color: #55aaff;
         animation: loadTrans 2s 1 normal forwards;
       }
 
@@ -62,10 +64,10 @@
       }
     }
 
-    h1 {
+    h2 {
       position: relative;
       text-align: center;
-      top: -2.5%;
+      top: 1rem;
     }
 
     &-content, &-content-holder {
@@ -77,6 +79,21 @@
       top: 2.5%;
       left: 1%;
       overflow-x: auto;
+      animation:landingAnimC 2s cubic-bezier(1, 0, 0, 1) 0s 1 normal forwards;
+
+      @keyframes landingAnimC {
+        0% {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+        50% {
+          opacity: 0.5;
+          transform: translateX(0);
+        }
+        100% {
+          opacity: 1;
+        }
+      }
   
       -ms-overflow-style: none;
   
@@ -96,9 +113,34 @@
         margin-bottom: 1rem;
         border-radius: 1rem;
         transition: all 0.3s ease-in-out;
+        opacity: 0;
+
+        @keyframes landingAnimI {
+          0% {
+            opacity: 0;
+            transform: translateY(-100%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
   
         &:hover {
-          border: 1px solid #ffa600;
+          border: 1px solid #55aaff;
+
+          .content {
+            &-description {
+              height: 50%;
+              max-height: 50%;
+              overflow-y: auto;
+
+              p {
+                max-height: 100%;
+                -webkit-line-clamp: initial;
+              }
+            }
+          }
         }
   
         a {
@@ -127,6 +169,7 @@
           height: 100%;
           display: flex;
           flex-direction: column;
+          overflow: hidden;
   
           &-title {
             width: 100%;
@@ -142,11 +185,21 @@
             left: 0;
             bottom: 0;
             width: 100%;
+            max-height: 11.5%;
             text-align: center;
             border-radius: 0 0 1rem 1rem;
             background-color: rgba(0,0,0,0.8);
+            transition: max-height 0.3s ease-in-out;
             p {
-              overflow-wrap: normal;
+              display: -webkit-box;
+              position: relative;
+              width: calc(98%);
+              max-height: 100%;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              margin-left: 1%;
+              overflow:hidden;
+              text-overflow: ellipsis;
             }
 
           }

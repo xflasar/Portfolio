@@ -17,6 +17,8 @@ const Home = ({ projects, skills }) => {
   const [activePage, setActivePage] = useState('')
   const [clickedButton, setClickedButton] = useState(null)
 
+  const [loadStyleState, setLoadStyleState] = useState(true)
+
   const handleBubblePop = (event) => {
     if (event.target.getAttribute('name') === 'bubble') {
       event.target.className += 'popped'
@@ -98,6 +100,28 @@ const Home = ({ projects, skills }) => {
   }
 
   useEffect(() => {
+    const linkClasses = ['.about-nav', '.skills-nav', '.projects-nav', '.contact-nav']
+
+    const updateLinkClass = async (index) => {
+      if (index < linkClasses.length) {
+        const link = document.querySelector(linkClasses[index])
+
+        if (link) {
+          await new Promise((resolve) => setTimeout(resolve, 1000))
+          link.removeAttribute('class')
+          link.className = linkClasses[index].split('.')[1]
+
+          updateLinkClass(index + 1)
+        }
+      }
+    }
+
+    setTimeout(() => {
+      updateLinkClass(0)
+    }, 2000)
+  }, [])
+
+  useEffect(() => {
     handleBubbleCreate()
   }, [])
 
@@ -124,10 +148,10 @@ const Home = ({ projects, skills }) => {
           <img src="../prof-image.png"/>
           <div className='links'>
           <ul>
-            <a href='#About' className="about-nav" onClick={(e) => handleNavbar(e, 'about')}><li>About</li></a>
-            <a href='#Skills' className="skills-nav" onClick={(e) => handleNavbar(e, 'skills')}><li>Skills</li></a>
-            <a href='#Projects' className="projects-nav" onClick={(e) => handleNavbar(e, 'projects')}><li>Projects</li></a>
-            <a href='#Contact' className="contact-nav" onClick={(e) => handleNavbar(e, 'contact')}><li>Contact</li></a>
+            <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><li>About</li></a>
+            <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><li>Skills</li></a>
+            <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><li>Projects</li></a>
+            <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><li>Contact</li></a>
           </ul>
         </div>
         </div>

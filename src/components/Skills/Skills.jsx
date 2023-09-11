@@ -4,6 +4,7 @@ import '../../assets/components/Skills/Skills.scss'
 
 const Skills = ({ projectsData, skills }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
+  const [shouldAnimate, setShouldAnimate] = useState(false)
 
   const handleSkillClick = (skill) => {
     GetProjectsFromSkill(skill)
@@ -22,7 +23,19 @@ const Skills = ({ projectsData, skills }) => {
   }
 
   useEffect(() => {
-    console.log(skillSelectedProjects)
+    if (skillSelectedProjects && skillSelectedProjects.length === 0) {
+      setShouldAnimate(false)
+      return
+    }
+
+    if (shouldAnimate) {
+      setShouldAnimate(false)
+      setTimeout(() => {
+        setShouldAnimate(true)
+      }, 100)
+    } else {
+      setShouldAnimate(true)
+    }
   }, [skillSelectedProjects])
 
   const calculateExperience = (startDate) => {
@@ -77,7 +90,7 @@ const Skills = ({ projectsData, skills }) => {
               ? skillSelectedProjects.length === 0
                 ? (<p>No Projects assigned!</p>)
                 : skillSelectedProjects.map((project, index) => (
-                <div className="skill-project-extra-content-item" key={index}>
+                <div className="skill-project-extra-content-item" key={index} style={shouldAnimate ? { animation: `landingAnimI 1s cubic-bezier(0.075, 0.82, 0.165, 1) ${index * 0.5}s 1 normal forwards` } : null}>
                   <img src={project.projectImage} alt={project.projectDescription} />
                   <a href={project.projectLink} target="_blank" rel="noreferrer">
                     <div className="content">
