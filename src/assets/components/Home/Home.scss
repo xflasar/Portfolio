@@ -3,7 +3,6 @@
   height: calc(100vh - 50px);
   z-index: -2;
   
-  
  .holder {
   position: absolute;
   top:0;
@@ -40,6 +39,7 @@
       border-radius: 50%;
       pointer-events: auto;
       animation: loadingAnimImg 2s cubic-bezier(0.7, 0, 0.84, 0) 0s 1 normal forwards;
+      opacity: 0;
         
       @keyframes loadingAnimImg {
         0% {
@@ -111,17 +111,15 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 15%;
+    top: -5%;
     left: 100%;
-    width: 40%;
-    height: 70%;
     pointer-events: none;
 
     ul {
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 5vh;
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -132,13 +130,17 @@
       a {
         position: relative;
         display: flex;
-        color: black;
+        color: white;
         text-decoration: none;
         transition: all 0.3s ease-in-out;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        min-width: 100px;
+        max-width: 170px;
+        width: 17vh;
+        min-height: 100px;
+        max-height: 170px;
+        height: 17vh;
         pointer-events: auto;
 
         &.load-in {
@@ -176,7 +178,7 @@
         &, &::after {
           border-radius: 50%;
         }
-
+        background-color: rgba(57, 48, 219, 0.2);
         background-image:
 		    radial-gradient(8% 8% at 22% 28%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
 		    radial-gradient(8% 8% at 23% 27%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
@@ -186,12 +188,9 @@
 		    radial-gradient(8% 8% at 27% 23%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
 		    radial-gradient(8% 8% at 28% 22%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%);
 	      box-shadow:
-		          0 -0.06em 0.1em hsl(0,90%,100%) inset,
-		          0 -0.15em 0.4em hsl(232, 90%, 45%) inset,
-		          0 0.05em 0.05em hsl(210, 90%, 45%) inset,
-		          0.05em 0 0.1em hsl(0,90%,100%) inset,
-		          -0.05em 0 0.1em hsl(0,90%,100%) inset,
-		          0 0.1em 0.4em hsl(225, 100%, 33%) inset;
+		          0 -0.06em 0.1em #3930DB inset,
+		          0 -0.15em 0.4em #305EDB inset,
+		          0 0.05em 0.05em #3930DB inset;
 	      cursor: pointer;
         transform-style: preserve-3d;
 	      transition-property: box-shadow, transform, width, height;
@@ -223,14 +222,11 @@
         }
 
         &:hover {
-          background-color: rgba(15, 101, 120, 0.5);
+          background-color: rgba(57, 48, 219, 0.5);
           box-shadow:
 		          0 -0.06em 0.1em hsl(226, 100%, 56%) inset,
 		          0 -0.15em 0.4em hsl(242, 90%, 45%) inset,
-		          0 0.05em 0.05em hsl(196, 90%, 45%) inset,
-		          0.05em 0 0.1em hsl(0,90%,100%) inset,
-		          -0.05em 0 0.1em hsl(0,90%,100%) inset,
-		          0 0.1em 0.4em hsl(235, 100%, 27%) inset;
+		          0 0.05em 0.05em hsl(196, 90%, 45%) inset;
           animation: openPage 1s cubic-bezier(0.075, 0.82, 0.165, 1) 1 normal;
 
           @keyframes openPage {
@@ -258,16 +254,20 @@
 
 // Bubble animation
 .wrapper {
-  height: 100%;
-  width: 100%;
+  height: calc(100vh - 50px);
+  width: 100vw;
   background: linear-gradient(180deg, #04fafd, 5%, #119dff, 50%, #030423);
   position: absolute;
+  overflow: hidden;
   z-index: 0;
 
   div {
     height: 60px;
     width: 60px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+		          0 -0.06em 0.1em #3930DB inset,
+		          0 -0.15em 0.4em #305EDB inset,
+		          0 0.05em 0.05em #30CADB inset;
     border-radius: 50px;
     position: absolute;
     top: 10%;
@@ -518,4 +518,102 @@
       overflow: auto;
     }
   }
+}
+
+@media screen and (max-width: 600px) {
+  .home {
+   .holder {
+    .home-intro-container {
+      width: 90%;
+      left: 5%;
+      top: 35%;
+      font-size: 4vh;
+  
+      .home-intro-h1 {
+        font-size: 4vh;
+        color: white;
+      }
+
+      .home-intro {
+        height: 5vh;
+      }
+
+      @keyframes slide {
+        0% {
+          top: 0vh;
+        }
+        40.5% {
+          top: -4.5vh;
+        }
+        85% {
+          top: -9vh;
+        }
+      }
+    }
+
+      .prof-image {
+      position: relative;
+      top: 5%;
+      left: 25%;
+      width: 50%;
+      height:50%;
+    
+      .links {
+      position: relative;
+      top: -5%;
+      left: -45%;
+      width: 90vw;
+      pointer-events: none;
+  
+      ul {
+        position: relative;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 30% 30%;
+        list-style-type: none;
+        justify-items: center;
+        justify-content: center;
+  
+        a {
+          min-width: 60px;
+          max-width: 150px;
+          width: 10vh;
+          min-height: 60px;
+          max-height: 150px;
+          height: 10vh;
+  
+          &.about-nav {
+            position: relative;
+            top: 0;
+            left: 0;
+            grid-column: 1;
+            grid-row: 1;
+          }
+          &.skills-nav {
+            position: relative;
+            top: 0;
+            left: 0;
+            grid-column: 1;
+            grid-row: 2;
+          }
+          &.projects-nav {
+            position: relative;
+            top: 0;
+            left: 0;
+            grid-column: 2;
+            grid-row: 1;
+          }
+          &.contact-nav {
+            position: relative;
+            top: 0;
+            left: 0;
+            grid-column: 2;
+            grid-row: 2;
+          }
+        }
+      }
+      }
+    }
+  }
+}
 }
