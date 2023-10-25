@@ -17,8 +17,6 @@ const Home = ({ projects, skills }) => {
   const [activePage, setActivePage] = useState('')
   const [clickedButton, setClickedButton] = useState(null)
 
-  const [loadStyleState, setLoadStyleState] = useState(true)
-
   const handleBubblePop = (event) => {
     if (event.target.getAttribute('name') === 'bubble') {
       event.target.className += 'popped'
@@ -142,7 +140,6 @@ const Home = ({ projects, skills }) => {
       {bubbles && bubbles.map((bubble) => bubble)}
     </div>
     <section className="home">
-      <h1>Home</h1>
       <div className="holder">
         <div className="prof-image">
           <img src="../prof-image.png"/>

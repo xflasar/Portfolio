@@ -109,3 +109,117 @@
     }
   }
 }
+
+@media (orientation: portrait) {
+  .about {
+    position: relative;
+    width: 80%;
+    height: 90%;
+    left: 10%;
+    top: 5%;
+    overflow: hidden;
+    color: white;
+    background: #000010 ;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  
+    h1 {
+      text-align: center;
+      font-size: 3.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      font-family: 'Helvetica', sans-serif;
+      margin-bottom: 10px;
+      color: #275ea3;
+    }
+  
+    .about-container{
+      position: relative;
+      width: 90%;
+      height: 100%;
+      overflow: auto;
+      left: 4.5%;
+  
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1rem;
+    
+      &::-webkit-scrollbar {
+        width: 0.2rem;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #9ecfe7;
+        border-radius: 5px;
+      }
+  
+      h2 {
+        font-family: 'Helvetica', sans-serif;
+        margin-bottom: 10px;
+        color: #9ecfe7;
+      }
+  
+      section {
+        margin: 20px 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: #4b5354;
+        transition: background-color 0.3s ease;
+        position: relative;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        min-height: 15vh;
+  
+        a {
+          color: #55ffaa;
+          text-decoration: none;
+          cursor: pointer;
+        }
+  
+        p {
+          color: #e9edef;
+          font-size: 1rem;
+        }
+  
+        &:first-child {
+          margin-top: 0;
+        }
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+  
+      .about-container-workflow {
+        .key-point {
+          margin-bottom: 20px;
+          color: #f0f0f0;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+        
+        .key-word {
+          font-weight: bold;
+          color: #ffcc33;
+          font-size: 1.3rem;
+          flex: 2;
+          margin-right: 10px;
+        }
+        
+        .key-description {
+          font-size: 1.2rem;
+          flex: 3;
+        }
+      }
+    }
+  }
+}

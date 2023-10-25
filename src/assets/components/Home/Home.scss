@@ -2,14 +2,16 @@
   width: 100%;
   height: calc(100vh - 50px);
   z-index: -2;
+  overflow: auto;
   
  .holder {
-  position: absolute;
-  top:0;
+  position: relative;
+  top:-50px;
   pointer-events: none;
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100vh - 50px);
   animation: loadInHomeHolder 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s 1 normal forwards;
+  padding: 1rem 0;
 
   @keyframes loadInHomeHolder {
     0% {
@@ -61,9 +63,10 @@
     width: 50%;
     left: 50%;
     font-size: 4vw;
-    top: -10rem;
+    top: 0;
     animation: loadIn 2s cubic-bezier(0.075, 0.82, 0.165, 1) 1.5s 1 normal forwards;
     opacity: 0;
+
     @keyframes loadIn {
       0% {
         transform: translateX(50%);
@@ -520,10 +523,31 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-height: 600px),(height > width) {
   .home {
-   .holder {
-    .home-intro-container {
+    .holder {
+      .prof-image {
+        .links {
+          height: 70vh;
+          
+          ul {
+            gap:0 !important;
+            a {
+              min-width: 50px;
+              min-height: 50px;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media (orientation: portrait) {
+  .home {
+    .holder {
+      .home-intro-container {
       width: 90%;
       left: 5%;
       top: 35%;
@@ -549,9 +573,9 @@
           top: -9vh;
         }
       }
-    }
+      }
 
-      .prof-image {
+        .prof-image {
       position: relative;
       top: 5%;
       left: 25%;
@@ -613,7 +637,7 @@
         }
       }
       }
+      }
     }
   }
-}
 }
