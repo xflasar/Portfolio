@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../../assets/components/About/About.scss'
 
-const About = ({ redirectTo }) => {
+const About = ({ redirectTo, onCloseOverlay }) => {
   const handleFreelancingProjectsClick = () => {
     redirectTo('projects')
   }
 
   return (
     <div className="about">
+      <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
       <h1>About</h1>
       <div className="about-container">
         <section className="about-container-intro">
@@ -44,7 +45,8 @@ const About = ({ redirectTo }) => {
 }
 
 About.propTypes = {
-  redirectTo: PropTypes.func
+  redirectTo: PropTypes.func,
+  onCloseOverlay: PropTypes.func
 }
 
 export default About

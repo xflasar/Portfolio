@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../assets/components/Skills/Skills.scss'
 
-const Skills = ({ projectsData, skills }) => {
+const Skills = ({ projectsData, skills, onCloseOverlay }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
   const [shouldAnimate, setShouldAnimate] = useState(false)
 
@@ -57,6 +57,7 @@ const Skills = ({ projectsData, skills }) => {
 
   return (
     <section className="skills">
+      <button type='button' className='close-button' onClick={onCloseOverlay}>X</button>
       <h1>Skills</h1>
       <div className={skillSelectedProjects !== null ? 'skill-cloud non-main' : 'skill-cloud'}>
         {skills.map((skill, index) => {
@@ -117,7 +118,8 @@ const Skills = ({ projectsData, skills }) => {
 
 Skills.propTypes = {
   projectsData: PropTypes.array,
-  skills: PropTypes.array
+  skills: PropTypes.array,
+  onCloseOverlay: PropTypes.func
 }
 
 export default Skills

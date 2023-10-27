@@ -19,9 +19,18 @@ const Home = ({ projects, skills }) => {
 
   const handleBubblePop = (event) => {
     if (event.target.getAttribute('name') === 'bubble') {
-      event.target.className += 'popped'
+      const elementPos = event.target.getBoundingClientRect()
+
+      // Preseting values to use current from animation
+      event.target.style.top = `${elementPos.y}px`
+      event.target.style.left = `${elementPos.x}px`
+      event.target.style.width = `${elementPos.width}px`
+      event.target.style.height = `${elementPos.height}px`
+      event.target.className = 'popped'
+
       setTimeout(() => {
-        event.target.classList.remove('popped')
+        event.target.removeAttribute('class')
+        event.target.removeAttribute('style')
       }, 1500)
     }
   }
@@ -52,28 +61,28 @@ const Home = ({ projects, skills }) => {
     }, 500)
   }
 
+  const handleOverlayClose = () => {
+    setActivePage('')
+  }
+
   const handleNavbarPageRender = () => {
     let element = null
+
     if (!clickedButton) return
-    const dom = Array.from(document.getElementsByTagName('li')).filter((element) => {
-      return Array.from(element.childNodes).some((child) => {
-        return child.data === clickedButton.innerText
-      })
-    })
+    const dom = clickedButton
 
     switch (activePage) {
       case 'about':
-        element = <div className='overlay-page' style={{ left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback}/></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} /></div>
         break
       case 'skills':
-        element = <div className='overlay-page' style={{ left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px` }}><Skills projectsData={projects} skills={skills} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills projectsData={projects} skills={skills} onCloseOverlay={handleOverlayClose} /></div>
         break
       case 'projects':
-        console.log(projects)
-        element = <div className='overlay-page' style={{ left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px` }}><Projects projectsData={projects} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Projects projectsData={projects} onCloseOverlay={handleOverlayClose} /></div>
         break
       case 'contact':
-        element = <div className='overlay-page' style={{ left: `${dom[0].getBoundingClientRect().x}px`, top: `${dom[0].getBoundingClientRect().y}px` }}><Contact /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Contact onCloseOverlay={handleOverlayClose} /></div>
         break
     }
     return element
@@ -95,6 +104,14 @@ const Home = ({ projects, skills }) => {
     if (((aboutPage && !aboutPage.contains(clickTarget)) && (aboutLink && !aboutLink.contains(clickTarget))) || ((skillsPage && !skillsPage.contains(clickTarget)) && (skillsLink && !skillsLink.contains(clickTarget))) || ((projectsPage && !projectsPage.contains(clickTarget)) && (projectsLink && !projectsLink.contains(clickTarget))) || ((contactPage && !contactPage.contains(clickTarget)) && (contactLink && !contactLink.contains(clickTarget)))) {
       setActivePage('')
     }
+  }
+
+  const handleNavAnimation = (event) => {
+    event.target.classList.add('hoverAnim')
+  }
+
+  const handleNavAnimationEnd = (event) => {
+    event.target.classList.remove('hoverAnim')
   }
 
   useEffect(() => {
@@ -125,31 +142,28 @@ const Home = ({ projects, skills }) => {
 
   useEffect(() => {
     document.addEventListener('click', handlePageOutsideClick)
-    document.addEventListener('click', handleBubblePop, { useCapture: true })
+    const bubblePopEventListener = document.addEventListener('click', handleBubblePop, { useCapture: true })
 
     return () => {
       document.removeEventListener('click', handlePageOutsideClick)
-      document.removeEventListener('click', handleBubblePop)
+      document.removeEventListener('click', bubblePopEventListener)
     }
   }, [])
 
   return (
     <>
     {handleNavbarPageRender()}
+    <section className="home">
     <div className="wrapper">
       {bubbles && bubbles.map((bubble) => bubble)}
     </div>
-    <section className="home">
-      <div className="holder">
         <div className="prof-image">
           <img src="../prof-image.png"/>
           <div className='links'>
-          <ul>
-            <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><li>About</li></a>
-            <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><li>Skills</li></a>
-            <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><li>Projects</li></a>
-            <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><li>Contact</li></a>
-          </ul>
+            <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd}/><span className='nav-title'>About</span></a>
+            <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Skills</span></a>
+            <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Projects</span></a>
+            <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Contact</span></a>
         </div>
         </div>
         <div className='home-intro-container'>
@@ -163,7 +177,6 @@ const Home = ({ projects, skills }) => {
             </span>
           </div>
         </div>
-      </div>
     </section>
     </>
   )

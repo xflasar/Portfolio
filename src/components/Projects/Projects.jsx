@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import '../../assets/components/Projects/Projects.scss'
 import ProjectsList from './projectsList'
 
-const Projects = ({ projectsData }) => {
+const Projects = ({ projectsData, onCloseOverlay }) => {
   const [personalProjects, setPersonalProjects] = useState([])
   const [freelanceProjects, setFreelanceProjects] = useState([])
   const [sideSmallProjects, setSideSmallProjects] = useState([])
@@ -43,6 +43,7 @@ const Projects = ({ projectsData }) => {
 
   return (
     <section className="projects">
+      <button type='button' className='close-button' onClick={onCloseOverlay}>X</button>
       <h1>Projects</h1>
       {projectsData && (
         <div className="project-container">
@@ -57,7 +58,8 @@ const Projects = ({ projectsData }) => {
 }
 
 Projects.propTypes = {
-  projectsData: PropTypes.array
+  projectsData: PropTypes.array,
+  onCloseOverlay: PropTypes.func
 }
 
 export default Projects
