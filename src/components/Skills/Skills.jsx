@@ -5,12 +5,21 @@ import '../../assets/components/Skills/Skills.scss'
 const Skills = ({ projectsData, skills, onCloseOverlay }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
   const [shouldAnimate, setShouldAnimate] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [antiSkillsBoxCollision, setAntiSkillsBoxCollision] = useState(() => {
+    try {
+      document.createEvent('TouchEvent')
+      return true
+    } catch (e) {
+      return false
+    }
+  })
 
   const handleSkillClick = (skill) => {
-    GetProjectsFromSkill(skill)
+    getProjectsFromSkill(skill)
   }
 
-  const GetProjectsFromSkill = (_skill) => {
+  const getProjectsFromSkill = (_skill) => {
     const foundProjectsMatch = []
     projectsData.map((project) => {
       project.projectSkills.map((skill) => {
@@ -21,6 +30,30 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
     })
     setSkillSelectedProjects(foundProjectsMatch)
   }
+
+  useEffect(() => {
+    function antiSkillsBoxCollisionFn () {
+      if (window.innerHeight < 1050) {
+        setAntiSkillsBoxCollision(true)
+      } else {
+        setAntiSkillsBoxCollision(false)
+      }
+    }
+
+    if (isMobile) {
+      if (antiSkillsBoxCollision) {
+        window.removeEventListener('resize', antiSkillsBoxCollisionFn)
+        setAntiSkillsBoxCollision(false)
+      }
+      return
+    }
+
+    window.addEventListener('resize', antiSkillsBoxCollisionFn)
+
+    return () => {
+      window.removeEventListener('resize', antiSkillsBoxCollisionFn)
+    }
+  }, [skillSelectedProjects, isMobile])
 
   useEffect(() => {
     if (skillSelectedProjects && skillSelectedProjects.length === 0) {
@@ -37,6 +70,52 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
       setShouldAnimate(true)
     }
   }, [skillSelectedProjects])
+
+  useEffect(() => {
+    function handleOrientationChange (event) {
+      const { matches, media } = event
+      if (matches) {
+        console.log('changed')
+
+        const fnTouch = function () {
+          try {
+            document.createEvent('TouchEvent')
+            return true
+          } catch (e) {
+            return false
+          }
+        }
+
+        if (fnTouch) {
+          setAntiSkillsBoxCollision(true)
+        } else {
+          setAntiSkillsBoxCollision(false)
+        }
+
+        if (media === '(orientation: portrait)') {
+          setIsMobile(true)
+        } else if (media === '(orientation: landscape)') {
+          setIsMobile(false)
+        }
+      }
+    }
+    const mediaQueryPortrait = window.matchMedia('(orientation: portrait)')
+    const mediaQueryLandscape = window.matchMedia('(orientation: landscape)')
+
+    if (mediaQueryPortrait.matches) {
+      setIsMobile(true)
+    } else if (mediaQueryLandscape.matches) {
+      setIsMobile(false)
+    }
+
+    mediaQueryPortrait.addEventListener('change', handleOrientationChange)
+    mediaQueryLandscape.addEventListener('change', handleOrientationChange)
+
+    return () => {
+      mediaQueryPortrait.removeEventListener('change', handleOrientationChange)
+      mediaQueryLandscape.removeEventListener('change', handleOrientationChange)
+    }
+  }, [])
 
   const calculateExperience = (startDate) => {
     const currentDate = new Date()
@@ -57,14 +136,17 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
 
   return (
     <section className="skills">
-      <button type='button' className='close-button' onClick={onCloseOverlay}>X</button>
+      <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
       <h1>Skills</h1>
-      <div className={skillSelectedProjects !== null ? 'skill-cloud non-main' : 'skill-cloud'}>
+      <div className={skillSelectedProjects !== null ? antiSkillsBoxCollision ? 'skill-cloud non-main box-collision-active' : 'skill-cloud non-main' : antiSkillsBoxCollision ? 'skill-cloud box-collision-active' : 'skill-cloud'}>
         {skills.map((skill, index) => {
           const rotation = (360 / skills.length) * index
-          const radius = 15 // Spacing between items
-          const translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180))
-          const translateX = radius * Math.sin((rotation - 90) * (Math.PI / 180))
+          const radius = 18 // Spacing between items
+          let translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180))
+          if (skillSelectedProjects) {
+            translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180)) * 0.7
+          }
+          const translateX = radius * Math.sin((rotation - 90) * (Math.PI / 180)) * 1.2
 
           return (
             <div
@@ -72,11 +154,17 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
               key={skill.name}
               className="skill"
               title={`Learning since ${skill.startDate}`}
-              style={{
-                transform: `translate(${translateX}vw, ${translateY}vh)`,
-                transitionDelay: `${index * 50}ms`
-              }}
+              style={isMobile
+                ? null
+                : antiSkillsBoxCollision
+                  ? null
+                  : {
+                      transform: `translate(${translateX}vw, ${translateY}vh)`,
+                      transitionDelay: `${index * 50}ms`
+                    }
+              }
             >
+              <img src={skill.image} />
               <span className="skill-name">{skill.name}</span>
               <span className="experience">{calculateExperience(skill.startDate)}</span>
             </div>
@@ -84,7 +172,7 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
         })}
       </div>
       <div className={skillSelectedProjects ? 'skill-project-extra active' : 'skill-project-extra'}>
-        <h2> Project Extras</h2>
+        <h2>Projects</h2>
         <div className="skill-project-extra-content">
           <div className="skill-project-extra-content-holder">
             {skillSelectedProjects

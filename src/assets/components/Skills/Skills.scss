@@ -4,6 +4,7 @@
   position: relative;
   width: 80%;
   height: 90%;
+  min-height: 950px;
   left: 10%;
   top: 5%;
   overflow: hidden;
@@ -19,15 +20,100 @@
     text-align: center;
     font-size: 3.5rem;
     padding-top: 1rem;
-    padding-bottom: 1rem;
     font-family: 'Helvetica', sans-serif;
-    margin-bottom: 10px;
     color: #55aaff;
   }
 
   h2 {
     color: white;
     margin: 0;
+  }
+
+  .skill-cloud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    top: 15%;
+    margin: 1rem;
+    position: relative;
+    overflow:visible;
+    transition: all 0.3s ease-in-out;
+
+    &.box-collision-active {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      justify-content: initial;
+      align-items: initial;
+      overflow: hidden;
+      overflow-y: auto;
+
+      .skill {
+        position: relative;
+        min-width: 200px;
+        min-height: 100px;
+        width: auto;
+        height: auto;
+        padding: 0;
+
+        img {
+          width: 75%;
+        }
+      }
+
+    }
+
+    &.non-main {
+      top: 1rem;
+    }
+    
+    .skill {
+      background-color: #333;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      color: #55aaff;
+      font-size: 1.2rem;
+      text-decoration: none;
+      position: absolute;
+      transition: transform 0.3s;
+      cursor: pointer;
+      width: 150px;
+      height: 75px;
+      text-align: center;
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: 1fr 1fr;
+      justify-items: center;
+      align-items: center;
+      
+      img {
+        object-fit: scale-down;
+        height: 75%;
+        grid-column: 2;
+        grid-row: span 2;
+      }
+
+      &:hover {
+        background-color: rgba(51, 51, 51, 0.5);
+      }
+
+
+      .skill-name {
+        display: block;
+        margin-bottom: 0.5rem;
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .experience {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.8);
+        grid-column: 1;
+        grid-row: 2;
+      }
+    }
   }
 
   .skill-project-extra {
@@ -78,6 +164,7 @@
       height: 90%;
       top: 2.5%;
       left: 1%;
+      overflow: hidden;
       overflow-x: auto;
       animation:landingAnimC 2s cubic-bezier(1, 0, 0, 1) 0s 1 normal forwards;
 
@@ -94,8 +181,6 @@
           opacity: 1;
         }
       }
-  
-      -ms-overflow-style: none;
   
       &::-webkit-scrollbar {
         height: 0.5rem;
@@ -207,55 +292,48 @@
       }
     }
   }
+}
 
-  // There needs to be an lower screen version
-  @media screen and (min-width: 1280px) and (min-height: 680px) {
-  
+@media screen and (orientation: portrait) {
+  .skills {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #000010 ;
+    border-radius: 0;
+    overflow: auto;
+    
     .skill-cloud {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 50vh;
-      top: 15%;
-      margin-bottom: 1rem;
-      position: relative;
-      overflow:visible;
-      transition: all 0.3s ease-in-out;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      justify-content: initial;
+      align-items: initial;
+      overflow: hidden;
+      overflow-y: auto;
 
-      &.non-main {
-        top: 1rem;
-      }
-      
       .skill {
-        background-color: #333;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        color: #55aaff;
-        font-size: 1.2rem;
-        text-decoration: none;
-        position: absolute;
-        transition: transform 0.3s;
-        cursor: pointer;
-        width: 100px;
-        text-align: center;
-        &:hover {
-          background-color: darke($color-primary,  10%);
-          transform: translateY(-5px);
-        }
-        .skill-name {
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-        .experience {
-          font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.8);
+        position: relative;
+        width: 100%;
+        height: 100px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img {
+          object-fit: scale-down;
+          width: 100%;
+          height: 50%;
         }
       }
     }
-  }
 
-  @media screen and (max-width: 1279px) and (max-height: 679px) {
-    
+    .skill-project-extra {
+      height: calc(100% - 30vh - 1rem);
+      margin-bottom: 2rem;
+    }
   }
 }
-  

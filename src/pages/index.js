@@ -104,14 +104,14 @@ const projects = [
 ]
 
 const skills = [
-  { name: 'React.js', url: 'https://reactjs.org/', startDate: '2023-03-5' },
-  { name: 'HTML5', url: 'https://developer.mozilla.org/en-US/docs/Glossary/HTML5', startDate: '2021-06-15' },
-  { name: 'CSS3', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', startDate: '2021-06-15' },
-  { name: 'Node.js', url: 'https://nodejs.org/en/', startDate: '2023-03-5' },
-  { name: 'Java', url: 'https://www.w3schools.com/java/', startDate: '2023-08-1' },
-  { name: 'Vue.js', url: 'https://vuejs.org/', startDate: '2023-08-1' },
-  { name: 'MongoDB', url: 'https://www.mongodb.com/', startDate: '2023-02-15' },
-  { name: 'PostgreSQL', url: 'https://www.postgresql.org/', startDate: '2023-08-1' }
+  { name: 'React.js', url: 'https://reactjs.org/', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', startDate: '2023-03-5' },
+  { name: 'HTML5', url: 'https://developer.mozilla.org/en-US/docs/Glossary/HTML5', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png', startDate: '2021-06-15' },
+  { name: 'CSS3', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg', startDate: '2021-06-15' },
+  { name: 'Node.js', url: 'https://nodejs.org/en/', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg', startDate: '2023-03-5' },
+  { name: 'Java', url: 'https://www.w3schools.com/java/', image: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png', startDate: '2023-08-1' },
+  { name: 'Vue.js', url: 'https://vuejs.org/', image: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg', startDate: '2023-08-1' },
+  { name: 'MongoDB', url: 'https://www.mongodb.com/', image: 'https://png2.cleanpng.com/sh/7139acc613f224cb0921e4fac74b1fe1/L0KzQYm3VMA0N5hxiZH0aYP2gLBuTf1wdph0fNQ2bnBndX7xk71veJ4yhAJubj32f8b5gBUudZDpfd42YX7qhb3okvp0NZ1qedg2NXHmRIXrWfVnOJRofKc3MkS2RYSAUMIyPWM3UKM9M0a5SYm9U75xdpg=/kisspng-mongodb-node-js-npm-open-source-model-angularjs-leaf-5ac44d9ef0ccd5.2435370215228143669863.png', startDate: '2023-02-15' },
+  { name: 'PostgreSQL', url: 'https://www.postgresql.org/', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/540px-Postgresql_elephant.svg.png', startDate: '2023-08-1' }
 ]
 
 export default function App () {
