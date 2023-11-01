@@ -3,10 +3,51 @@ import PropTypes from 'prop-types'
 import '../../assets/components/Projects/Projects.scss'
 import ProjectsList from './projectsList'
 
-const Projects = ({ projectsData, onCloseOverlay }) => {
+const Projects = ({ projectsData, onCloseOverlay, isMobile }) => {
   const [personalProjects, setPersonalProjects] = useState([])
   const [freelanceProjects, setFreelanceProjects] = useState([])
   const [sideSmallProjects, setSideSmallProjects] = useState([])
+  const [mobileProjectSelection, setMobileProjectSelection] = useState(null)
+
+  const handleProjectSelector = (e) => {
+    e.preventDefault()
+    const { innerText } = e.target
+    const projectDataE = {
+      name: innerText,
+      projects: []
+    }
+    let el = null
+    const topEl = document.querySelector('.projects-top')
+    switch (innerText) {
+      case 'Personal Projects':
+        if (isMobile) {
+          projectDataE.projects = personalProjects
+          setMobileProjectSelection(projectDataE)
+        } else {
+          el = document.getElementById('personal-projects-container')
+          console.log(el.parentElement)
+          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
+        }
+        break
+      case 'Freelance Projects':
+        if (isMobile) {
+          projectDataE.projects = freelanceProjects
+          setMobileProjectSelection(projectDataE)
+        } else {
+          el = document.getElementById('freelance-projects-container')
+          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
+        }
+        break
+      case 'Side-Small Projects':
+        if (isMobile) {
+          projectDataE.projects = sideSmallProjects
+          setMobileProjectSelection(projectDataE)
+        } else {
+          el = document.getElementById('side-projects-container')
+          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
+        }
+    }
+  }
 
   useEffect(() => {
     const personalProjectsArray = []
@@ -43,23 +84,42 @@ const Projects = ({ projectsData, onCloseOverlay }) => {
 
   return (
     <section className="projects">
-      <button type='button' className='close-button' onClick={onCloseOverlay}>X</button>
-      <h1>Projects</h1>
-      {projectsData && (
-        <div className="project-container">
-          {console.log(projectsData)}
-          <ProjectsList projectsContainerName='Personal Projects' ProjectsData={personalProjects} />
-          <ProjectsList projectsContainerName='Freelance Projects' ProjectsData={freelanceProjects} />
-          <ProjectsList projectsContainerName='Side-Small Projects' ProjectsData={sideSmallProjects} />
+      <div className='projects-top'>
+        <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
+        <h1>Projects</h1>
+        <div className='projects-selector'>
+          <button type='button' className='projects-selector-button' onClick={handleProjectSelector}>Personal Projects</button>
+          <button type='button' className='projects-selector-button' onClick={handleProjectSelector}>Freelance Projects</button>
+          <button type='button' className='projects-selector-button' onClick={handleProjectSelector}>Side-Small Projects</button>
         </div>
-      )}
+      </div>
+      <div className='projects-bottom'>
+        {projectsData && (
+          <div className="project-container">
+            {isMobile
+              ? mobileProjectSelection && (<ProjectsList projectsContainerName={mobileProjectSelection.name} ProjectsData={mobileProjectSelection.projects} isMobile={isMobile} />)
+              : (
+              <>
+              <span id='personal-projects-container'/>
+            <ProjectsList projectsContainerName='Personal Projects' ProjectsData={personalProjects} isMobile={isMobile} />
+            <span id='freelance-projects-container'/>
+            <ProjectsList projectsContainerName='Freelance Projects' ProjectsData={freelanceProjects} isMobile={isMobile} />
+            <span id='side-projects-container'/>
+            <ProjectsList projectsContainerName='Side-Small Projects' ProjectsData={sideSmallProjects} isMobile={isMobile} />
+            </>
+                )
+          }
+        </div>
+        )}
+      </div>
     </section>
   )
 }
 
 Projects.propTypes = {
   projectsData: PropTypes.array,
-  onCloseOverlay: PropTypes.func
+  onCloseOverlay: PropTypes.func,
+  isMobile: PropTypes.bool
 }
 
 export default Projects

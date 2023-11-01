@@ -2,18 +2,9 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../assets/components/Skills/Skills.scss'
 
-const Skills = ({ projectsData, skills, onCloseOverlay }) => {
+const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxCollision }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
   const [shouldAnimate, setShouldAnimate] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [antiSkillsBoxCollision, setAntiSkillsBoxCollision] = useState(() => {
-    try {
-      document.createEvent('TouchEvent')
-      return true
-    } catch (e) {
-      return false
-    }
-  })
 
   const handleSkillClick = (skill) => {
     getProjectsFromSkill(skill)
@@ -32,30 +23,6 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
   }
 
   useEffect(() => {
-    function antiSkillsBoxCollisionFn () {
-      if (window.innerHeight < 1050) {
-        setAntiSkillsBoxCollision(true)
-      } else {
-        setAntiSkillsBoxCollision(false)
-      }
-    }
-
-    if (isMobile) {
-      if (antiSkillsBoxCollision) {
-        window.removeEventListener('resize', antiSkillsBoxCollisionFn)
-        setAntiSkillsBoxCollision(false)
-      }
-      return
-    }
-
-    window.addEventListener('resize', antiSkillsBoxCollisionFn)
-
-    return () => {
-      window.removeEventListener('resize', antiSkillsBoxCollisionFn)
-    }
-  }, [skillSelectedProjects, isMobile])
-
-  useEffect(() => {
     if (skillSelectedProjects && skillSelectedProjects.length === 0) {
       setShouldAnimate(false)
       return
@@ -70,52 +37,6 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
       setShouldAnimate(true)
     }
   }, [skillSelectedProjects])
-
-  useEffect(() => {
-    function handleOrientationChange (event) {
-      const { matches, media } = event
-      if (matches) {
-        console.log('changed')
-
-        const fnTouch = function () {
-          try {
-            document.createEvent('TouchEvent')
-            return true
-          } catch (e) {
-            return false
-          }
-        }
-
-        if (fnTouch) {
-          setAntiSkillsBoxCollision(true)
-        } else {
-          setAntiSkillsBoxCollision(false)
-        }
-
-        if (media === '(orientation: portrait)') {
-          setIsMobile(true)
-        } else if (media === '(orientation: landscape)') {
-          setIsMobile(false)
-        }
-      }
-    }
-    const mediaQueryPortrait = window.matchMedia('(orientation: portrait)')
-    const mediaQueryLandscape = window.matchMedia('(orientation: landscape)')
-
-    if (mediaQueryPortrait.matches) {
-      setIsMobile(true)
-    } else if (mediaQueryLandscape.matches) {
-      setIsMobile(false)
-    }
-
-    mediaQueryPortrait.addEventListener('change', handleOrientationChange)
-    mediaQueryLandscape.addEventListener('change', handleOrientationChange)
-
-    return () => {
-      mediaQueryPortrait.removeEventListener('change', handleOrientationChange)
-      mediaQueryLandscape.removeEventListener('change', handleOrientationChange)
-    }
-  }, [])
 
   const calculateExperience = (startDate) => {
     const currentDate = new Date()
@@ -207,7 +128,9 @@ const Skills = ({ projectsData, skills, onCloseOverlay }) => {
 Skills.propTypes = {
   projectsData: PropTypes.array,
   skills: PropTypes.array,
-  onCloseOverlay: PropTypes.func
+  onCloseOverlay: PropTypes.func,
+  isMobile: PropTypes.bool,
+  antiSkillsBoxCollision: PropTypes.bool
 }
 
 export default Skills

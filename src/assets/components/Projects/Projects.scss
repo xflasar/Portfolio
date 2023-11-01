@@ -7,8 +7,8 @@
   left: 10%;
   top: 5%;
   overflow: hidden;
-  color: white;
-  background: #1a1a1a;
+  color: #9ecfe7;
+  background: #000010;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -17,20 +17,87 @@
 
   h1 {
     text-align: center;
-    font-size: 3.5rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    font-size: 3rem;
+    padding-top: 0.5rem;
     font-family: 'Helvetica', sans-serif;
     margin-bottom: 10px;
-    color: #55aaff;
+    color: #275ea3;
   }
 
   .project-container {
+    margin: 0 2rem 0 2rem;
+    height: 100%;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+  }
+
+  .projects-top {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    max-width: 100%;
-    justify-items: center;
-    overflow-y: scroll;
+    position: relative;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    height: 20%;
+    min-height: 180px;
+    z-index: 3;
+
+    .projects-selector {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      .projects-selector-button {
+        width: 10vh;
+        height: 10vh;
+        min-width: 75px;
+        max-width: 130px;
+        min-height: 75px;
+        max-height: 130px;
+        border-radius: 50%;
+        color: white;
+        background-color: rgba(183, 181, 231, 0.2);
+        background-image:
+        radial-gradient(8% 8% at 22% 28%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
+        radial-gradient(8% 8% at 23% 27%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
+        radial-gradient(8% 8% at 24% 26%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
+        radial-gradient(8% 8% at 25% 25%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
+        radial-gradient(8% 8% at 26% 24%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
+        radial-gradient(8% 8% at 27% 23%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
+        radial-gradient(8% 8% at 28% 22%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%);
+        box-shadow:
+        0 -0.06em 0.1em #3930DB inset,
+        0 -0.15em 0.4em #305EDB inset,
+        0 0.05em 0.05em #3930DB inset;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: rgba(57, 48, 219, 0.5);
+          box-shadow:
+          0 -0.06em 0.1em hsl(226, 100%, 56%) inset,
+          0 -0.15em 0.4em hsl(242, 90%, 45%) inset,
+          0 0.05em 0.05em hsl(196, 90%, 45%) inset;
+        }
+
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+    
+  .projects-bottom {
+    flex-grow: 1;
+    height: 80%;
+    width: 100%;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .projects {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
   }
 }

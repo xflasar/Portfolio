@@ -16,6 +16,83 @@ const Home = ({ projects, skills }) => {
   const [bubbles, setBubbles] = useState([])
   const [activePage, setActivePage] = useState('')
   const [clickedButton, setClickedButton] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [antiSkillsBoxCollision, setAntiSkillsBoxCollision] = useState(() => {
+    try {
+      document.createEvent('TouchEvent')
+      return true
+    } catch (e) {
+      return false
+    }
+  })
+
+  useEffect(() => {
+    function antiSkillsBoxCollisionFn () {
+      if (window.innerHeight < 1050) {
+        setAntiSkillsBoxCollision(true)
+      } else {
+        setAntiSkillsBoxCollision(false)
+      }
+    }
+
+    if (isMobile) {
+      if (antiSkillsBoxCollision) {
+        window.removeEventListener('resize', antiSkillsBoxCollisionFn)
+        setAntiSkillsBoxCollision(false)
+      }
+      return
+    }
+
+    window.addEventListener('resize', antiSkillsBoxCollisionFn)
+
+    return () => {
+      window.removeEventListener('resize', antiSkillsBoxCollisionFn)
+    }
+  }, [isMobile])
+
+  useEffect(() => {
+    function handleOrientationChange (event) {
+      const { matches, media } = event
+      if (matches) {
+        const fnTouch = function () {
+          try {
+            document.createEvent('TouchEvent')
+            return true
+          } catch (e) {
+            return false
+          }
+        }
+
+        if (fnTouch) {
+          setAntiSkillsBoxCollision(true)
+        } else {
+          setAntiSkillsBoxCollision(false)
+        }
+
+        if (media === '(orientation: portrait)') {
+          setIsMobile(true)
+        } else if (media === '(orientation: landscape)') {
+          setIsMobile(false)
+        }
+      }
+    }
+    const mediaQueryPortrait = window.matchMedia('(orientation: portrait)')
+    const mediaQueryLandscape = window.matchMedia('(orientation: landscape)')
+
+    if (mediaQueryPortrait.matches) {
+      setIsMobile(true)
+    } else if (mediaQueryLandscape.matches) {
+      setIsMobile(false)
+    }
+
+    mediaQueryPortrait.addEventListener('change', handleOrientationChange)
+    mediaQueryLandscape.addEventListener('change', handleOrientationChange)
+
+    return () => {
+      mediaQueryPortrait.removeEventListener('change', handleOrientationChange)
+      mediaQueryLandscape.removeEventListener('change', handleOrientationChange)
+    }
+  }, [])
 
   const handleBubblePop = (event) => {
     if (event.target.getAttribute('name') === 'bubble') {
@@ -73,13 +150,13 @@ const Home = ({ projects, skills }) => {
 
     switch (activePage) {
       case 'about':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
         break
       case 'skills':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills projectsData={projects} skills={skills} onCloseOverlay={handleOverlayClose} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills projectsData={projects} skills={skills} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
         break
       case 'projects':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Projects projectsData={projects} onCloseOverlay={handleOverlayClose} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Projects projectsData={projects} onCloseOverlay={handleOverlayClose} isMobile={isMobile} /></div>
         break
       case 'contact':
         element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Contact onCloseOverlay={handleOverlayClose} /></div>

@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../../assets/components/Projects/projectsList.scss'
 
-const ProjectsList = ({ projectsContainerName, ProjectsData }) => {
+const ProjectsList = ({ projectsContainerName, ProjectsData, isMobile }) => {
   const handleProjectClick = (index) => {
     console.log(index)
   }
   return (
-    <div className="projects-content">
+    <div className={isMobile ? 'projects-content mobile' : 'projects-content'}>
       <h2>{projectsContainerName}</h2>
       <div className='projects-content-holder'>
         {ProjectsData.map((project, index) => (
@@ -35,7 +35,8 @@ const ProjectsList = ({ projectsContainerName, ProjectsData }) => {
 
 ProjectsList.propTypes = {
   projectsContainerName: PropTypes.string,
-  ProjectsData: PropTypes.array
+  ProjectsData: PropTypes.array,
+  isMobile: PropTypes.bool
 }
 
 export default ProjectsList
