@@ -11,7 +11,7 @@ const ProjectsList = ({ projectsContainerName, ProjectsData, isMobile }) => {
       <h2>{projectsContainerName}</h2>
       <div className='projects-content-holder'>
         {ProjectsData.map((project, index) => (
-          <div className='projects-content-holder-item' key={index} onClick={() => handleProjectClick(this.key)}>
+          <div className='projects-content-holder-item' key={index} onClick={() => handleProjectClick(index)}>
             <img src={project.projectImage} alt={project.projectDescription} />
             <a href={project.projectLink} target="_blank" rel="noreferrer">
               <div className="content">

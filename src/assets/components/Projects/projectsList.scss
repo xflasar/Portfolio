@@ -5,13 +5,13 @@
   h2:not(:first-child) {
     margin-bottom: 1rem;
     margin-top: 1rem;
-    color: #55aaff;
+    color: #0088C3;
   }
   h2:first-child {
     margin-bottom: 1rem;
-    color: #55aaff;
+    color: #0088C3;
   }
-
+  
   .projects-content-holder {
     width: 100%;
     display: grid;
@@ -29,26 +29,26 @@
     
     .projects-content-holder-item {
       position: relative;
-      width: 100%;
-      height: 100%;
-      border: 1px solid transparent;
-      border-radius: 0.5rem;
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
+      border-radius: 20px;
       cursor: pointer;
       transition: transform 0.3s ease;
       will-change: transform;
       z-index: 1;
+      overflow: hidden;
       
       &:hover {
-        border: 1px solid #55aaff;
-        z-index: 2;
-
         .content {
+          transform: translateY(5%);
+          background: linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+
+          &::before {
+            box-shadow: inset 48px 48px linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+          }
           &-description {
-            height: fit-content;
-            max-height: 50%;
-            overflow-y: scroll;
-            mask-image: none;
-            -webkit-mask-image:initial;
+            opacity: 1;
+            transition-delay: .25s;
           }
         }
       }
@@ -75,11 +75,29 @@
       }
 
       .content {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        overflow: visible;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 95%;
+        height: auto;
+        padding: 20px;
+        background: linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+        border-top-left-radius: 20px;
+        transform: translateY(70%);
+        transition: transform .25s,
+                    background-color .25s;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: -47px;
+          right: -37px;
+          width: 100px;
+          height: 100px;
+          transform: rotate(-175deg);
+          border-radius: 50%;
+          box-shadow: inset 48px 48px linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+        }
 
         &-title {
           width: 100%;
@@ -91,18 +109,9 @@
         }
 
         &-description {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          max-height: 28%;
-          text-align: center;
-          border-radius: 0 0 1rem 1rem;
-          background-color: rgba(0,0,0,0.8);
-          transition: max-height 0.3s ease-in-out;
-          mask-image: none;
-          -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
-          overflow: hidden;
+          font-size: 14px;
+          opacity: 0;
+          transition: opacity .5s;
         }
       }
     }
@@ -111,7 +120,7 @@
   &.mobile {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 95%;
 
     .projects-content-holder {
       display: flex;

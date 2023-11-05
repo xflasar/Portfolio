@@ -7,7 +7,7 @@
   left: 10%;
   top: 5%;
   overflow: hidden;
-  color: #9ecfe7;
+  color: #0088C3;
   background: #000010;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -19,15 +19,16 @@
     text-align: center;
     font-size: 3rem;
     padding-top: 0.5rem;
-    font-family: 'Helvetica', sans-serif;
     margin-bottom: 10px;
-    color: #275ea3;
+    color: rgb(212, 211, 211);
   }
 
   .project-container {
     margin: 0 2rem 0 2rem;
-    height: 100%;
+    width: calc(100% - 2rem - 2rem);
+    height: 85%;
     scroll-behavior: smooth;
+    overflow: hidden;
     overflow-y: auto;
   }
 
@@ -45,6 +46,8 @@
       display: flex;
       flex-direction: row;
       justify-content: center;
+      margin-bottom: 1rem;
+
       .projects-selector-button {
         width: 10vh;
         height: 10vh;
@@ -85,7 +88,6 @@
   }
     
   .projects-bottom {
-    flex-grow: 1;
     height: 80%;
     width: 100%;
   }
