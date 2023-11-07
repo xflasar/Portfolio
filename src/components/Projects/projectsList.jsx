@@ -16,9 +16,9 @@ const ProjectsList = ({ projectsContainerName, ProjectsData, isMobile }) => {
             <a href={project.projectLink} target="_blank" rel="noreferrer">
               <div className="content">
                 <div className="content-title">
-                  <p>
+                  <h3>
                     {project.projectName}
-                  </p>
+                  </h3>
                 </div>
                 <div className="content-description">
                   <p>{project.projectDescription}</p>

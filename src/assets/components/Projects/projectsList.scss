@@ -1,21 +1,27 @@
 @import '../../variables';
+
 .projects-content {
   width: 100%;
 
-  h2:not(:first-child) {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    color: #0088C3;
+  h2 {
+    font-size: 2.5rem;
+
+    &:not(:first-child) {
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      color: #0088C3;
+    }
+
+    &:first-child {
+      margin-bottom: 1rem;
+      color: #0088C3;
+    }
   }
-  h2:first-child {
-    margin-bottom: 1rem;
-    color: #0088C3;
-  }
-  
+
   .projects-content-holder {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-template-rows: auto;
     gap: 0.5rem;
 
@@ -23,10 +29,11 @@
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
+
     &:last-child {
       margin: 0;
     }
-    
+
     .projects-content-holder-item {
       position: relative;
       width: calc(100% - 2px);
@@ -37,22 +44,23 @@
       will-change: transform;
       z-index: 1;
       overflow: hidden;
-      
+
       &:hover {
         .content {
-          transform: translateY(5%);
-          background: linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+          max-height: 45%;
 
           &::before {
-            box-shadow: inset 48px 48px linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+            box-shadow: inset 48px 48px #014e7d;
           }
+
           &-description {
             opacity: 1;
-            transition-delay: .25s;
+            transition-delay: 0.25s;
+            flex: 1;
           }
         }
       }
-    
+
       a {
         position: absolute;
         width: 100%;
@@ -78,40 +86,52 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        width: 95%;
-        height: auto;
-        padding: 20px;
+        width: 100%;
         background: linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
         border-top-left-radius: 20px;
-        transform: translateY(70%);
-        transition: transform .25s,
-                    background-color .25s;
-        
+        max-height: 50px;
+        transition: max-height 0.25s;
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+
         &::before {
           content: '';
           position: absolute;
-          top: -47px;
-          right: -37px;
+          top: -48px;
+          right: -43px;
           width: 100px;
           height: 100px;
           transform: rotate(-175deg);
           border-radius: 50%;
-          box-shadow: inset 48px 48px linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+          box-shadow: inset 48px 48px #014e7d;
+          z-index: -1;
         }
 
         &-title {
           width: 100%;
-          text-align: center;
-          p {
-            font-size: x-large;
+
+          h3 {
+            font-size: 1.5rem;
             overflow-wrap: normal;
+            margin: 0;
+            margin-top: 0.5rem;
           }
         }
 
         &-description {
-          font-size: 14px;
+          position: relative;
           opacity: 0;
-          transition: opacity .5s;
+          transition: opacity 0.5s;
+          overflow: hidden;
+          overflow-y: auto;
+          flex: 1;
+
+          p {
+            margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+            display: inline-block;
+            text-align: justify;
+          }
         }
       }
     }
@@ -120,18 +140,18 @@
   &.mobile {
     display: flex;
     flex-direction: column;
-    height: 95%;
+    height: 100%;
 
     .projects-content-holder {
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      overflow-y: scroll;
+      overflow-y: auto;
       height: 100%;
 
       .projects-content-holder-item {
-        left: 2.5%;
-        width: 95%;
+        width: 100%;
+        min-height: 90vw;
 
         img {
           width: 100%;
@@ -140,6 +160,27 @@
 
         &:last-child {
           margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .projects-content {
+    h2 {
+      font-size: 2rem;
+    }
+
+    .projects-content-holder {
+      .projects-content-holder-item {
+        .content {
+          &-title {
+            h3 {
+              padding-top: 0.3rem;
+              font-size: 1.2rem;
+            }
+          }
         }
       }
     }

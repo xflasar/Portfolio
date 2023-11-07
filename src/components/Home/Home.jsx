@@ -27,7 +27,7 @@ const Home = ({ projects, skills }) => {
   })
 
   useEffect(() => {
-    // TODO: Problematic with lower screen laptops change 
+    // TODO: Problematic with lower screen laptops change
     // this to be able to show on lower screens of laptops
     function antiSkillsBoxCollisionFn () {
       if (window.innerHeight < 1050) {
