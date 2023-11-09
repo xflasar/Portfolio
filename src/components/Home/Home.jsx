@@ -9,22 +9,13 @@ import Contact from '../Contact/Contact'
 // Needs refactoring
 // custom hooks
 
-const Home = ({ projects, skills }) => {
-  const bubblesCountMax = 20
-  const bubblesFreeIndexes = Array.from({ length: bubblesCountMax }, (_, index) => index)
+const Home = () => {
+  const isBrowser = typeof window !== 'undefined'
 
-  const [bubbles, setBubbles] = useState([])
   const [activePage, setActivePage] = useState('')
   const [clickedButton, setClickedButton] = useState(null)
-  const [isMobile, setIsMobile] = useState(false)
-  const [antiSkillsBoxCollision, setAntiSkillsBoxCollision] = useState(() => {
-    try {
-      document.createEvent('TouchEvent')
-      return true
-    } catch (e) {
-      return false
-    }
-  })
+  const [isMobile, setIsMobile] = useState(isBrowser ? window.matchMedia('(pointer:fine)').matches : undefined)
+  const [antiSkillsBoxCollision, setAntiSkillsBoxCollision] = useState(isBrowser ? window.matchMedia('(pointer:fine)').matches : undefined)
 
   useEffect(() => {
     // TODO: Problematic with lower screen laptops change
@@ -52,28 +43,30 @@ const Home = ({ projects, skills }) => {
     }
   }, [isMobile])
 
+  // FIXME: [PORTFOLIO-14] problem with changing from mobile to desktop and reverse
+  // NOTFIXED!
   useEffect(() => {
     function handleOrientationChange (event) {
+      console.log('run', antiSkillsBoxCollision, isMobile)
       const { matches, media } = event
       if (matches) {
         const fnTouch = function () {
-          try {
-            document.createEvent('TouchEvent')
-            return true
-          } catch (e) {
-            return false
-          }
+          return window.matchMedia('(pointer:fine)').matches
         }
 
         if (fnTouch) {
+          console.log('Touchy')
           setAntiSkillsBoxCollision(true)
         } else {
+          console.log('Touchy not')
           setAntiSkillsBoxCollision(false)
         }
 
         if (media === '(orientation: portrait)') {
+          console.log('portrait')
           setIsMobile(true)
         } else if (media === '(orientation: landscape)') {
+          console.log('landscape')
           setIsMobile(false)
         }
       }
@@ -95,38 +88,6 @@ const Home = ({ projects, skills }) => {
       mediaQueryLandscape.removeEventListener('change', handleOrientationChange)
     }
   }, [])
-
-  const handleBubblePop = (event) => {
-    if (event.target.getAttribute('name') === 'bubble') {
-      const elementPos = event.target.getBoundingClientRect()
-
-      // Preseting values to use current from animation
-      event.target.style.top = `${elementPos.y}px`
-      event.target.style.left = `${elementPos.x}px`
-      event.target.style.width = `${elementPos.width}px`
-      event.target.style.height = `${elementPos.height}px`
-      event.target.className = 'popped'
-
-      setTimeout(() => {
-        event.target.removeAttribute('class')
-        event.target.removeAttribute('style')
-      }, 1500)
-    }
-  }
-
-  const handleBubbleCreate = () => {
-    const newBubbles = []
-    const bFreeIndex = bubblesFreeIndexes.length
-
-    for (let i = 0; i < bFreeIndex; i++) {
-      const newIndex = bubblesFreeIndexes.pop()
-      const eParent = <div key={newIndex} data-id={newIndex} name='bubble'><button type="button" className="dot" onClick={() => handleBubblePop()}></button></div>
-
-      newBubbles.push(eParent)
-    }
-
-    setBubbles(newBubbles)
-  }
 
   const handleNavbar = (event, page) => {
     setActivePage(page)
@@ -155,10 +116,10 @@ const Home = ({ projects, skills }) => {
         element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
         break
       case 'skills':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills projectsData={projects} skills={skills} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
         break
       case 'projects':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Projects projectsData={projects} onCloseOverlay={handleOverlayClose} isMobile={isMobile} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Projects onCloseOverlay={handleOverlayClose} isMobile={isMobile} /></div>
         break
       case 'contact':
         element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Contact onCloseOverlay={handleOverlayClose} /></div>
@@ -216,16 +177,10 @@ const Home = ({ projects, skills }) => {
   }, [])
 
   useEffect(() => {
-    handleBubbleCreate()
-  }, [])
-
-  useEffect(() => {
     document.addEventListener('click', handlePageOutsideClick)
-    const bubblePopEventListener = document.addEventListener('click', handleBubblePop, { useCapture: true })
 
     return () => {
       document.removeEventListener('click', handlePageOutsideClick)
-      document.removeEventListener('click', bubblePopEventListener)
     }
   }, [])
 
@@ -234,10 +189,12 @@ const Home = ({ projects, skills }) => {
     {handleNavbarPageRender()}
     <section className="home">
     <div className="wrapper">
-      {bubbles && bubbles.map((bubble) => bubble)}
+      {/* <video autoPlay muted loop className="video">
+        <source src="../bg.mp4" type="video/mp4" />
+      </video> */}
     </div>
         <div className="prof-image">
-          <img src="../prof-image.png"/>
+          <img src="../prof-image.webp" alt='Profile picture'/>
           <div className='links'>
             <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd}/><span className='nav-title'>About</span></a>
             <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Skills</span></a>
@@ -251,7 +208,6 @@ const Home = ({ projects, skills }) => {
             <span>
               FRONTEND DEVELOPER<br/>
               WITH<br/>
-
               A TOUCH OF BACKEND
             </span>
           </div>

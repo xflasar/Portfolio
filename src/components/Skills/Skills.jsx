@@ -1,10 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useStaticQuery, graphql } from 'gatsby'
 import '../../assets/components/Skills/Skills.scss'
 
-const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxCollision }) => {
+const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
   const [shouldAnimate, setShouldAnimate] = useState(false)
+  const [projectsData, setProjectsData] = useState([])
+  const [skillsData, setSkillsData] = useState([])
+
+  // hook separate
+  const qlData = useStaticQuery(graphql`
+    query {
+      allProjectsJson {
+        edges {
+          node {
+            projectName,
+            projectDescription,
+            projectLink,
+            projectImage,
+            projectSkills,
+            Tag
+          }
+        }
+      },
+      allSkillsJson {
+        edges {
+          node {
+            skillName,
+            skillUrl,
+            skillImage,
+            skillStartDate
+          }
+        }
+      }
+    }
+  `)
+
+  useEffect(() => {
+    if (qlData) {
+      if (qlData.allProjectsJson) setProjectsData(qlData.allProjectsJson.edges)
+      if (qlData.allSkillsJson) setSkillsData(qlData.allSkillsJson.edges)
+    }
+  }, [qlData])
 
   const handleSkillClick = (skill) => {
     getProjectsFromSkill(skill)
@@ -13,8 +51,8 @@ const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxC
   const getProjectsFromSkill = (_skill) => {
     const foundProjectsMatch = []
     projectsData.map((project) => {
-      project.projectSkills.map((skill) => {
-        if (skill === _skill.name) return foundProjectsMatch.push(project)
+      project.node.projectSkills.map((skill) => {
+        if (skill === _skill.skillName) return foundProjectsMatch.push(project)
         return skill
       })
       return project
@@ -60,8 +98,8 @@ const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxC
       <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
       <h1>Skills</h1>
       <div className={skillSelectedProjects !== null ? antiSkillsBoxCollision ? 'skill-cloud non-main box-collision-active' : 'skill-cloud non-main' : antiSkillsBoxCollision ? 'skill-cloud box-collision-active' : 'skill-cloud'}>
-        {skills.map((skill, index) => {
-          const rotation = (360 / skills.length) * index
+        {skillsData.map((skill, index) => {
+          const rotation = (360 / skillsData.length) * index
           const radius = 18 // Spacing between items
           let translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180))
           if (skillSelectedProjects) {
@@ -71,10 +109,10 @@ const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxC
 
           return (
             <div
-              onClick={() => handleSkillClick(skill)}
-              key={skill.name}
+              onClick={() => handleSkillClick(skill.node)}
+              key={skill.node.skillName}
               className="skill"
-              title={`Learning since ${skill.startDate}`}
+              title={`Learning since ${skill.node.skillStartDate}`}
               style={isMobile
                 ? null
                 : antiSkillsBoxCollision
@@ -85,9 +123,9 @@ const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxC
                     }
               }
             >
-              <img src={skill.image} />
-              <span className="skill-name">{skill.name}</span>
-              <span className="experience">{calculateExperience(skill.startDate)}</span>
+              <img src={skill.node.skillImage} />
+              <span className="skill-name">{skill.node.skillName}</span>
+              <span className="experience">{calculateExperience(skill.node.skillStartDate)}</span>
             </div>
           )
         })}
@@ -101,16 +139,16 @@ const Skills = ({ projectsData, skills, onCloseOverlay, isMobile, antiSkillsBoxC
                 ? (<p>No Projects assigned!</p>)
                 : skillSelectedProjects.map((project, index) => (
                 <div className="skill-project-extra-content-item" key={index} style={shouldAnimate ? { animation: `landingAnimI 1s cubic-bezier(0.075, 0.82, 0.165, 1) ${index * 0.5}s 1 normal forwards` } : null}>
-                  <img src={project.projectImage} alt={project.projectDescription} />
-                  <a href={project.projectLink} target="_blank" rel="noreferrer">
+                  <img src={project.node.projectImage} alt={project.node.projectDescription} />
+                  <a href={project.node.projectLink} target="_blank" rel="noreferrer">
                     <div className="content">
                       <div className="content-title">
                         <p>
-                          {project.projectName}
+                          {project.node.projectName}
                         </p>
                       </div>
                       <div className="content-description">
-                        <p>{project.projectDescription}</p>
+                        <p>{project.node.projectDescription}</p>
                       </div>
                     </div>
                   </a>

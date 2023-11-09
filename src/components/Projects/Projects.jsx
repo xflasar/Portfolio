@@ -2,12 +2,31 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../assets/components/Projects/Projects.scss'
 import ProjectsList from './projectsList'
+import { useStaticQuery, graphql } from 'gatsby'
 
-const Projects = ({ projectsData, onCloseOverlay, isMobile }) => {
+const Projects = ({ onCloseOverlay, isMobile }) => {
   const [personalProjects, setPersonalProjects] = useState([])
   const [freelanceProjects, setFreelanceProjects] = useState([])
   const [sideSmallProjects, setSideSmallProjects] = useState([])
   const [mobileProjectSelection, setMobileProjectSelection] = useState(null)
+
+  const projectsData = useStaticQuery(graphql`
+
+    query {
+      allProjectsJson {
+        edges {
+          node {
+            projectName,
+            projectDescription,
+            projectLink,
+            projectImage,
+            projectSkills,
+            Tag
+          }
+        }
+      }
+    }
+  `)
 
   const handleProjectSelector = (e) => {
     e.preventDefault()
@@ -25,7 +44,6 @@ const Projects = ({ projectsData, onCloseOverlay, isMobile }) => {
           setMobileProjectSelection(projectDataE)
         } else {
           el = document.getElementById('personal-projects-container')
-          console.log(el.parentElement)
           return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
         }
         break
@@ -55,16 +73,25 @@ const Projects = ({ projectsData, onCloseOverlay, isMobile }) => {
     const sideSmallProjectsArray = []
 
     // Loop through the data and categorize projects
-    projectsData.forEach((project) => {
-      switch (project.Tag) {
+    projectsData.allProjectsJson.edges.forEach((project) => {
+      const projectNode = {
+        projectName: project.node.projectName,
+        projectDescription: project.node.projectDescription,
+        projectLink: project.node.projectLink,
+        projectImage: project.node.projectImage,
+        projectSkills: project.node.projectSkills,
+        Tag: project.node.Tag
+      }
+
+      switch (projectNode.Tag) {
         case 'Personal Project':
-          personalProjectsArray.push(project)
+          personalProjectsArray.push(projectNode)
           break
         case 'Freelance Project':
-          freelanceProjectsArray.push(project)
+          freelanceProjectsArray.push(projectNode)
           break
         case 'Side-Small Project':
-          sideSmallProjectsArray.push(project)
+          sideSmallProjectsArray.push(projectNode)
           break
         default:
           break
@@ -75,11 +102,6 @@ const Projects = ({ projectsData, onCloseOverlay, isMobile }) => {
     setPersonalProjects(personalProjectsArray)
     setFreelanceProjects(freelanceProjectsArray)
     setSideSmallProjects(sideSmallProjectsArray)
-
-    console.log(projectsData)
-    console.log('Personal Projects:', personalProjects)
-    console.log('Freelance Projects:', freelanceProjects)
-    console.log('Side-Small Projects:', sideSmallProjects)
   }, [projectsData])
 
   return (
