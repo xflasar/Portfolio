@@ -11,7 +11,6 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
   const [mobileProjectSelection, setMobileProjectSelection] = useState(null)
 
   const projectsData = useStaticQuery(graphql`
-
     query {
       allProjectsJson {
         edges {

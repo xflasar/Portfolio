@@ -1,43 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../assets/components/About/About.scss'
 
-const About = ({ redirectTo, onCloseOverlay }) => {
+const About = ({ redirectTo, onCloseOverlay, locale }) => {
+  const [localeData, setLocaleData] = useState(null)
+
   const handleFreelancingProjectsClick = () => {
     redirectTo('projects')
   }
 
+  // alone hook move this to hooks.js
+  useEffect(() => {
+    const lang = locale
+    import(`../../localize/About/about.${lang}.json`)
+      .then((data) => {
+        setLocaleData(data)
+      })
+      .catch((error) => {
+        console.error(`Error loading language data: ${error.message}`)
+      })
+  }, [])
+
   return (
     <div className="about">
       <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
-      <h1>About</h1>
+      <h1>{localeData?.AboutH1}</h1>
       <div className="about-container">
         <section className="about-container-intro">
-          <h2>Hi there again, I&apos;m Martin Flasar!</h2>
-          <p>I&apos;m a passionate software developer dedicated to developing elegant and efficient websites. With a background in IT, I&apos;ve honed my skills in various programming languages and technologies to create meaningful and user-friendly applications.</p>
+          <h2>{localeData?.IntroH2}</h2>
+          <p>{localeData?.IntroP}</p>
         </section>
         <section className="about-container-workflow">
-          <h2>What I Do</h2>
+          <h2>{localeData?.WorkflowH2}</h2>
           <div className="key-point">
             <span className="key-word">Frontend</span>
-            <span className="key-description">I specialize primarily in React.js and Vue.js, crafting immersive and dynamic user interfaces.</span>
+            <span className="key-description">{localeData?.WorkflowFrontendKD}</span>
           </div>
           <div className="key-point">
             <span className="key-word">Backend</span>
-            <span className="key-description">While my primary focus is on frontend development, I also possess strong skills in backend development, particularly in Node.js. I have some experience with Java Spring Boot as well.</span>
+            <span className="key-description">{localeData?.WorkflowBackendKD}</span>
           </div>
           <div className="key-point">
             <span className="key-word">Freelancing</span>
-            <span className="key-description">I have a history of freelancing, often working on personal or side projects. Additionally, I&apos;ve completed small-scale projects for clients. You can explore my freelancing projects on my <a onClick={handleFreelancingProjectsClick}>dedicated page</a>.</span>
+            <span className="key-description">{localeData?.WorkflowFreelanceKD}<a onClick={handleFreelancingProjectsClick}>{localeData?.WorkflowFreelanceA}</a>.</span>
           </div>
         </section>
         <section className="about-container-journey">
-          <h2>My Journey</h2>
-          <p>I started looking into programming in my High School where I was tasked to develop a simple program in Pascal from that moment my curiosity began to rise and fall until my University days where I dove deeper into Software Developement and made my first 3 medium sized projects ( C++, PHP ) after that I slowly started learning Web Developement where I felt being pulled and found my joy in making websites. Since then I made various projects personal or for close clients.</p>
+          <h2>{localeData?.JourneyH2}</h2>
+          <p>{localeData?.JourneyP}</p>
         </section>
         <section className="about-container-motivation">
-          <h2>Passionate about Coding and Innovation</h2>
-          <p>I find immense joy in coding and work while using the limitless possibilities of technology to develop new things for my own use or for client&apos;s benefit. I&apos;m dedicated to making a difference through Software Developement from developing a user-friendly websites and interfaces to optimizing application performance.</p>
+          <h2>{localeData?.MotivationH2}</h2>
+          <p>{localeData?.MotivationP}</p>
         </section>
       </div>
     </div>
@@ -46,7 +60,8 @@ const About = ({ redirectTo, onCloseOverlay }) => {
 
 About.propTypes = {
   redirectTo: PropTypes.func,
-  onCloseOverlay: PropTypes.func
+  onCloseOverlay: PropTypes.func,
+  locale: PropTypes.string
 }
 
 export default About

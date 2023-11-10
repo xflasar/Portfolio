@@ -125,6 +125,43 @@
     }
   }
 
+  .github-container {
+    position: absolute;
+    display: flex;
+    top: 15vh;
+    right: 7vw;
+    width: 30vw;
+    min-width: 300px;
+    height: 45vh;
+    min-height: 250px;
+    background-color: rgba(57, 48, 219, 1);
+    border-radius: 15px 25%;
+    animation: loadInInit 1.5s linear 2s 1 forwards, morph 10s 3s infinite forwards normal;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+
+      @keyframes loadInInit {
+        0% {
+          transform: translateY(-30vh);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+    @keyframes morph {
+      0% {
+        border-radius: 15px 25%;
+      }
+      50% {
+        border-radius: 25% 15px;
+      }
+    }
+  }
+
   .links {
     position: absolute;
     display: grid;
@@ -301,7 +338,7 @@
 }
  
 
-// Bubble animation
+// background stuff need to be done
 .wrapper {
   height: 100%;
   width: 100vw;
@@ -452,6 +489,87 @@
           top: 0;
           opacity: 0;
         }
+      }
+    }
+
+    .github-container {
+      display: none;
+      width: 100vw;
+      height: 40vh;
+      left: 0;
+      top: 0;
+      border-radius: 0 0 25% 25%;
+
+      &.active {
+        display: flex;
+        animation: loadInDownwards 1s linear 1 forwards;
+      }
+
+      &.deactivated {
+        animation: unloadAwayUpwards 1s linear 1 forwards;
+      }
+
+      @keyframes loadInDownwards {
+        0% {
+          transform: translateY(-40vh);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes unloadAwayUpwards {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+          display: flex;
+        }
+        100% {
+          transform: translateY(-40vh);
+          opacity: 0;
+          display: none;
+        }
+      }
+    }
+
+    .github-activity-button-show {
+      position: absolute;
+      left: 50%;
+      top: 60%;
+      width: 7vh;
+      height: 7vh;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background-color: rgba(57, 48, 219, 0.2);
+      box-shadow: 0 -0.06em 0.1em #3930DB inset, 0 -0.15em 0.4em #305EDB inset, 0 0.05em 0.05em #3930DB inset;
+      border: none;
+      transition: all 0.35s ease-in-out;
+
+      &:hover {
+        background-color: rgba(57, 48, 219, 1);
+        transform: translateY(-1px) translateX(-50%);
+      }
+      
+      &.active {
+        background-color: rgba(57, 48, 219, 0.8);
+        outline: 2px solid #04fafd;
+        color: #04fafd;
+        transform: translateY(-5px) translateX(-50%);
+        
+        &:hover {
+          background-color: rgba(57, 48, 219, .2);
+        }
+      }
+
+      img {
+        position: absolute;
+        left: 2px;
+        top: 0;
+        width: 95%;
+        height: 95%;
+        opacity: 0.7;
       }
     }
 

@@ -1,0 +1,14 @@
+{
+  "AboutH1": "About",
+  "IntroH2": "Hi there again, I'm Martin Flasar!",
+  "IntroP": "I'm a passionate software developer dedicated to developing elegant and efficient websites. With a background in IT, I've honed my skills in various programming languages and technologies to create meaningful and user-friendly applications.",
+  "WorkflowH2": "What I Do",
+  "WorkflowFrontendKD": "I specialize primarily in React.js and Vue.js, crafting immersive and dynamic user interfaces.",
+  "WorkflowBackendKD": "While my primary focus is on frontend development, I also possess strong skills in backend development, particularly in Node.js. I have some experience with Java Spring Boot and .Net framework (ASP.NET CORE) as well.",
+  "WorkflowFreelanceKD": "I have a history of freelancing, often working on personal or side projects. Additionally, I've completed small-scale projects for clients. You can explore my freelancing projects on my ",
+  "WorkflowFreelanceA": "dedicated page",
+  "JourneyH2": "My Journey",
+  "JourneyP": "I started looking into programming in my High School where I was tasked to develop a simple program in Pascal from that moment my curiosity began to rise and fall until my University days where I dove deeper into Software Developement and made my first 3 medium sized projects ( C++, PHP ) after that I slowly started learning Web Developement where I felt being pulled and found my joy in making websites. Since then I made various projects personal or for close clients.",
+  "MotivationH2": "Passionate about Coding and Innovation",
+  "MotivationP": "I find immense joy in coding and work in IT Department while using the limitless possibilities of technology to develop new things for my own use or for client's benefit. I'm dedicated to making a difference through Software Developement from developing a user-friendly websites and interfaces to optimizing application performance."
+}

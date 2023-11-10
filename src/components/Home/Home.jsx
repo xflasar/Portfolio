@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import '../../assets/components/Home/Home.scss'
 import About from '../About/About'
 import Skills from '../Skills/Skills'
 import Projects from '../Projects/Projects'
 import Contact from '../Contact/Contact'
+import GitActivity from '../Github/activity'
 
 // Needs refactoring
 // custom hooks
@@ -16,6 +16,35 @@ const Home = () => {
   const [clickedButton, setClickedButton] = useState(null)
   const [isMobile, setIsMobile] = useState(isBrowser ? window.matchMedia('(pointer:fine)').matches : undefined)
   const [antiSkillsBoxCollision, setAntiSkillsBoxCollision] = useState(isBrowser ? window.matchMedia('(pointer:fine)').matches : undefined)
+  const [githubActivityShow, setGithubActivityShow] = useState(false)
+  // localization
+  const [localeData, setLocaleData] = useState(null)
+  const [locale, setLocale] = useState(isBrowser ? window.navigator.language : 'en-US')
+
+  // alone hook move this to hooks.js
+  useEffect(() => {
+    const lang = locale.split('-').map((val, index) => {
+      if (index === 1) return val.toUpperCase()
+      return val
+    }).join('-')
+
+    import(`../../localize/Home/home.${lang}.json`)
+      .then((data) => {
+        setLocaleData(data)
+      })
+      .catch((error) => {
+        console.error(`Error loading language data: ${error.message}`)
+      })
+  }, [locale])
+
+  const handleLocaleChange = (e) => {
+    e.preventDefault()
+    setLocale(e.target.value)
+  }
+
+  const handleGithubActivityShow = () => {
+    setGithubActivityShow(!githubActivityShow)
+  }
 
   useEffect(() => {
     // TODO: Problematic with lower screen laptops change
@@ -113,7 +142,7 @@ const Home = () => {
 
     switch (activePage) {
       case 'about':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} locale={locale}/></div>
         break
       case 'skills':
         element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
@@ -184,6 +213,8 @@ const Home = () => {
     }
   }, [])
 
+  if (!localeData) return null
+
   return (
     <>
     {handleNavbarPageRender()}
@@ -192,34 +223,37 @@ const Home = () => {
       {/* <video autoPlay muted loop className="video">
         <source src="../bg.mp4" type="video/mp4" />
       </video> */}
+      <button type='button' className='locale-button' onClick={(e) => handleLocaleChange(e)} value={locale === 'en-US' ? 'cs-CS' : 'en-US'}>{locale === 'en-US' ? 'CZ' : 'EN'}</button>
     </div>
         <div className="prof-image">
           <img src="../prof-image.webp" alt='Profile picture'/>
           <div className='links'>
-            <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd}/><span className='nav-title'>About</span></a>
-            <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Skills</span></a>
-            <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Projects</span></a>
-            <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>Contact</span></a>
+            <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd}/><span className='nav-title'>{localeData?.AboutLink}</span></a>
+            <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.SkillsLink}</span></a>
+            <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.ProjectsLink}</span></a>
+            <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.ContactLink}</span></a>
+          </div>
         </div>
+        <div className={githubActivityShow ? 'github-container active' : isMobile ? 'github-container deactivated' : 'github-container'}>
+          <GitActivity />
         </div>
+        {isMobile && <button type='button' className={githubActivityShow ? 'github-activity-button-show active' : 'github-activity-button-show'} onClick={handleGithubActivityShow}><img src='../assets/home/github-mark-white.png' />GitHub Activity</button>}
         <div className='home-intro-container'>
-          <h1 className="home-intro-h1">I&apos;m Martin Flasar</h1>
+          <h1 className="home-intro-h1">{localeData.HomeIntroH1}</h1>
           <div className="home-intro">
             <span>
-              FRONTEND DEVELOPER<br/>
-              WITH<br/>
-              A TOUCH OF BACKEND
+              {localeData?.HomeIntroSpan.split('\n').map((text, index) => (
+                <React.Fragment key={index}>
+                  {text}
+                  {index < localeData.HomeIntroSpan.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))}
             </span>
           </div>
         </div>
     </section>
     </>
   )
-}
-
-Home.propTypes = {
-  projects: PropTypes.array,
-  skills: PropTypes.array
 }
 
 export default Home
