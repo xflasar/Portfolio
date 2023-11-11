@@ -145,7 +145,7 @@ const Home = () => {
         element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><About redirectTo={handleAboutCallback} onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} locale={locale}/></div>
         break
       case 'skills':
-        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} /></div>
+        element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Skills onCloseOverlay={handleOverlayClose} isMobile={isMobile} antiSkillsBoxCollision={antiSkillsBoxCollision} lang={locale}/></div>
         break
       case 'projects':
         element = <div className='overlay-page' style={{ left: `${dom.getBoundingClientRect().x}px`, top: `${dom.getBoundingClientRect().y}px` }}><Projects onCloseOverlay={handleOverlayClose} isMobile={isMobile} /></div>

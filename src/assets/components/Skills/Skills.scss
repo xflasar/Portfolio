@@ -39,6 +39,10 @@
     overflow: visible;
     transition: all 0.3s ease-in-out;
 
+    &.non-main {
+      top: 0;
+    }
+
     &.box-collision-active {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -61,10 +65,6 @@
           width: 75%;
         }
       }
-    }
-
-    &.non-main {
-      top: 1rem;
     }
 
     .skill {
@@ -131,6 +131,7 @@
       h2 {
         position: relative;
         color: #55aaff;
+        font-size: 2rem;
         animation: loadTrans 2s 1 normal forwards;
       }
 
@@ -149,19 +150,24 @@
     h2 {
       position: relative;
       text-align: center;
-      top: 1rem;
     }
 
-    &-content, &-content-holder {
+    &-content{
       position: relative;
-      display: flex;
-      flex-direction: row;
+      display: block;
       width: 98%;
       height: 90%;
-      top: 2.5%;
       left: 1%;
+    }
+
+    &-content-holder {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      gap: 1rem;
       overflow: hidden;
-      overflow-x: auto;
+      overflow-x: scroll;
       animation: landingAnimC 2s cubic-bezier(1, 0, 0, 1) 0s 1 normal forwards;
 
       @keyframes landingAnimC {
@@ -183,18 +189,17 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: black;
+        background-color: #003474;
         border-radius: 5px;
       }
 
-      &-item {
-        position: relative;
-        width: 400px;
-        margin-right: 1rem;
-        margin-bottom: 1rem;
-        border-radius: 1rem;
+      .projects-content-holder-item {
+        width: 100%;
+        min-width: 25vw;
         transition: all 0.3s ease-in-out;
         opacity: 0;
+        animation: landingAnimI 1s linear 1s 1 forwards;
+        overflow: hidden;
 
         @keyframes landingAnimI {
           0% {
@@ -206,86 +211,6 @@
             transform: translateY(0);
           }
         }
-
-        &:hover {
-          border: 1px solid #55aaff;
-
-          .content {
-            &-description {
-              height: 50%;
-              max-height: 50%;
-              overflow-y: auto;
-
-              p {
-                max-height: 100%;
-                -webkit-line-clamp: initial;
-              }
-            }
-          }
-        }
-
-        a {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          left: 0;
-          text-decoration: none;
-          color: white;
-        }
-
-        img {
-          position: relative;
-          object-fit: cover;
-          width: inherit;
-          height: 100%;
-          border-radius: 1rem;
-        }
-
-        &:last-child {
-          margin-right: 0.5rem;
-        }
-
-        .content {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-
-          &-title {
-            width: 100%;
-            text-align: center;
-
-            p {
-              font-size: x-large;
-              overflow-wrap: normal;
-            }
-          }
-
-          &-description {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            max-height: 11.5%;
-            text-align: center;
-            border-radius: 0 0 1rem 1rem;
-            background-color: rgba(0, 0, 0, 0.8);
-            transition: max-height 0.3s ease-in-out;
-
-            p {
-              display: -webkit-box;
-              position: relative;
-              width: calc(98%);
-              max-height: 100%;
-              -webkit-line-clamp: 3;
-              -webkit-box-orient: vertical;
-              margin-left: 1%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-          }
-        }
       }
     }
   }
@@ -295,26 +220,45 @@
   .skills {
     width: 100%;
     height: 100%;
+    min-height: 0;
     left: 0;
     top: 0;
     background: #000010;
     border-radius: 0;
-    overflow: auto;
+    overflow: hidden;
 
     .skill-cloud {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-rows: repeat(auto-fit, minmax(12vh, 1fr));
       gap: 1rem;
+      height: 80vh;
+      margin: 0;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      top: 0;
       justify-content: initial;
       align-items: initial;
       overflow: hidden;
       overflow-y: auto;
 
+      &.non-main {
+        height: 30vh;
+      }
+
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #003474;
+        border-radius: 5px;
+      }
+
       .skill {
         position: relative;
         width: 100%;
-        height: 100px;
+        height: 12vh;
         padding: 0;
         display: flex;
         flex-direction: column;
@@ -323,14 +267,23 @@
         img {
           object-fit: scale-down;
           width: 100%;
-          height: 50%;
+          height: 5vh;
         }
       }
     }
 
     .skill-project-extra {
-      height: calc(100% - 30vh - 1rem);
+      height: calc(70vh);
       margin-bottom: 2rem;
+
+      &-content {
+        top: 0;
+      }
+      &-content-holder {
+        .projects-content-holder-item {
+          min-width: 90vw;
+        }
+      }
     }
   }
 }

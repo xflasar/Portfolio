@@ -134,9 +134,9 @@
     min-width: 300px;
     height: 45vh;
     min-height: 250px;
-    background-color: rgba(57, 48, 219, 1);
+    background-color: #305EDB;
     border-radius: 15px 25%;
-    animation: loadInInit 1.5s linear 2s 1 forwards, morph 10s 3s infinite forwards normal;
+    animation: loadInInit 1.5s linear 2s 1 forwards, morph 20s cubic-bezier(1, 0.7, 0.7, 0.1) 3s infinite forwards normal;
     justify-content: center;
     align-items: center;
     opacity: 0;

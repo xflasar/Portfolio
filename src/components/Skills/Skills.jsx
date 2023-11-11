@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 import '../../assets/components/Skills/Skills.scss'
+import Project from '../Projects/project'
 
-const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision }) => {
+const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision, lang }) => {
   const [skillSelectedProjects, setSkillSelectedProjects] = useState(null)
   const [shouldAnimate, setShouldAnimate] = useState(false)
   const [projectsData, setProjectsData] = useState([])
@@ -84,9 +85,9 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision }) => {
     const months = currentDate.getMonth() - start.getMonth()
     const days = currentDate.getDate() - start.getDate()
 
-    const yearString = years > 0 ? `${years} year${years > 1 ? 's' : ''}` : ''
-    const monthString = months > 0 ? `${months} month${months > 1 ? 's' : ''}` : ''
-    const dayString = days > 0 ? `${days} day${days > 1 ? 's' : ''}` : ''
+    const yearString = years > 0 ? lang === 'en-US' ? `${years} year${years > 1 ? 's' : ''}` : `${years} rok${(years <= 4 && years >= 2) ? 'y' : years >= 5 ? 'ů' : ''}` : ''
+    const monthString = months > 0 ? lang === 'en-US' ? `${months} month${months > 1 ? 's' : ''}` : `${months} měsíc${(months <= 4 && months >= 2) ? 'e' : months >= 5 ? 'ů' : ''}` : ''
+    const dayString = days > 0 ? lang === 'en-US' ? `${days} day${days > 1 ? 's' : ''}` : `${days} ${(days === 1 ? 'den' : (days <= 4 && days >= 2) ? 'dny' : days >= 5 ? 'dní' : '')}` : ''
 
     const components = [yearString, monthString, dayString].filter(component => component !== '')
 
@@ -138,21 +139,7 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision }) => {
               ? skillSelectedProjects.length === 0
                 ? (<p>No Projects assigned!</p>)
                 : skillSelectedProjects.map((project, index) => (
-                <div className="skill-project-extra-content-item" key={index} style={shouldAnimate ? { animation: `landingAnimI 1s cubic-bezier(0.075, 0.82, 0.165, 1) ${index * 0.5}s 1 normal forwards` } : null}>
-                  <img src={project.node.projectImage} alt={project.node.projectDescription} />
-                  <a href={project.node.projectLink} target="_blank" rel="noreferrer">
-                    <div className="content">
-                      <div className="content-title">
-                        <p>
-                          {project.node.projectName}
-                        </p>
-                      </div>
-                      <div className="content-description">
-                        <p>{project.node.projectDescription}</p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
+                  <Project key={index} project={project.node} index={index} />
                 ))
               : null
             }
@@ -168,7 +155,8 @@ Skills.propTypes = {
   skills: PropTypes.array,
   onCloseOverlay: PropTypes.func,
   isMobile: PropTypes.bool,
-  antiSkillsBoxCollision: PropTypes.bool
+  antiSkillsBoxCollision: PropTypes.bool,
+  lang: PropTypes.string
 }
 
 export default Skills
