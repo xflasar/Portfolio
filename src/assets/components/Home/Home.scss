@@ -30,7 +30,7 @@
     flex-direction: row;
     pointer-events: none;
     
-    img {
+    .profile-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -290,8 +290,6 @@
           }
         }
 
-        
-
         @keyframes loadingNavLinksAnim {
           0% {
             opacity: 0;
@@ -443,6 +441,7 @@
     width: 100vw;
     overflow: auto;
     overflow-y: scroll;
+
     .home-intro-container {
       width: 90%;
       height: auto;
@@ -534,45 +533,6 @@
       }
     }
 
-    .github-activity-button-show {
-      position: absolute;
-      left: 50%;
-      top: 60%;
-      width: 7vh;
-      height: 7vh;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background-color: rgba(57, 48, 219, 0.2);
-      box-shadow: 0 -0.06em 0.1em #3930DB inset, 0 -0.15em 0.4em #305EDB inset, 0 0.05em 0.05em #3930DB inset;
-      border: none;
-      transition: all 0.35s ease-in-out;
-
-      &:hover {
-        background-color: rgba(57, 48, 219, 1);
-        transform: translateY(-1px) translateX(-50%);
-      }
-      
-      &.active {
-        background-color: rgba(57, 48, 219, 0.8);
-        outline: 2px solid #04fafd;
-        color: #04fafd;
-        transform: translateY(-5px) translateX(-50%);
-        
-        &:hover {
-          background-color: rgba(57, 48, 219, .2);
-        }
-      }
-
-      img {
-        position: absolute;
-        left: 2px;
-        top: 0;
-        width: 95%;
-        height: 95%;
-        opacity: 0.7;
-      }
-    }
-
     .prof-image {
       position: relative;
       display: flex;
@@ -583,26 +543,78 @@
       width: 100%;
       height:80%;
 
-      img {
+      .profile-img {
         width: 40vh;
         height: 40vh;
         object-fit: contain;
       }
     
       .links {
-      position: relative;
-      display: grid;
-      top: 0;
-      left: 0;
-      gap: 0;
-      grid-template-columns: 50% 50%;
-      grid-template-rows: 50% 50%;
-      justify-items: center;
-      align-items: center;
-      pointer-events: none;
-      flex: 1;
+        position: relative;
+        display: grid;
+        top: 0;
+        left: 0;
+        gap: 0;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+        justify-items: center;
+        align-items: center;
+        pointer-events: none;
+        flex: 1;
 
-      a {
+        .github-activity-button-show {
+          position: absolute;
+          left: 50%;
+          top: 40%;
+          width: 7vh;
+          height: 7vh;
+          transform: translateX(-50%);
+          border-radius: 50%;
+          background-color: rgba(57, 48, 219, 0.2);
+          box-shadow: 0 -0.06em 0.1em #3930DB inset, 0 -0.15em 0.4em #305EDB inset, 0 0.05em 0.05em #3930DB inset;
+          border: none;
+          transition: all 0.35s ease-in-out;
+          pointer-events: all;
+          animation: loadingAnimGithubButton 2s linear 3s 1 normal forwards;
+          opacity: 0;
+
+          @keyframes loadingAnimGithubButton {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+        
+          &:hover {
+            background-color: rgba(57, 48, 219, 1);
+            transform: translateY(-1px) translateX(-50%);
+          }
+
+          &.active {
+            background-color: rgba(57, 48, 219, 0.8);
+            outline: 2px solid #04fafd;
+            color: #04fafd;
+            transform: translateY(-5px) translateX(-50%);
+
+            &:hover {
+              background-color: rgba(57, 48, 219, .2);
+            }
+          }
+        
+          img {
+            position: absolute;
+            left: 2px;
+            top: 0;
+            width: 95%;
+            height: 95%;
+            opacity: 0.7;
+            animation: none;
+          }
+        }
+
+        a {
         min-width: 60px;
         max-width: 150px;
         width: 15vh;
@@ -639,7 +651,7 @@
           grid-column: 2;
           grid-row: 2;
         }
-      }
+        }
       }
     }
   }
