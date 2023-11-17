@@ -11,6 +11,7 @@ import GitActivity from '../Github/activity'
 
 const Home = () => {
   const isBrowser = typeof window !== 'undefined'
+  console.log(isBrowser)
 
   const [activePage, setActivePage] = useState('')
   const [clickedButton, setClickedButton] = useState(null)
@@ -223,7 +224,7 @@ const Home = () => {
       {/* <video autoPlay muted loop className="video">
         <source src="../bg.mp4" type="video/mp4" />
       </video> */}
-      <button type='button' className='locale-button' onClick={(e) => handleLocaleChange(e)} value={locale === 'en-US' ? 'cs-CS' : 'en-US'}>{locale === 'en-US' ? 'CZ' : 'EN'}</button>
+      <button type='button' className='locale-button' onClick={(e) => handleLocaleChange(e)} value={locale === 'en-US' ? 'cs-CZ' : 'en-US'}>{locale === 'en-US' ? 'CZ' : 'EN'}</button>
     </div>
         <div className="prof-image">
           <img src="./prof-image.webp" className='profile-img' alt='Profile picture'/>

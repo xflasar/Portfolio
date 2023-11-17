@@ -1210,6 +1210,7 @@ type Query_skillsJsonArgs = {
   internal: InputMaybe<InternalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
   skillImage: InputMaybe<StringQueryOperatorInput>;
+  skillLevelPercent: InputMaybe<IntQueryOperatorInput>;
   skillName: InputMaybe<StringQueryOperatorInput>;
   skillStartDate: InputMaybe<StringQueryOperatorInput>;
   skillUrl: InputMaybe<StringQueryOperatorInput>;
@@ -2003,6 +2004,7 @@ type SkillsJson = Node & {
   readonly internal: Internal;
   readonly parent: Maybe<Node>;
   readonly skillImage: Maybe<Scalars['String']>;
+  readonly skillLevelPercent: Maybe<Scalars['Int']>;
   readonly skillName: Maybe<Scalars['String']>;
   readonly skillStartDate: Maybe<Scalars['String']>;
   readonly skillUrl: Maybe<Scalars['String']>;
@@ -2059,6 +2061,7 @@ type SkillsJsonFieldSelector = {
   readonly internal: InputMaybe<InternalFieldSelector>;
   readonly parent: InputMaybe<NodeFieldSelector>;
   readonly skillImage: InputMaybe<FieldSelectorEnum>;
+  readonly skillLevelPercent: InputMaybe<FieldSelectorEnum>;
   readonly skillName: InputMaybe<FieldSelectorEnum>;
   readonly skillStartDate: InputMaybe<FieldSelectorEnum>;
   readonly skillUrl: InputMaybe<FieldSelectorEnum>;
@@ -2070,6 +2073,7 @@ type SkillsJsonFilterInput = {
   readonly internal: InputMaybe<InternalFilterInput>;
   readonly parent: InputMaybe<NodeFilterInput>;
   readonly skillImage: InputMaybe<StringQueryOperatorInput>;
+  readonly skillLevelPercent: InputMaybe<IntQueryOperatorInput>;
   readonly skillName: InputMaybe<StringQueryOperatorInput>;
   readonly skillStartDate: InputMaybe<StringQueryOperatorInput>;
   readonly skillUrl: InputMaybe<StringQueryOperatorInput>;
@@ -2126,6 +2130,7 @@ type SkillsJsonSortInput = {
   readonly internal: InputMaybe<InternalSortInput>;
   readonly parent: InputMaybe<NodeSortInput>;
   readonly skillImage: InputMaybe<SortOrderEnum>;
+  readonly skillLevelPercent: InputMaybe<SortOrderEnum>;
   readonly skillName: InputMaybe<SortOrderEnum>;
   readonly skillStartDate: InputMaybe<SortOrderEnum>;
   readonly skillUrl: InputMaybe<SortOrderEnum>;

@@ -88,7 +88,7 @@
     .home-intro > span {
       position: absolute;
       top: 0;
-      animation: slide 10s 1s infinite;
+      animation: slide 15s 1s infinite;
       font-weight: bold;
       color: white;
       opacity: 0;
@@ -104,7 +104,7 @@
         top: 0vw;
         opacity: 1;
       }
-      40% {
+      55% {
         top: -5vw;
       }
       60% {
@@ -114,7 +114,7 @@
         top: -10vw;
         opacity: 1;
       }
-      95% {
+      90% {
         top: -10vw;
         opacity: 0;
       }
@@ -134,7 +134,7 @@
     min-width: 300px;
     height: 45vh;
     min-height: 250px;
-    background-color: #305EDB;
+    background-color: rgba(47, 93, 218, 0.5);
     border-radius: 15px 25%;
     animation: loadInInit 1.5s linear 2s 1 forwards, morph 20s cubic-bezier(1, 0.7, 0.7, 0.1) 3s infinite forwards normal;
     justify-content: center;
@@ -361,7 +361,7 @@
   height: 100vh;
   z-index: 101;
   transform-origin: center;
-  animation: expand 1.5s 1 forwards;
+  animation: expand .5s 1 forwards;
 
   .close-button {
     all: unset;

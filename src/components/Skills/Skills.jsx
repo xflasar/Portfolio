@@ -9,6 +9,7 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision, lang }) => {
   const [shouldAnimate, setShouldAnimate] = useState(false)
   const [projectsData, setProjectsData] = useState([])
   const [skillsData, setSkillsData] = useState([])
+  const [skillSelected, setSkillSelected] = useState(null)
 
   // hook separate
   const qlData = useStaticQuery(graphql`
@@ -31,7 +32,8 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision, lang }) => {
             skillName,
             skillUrl,
             skillImage,
-            skillStartDate
+            skillStartDate,
+            skillLevelPercent
           }
         }
       }
@@ -40,13 +42,22 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision, lang }) => {
 
   useEffect(() => {
     if (qlData) {
-      if (qlData.allProjectsJson) setProjectsData(qlData.allProjectsJson.edges)
+      if (qlData.allProjectsJson) {
+        setProjectsData(qlData.allProjectsJson.edges)
+        setSkillSelectedProjects(qlData.allProjectsJson.edges)
+      }
       if (qlData.allSkillsJson) setSkillsData(qlData.allSkillsJson.edges)
     }
   }, [qlData])
 
   const handleSkillClick = (skill) => {
-    getProjectsFromSkill(skill)
+    setSkillSelectedProjects(null)
+
+    // Hack for reloading animation when changing skill
+    setTimeout(() => {
+      setSkillSelected(skill.skillName)
+      getProjectsFromSkill(skill)
+    }, 0)
   }
 
   const getProjectsFromSkill = (_skill) => {
@@ -98,48 +109,36 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision, lang }) => {
     <section className="skills">
       <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
       <h1>Skills</h1>
-      <div className={skillSelectedProjects !== null ? antiSkillsBoxCollision ? 'skill-cloud non-main box-collision-active' : 'skill-cloud non-main' : antiSkillsBoxCollision ? 'skill-cloud box-collision-active' : 'skill-cloud'}>
-        {skillsData.map((skill, index) => {
-          const rotation = (360 / skillsData.length) * index
-          const radius = 18 // Spacing between items
-          let translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180))
-          if (skillSelectedProjects) {
-            translateY = -radius * Math.cos((rotation - 90) * (Math.PI / 180)) * 0.7
-          }
-          const translateX = radius * Math.sin((rotation - 90) * (Math.PI / 180)) * 1.2
-
+      <div className='skill-cloud-container'>
+        <div className={skillSelectedProjects !== null ? antiSkillsBoxCollision ? 'skill-cloud non-main box-collision-active' : 'skill-cloud non-main' : antiSkillsBoxCollision ? 'skill-cloud box-collision-active' : 'skill-cloud'}>
+        {skillsData.map((skill) => {
           return (
             <div
               onClick={() => handleSkillClick(skill.node)}
               key={skill.node.skillName}
-              className="skill"
+              className={skillSelected === skill.node.skillName ? 'skill active' : 'skill'}
               title={`Learning since ${skill.node.skillStartDate}`}
-              style={isMobile
-                ? null
-                : antiSkillsBoxCollision
-                  ? null
-                  : {
-                      transform: `translate(${translateX}vw, ${translateY}vh)`,
-                      transitionDelay: `${index * 50}ms`
-                    }
-              }
             >
-              <img src={skill.node.skillImage} />
+              <img src={skill.node.skillImage}/>
+              <div className="skill-overlay" style={{ maxHeight: `${skill.node.skillLevelPercent}%`, backgroundColor: `${skill.node.skillLevelPercent < 45 ? 'rgba(200, 20, 20, 0.5)' : skill.node.skillLevelPercent > 75 ? 'rgba(20, 200, 0, 0.5)' : 'rgba(200, 200, 10, 0.5)'}` }}/>
               <span className="skill-name">{skill.node.skillName}</span>
               <span className="experience">{calculateExperience(skill.node.skillStartDate)}</span>
             </div>
           )
         })}
+        </div>
       </div>
+      <h2>Projects</h2>
       <div className={skillSelectedProjects ? 'skill-project-extra active' : 'skill-project-extra'}>
-        <h2>Projects</h2>
         <div className="skill-project-extra-content">
           <div className="skill-project-extra-content-holder">
             {skillSelectedProjects
               ? skillSelectedProjects.length === 0
                 ? (<p>No Projects assigned!</p>)
                 : skillSelectedProjects.map((project, index) => (
-                  <Project key={index} project={project.node} index={index} />
+                  <div key={index} className='project-container' style={{ animationDelay: `${index * 200}ms` }}>
+                    <Project key={index} project={project.node} index={index} />
+                  </div>
                 ))
               : null
             }

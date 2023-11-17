@@ -34,15 +34,15 @@ const About = ({ redirectTo, onCloseOverlay, locale }) => {
           <h2>{localeData?.WorkflowH2}</h2>
           <div className="key-point">
             <span className="key-word">Frontend</span>
-            <span className="key-description">{localeData?.WorkflowFrontendKD}</span>
+            <p className="key-description">{localeData?.WorkflowFrontendKD}</p>
           </div>
           <div className="key-point">
             <span className="key-word">Backend</span>
-            <span className="key-description">{localeData?.WorkflowBackendKD}</span>
+            <p className="key-description">{localeData?.WorkflowBackendKD}</p>
           </div>
           <div className="key-point">
             <span className="key-word">Freelancing</span>
-            <span className="key-description">{localeData?.WorkflowFreelanceKD}<a onClick={handleFreelancingProjectsClick}>{localeData?.WorkflowFreelanceA}</a>.</span>
+            <p className="key-description">{localeData?.WorkflowFreelanceKD}<a onClick={handleFreelancingProjectsClick}>{localeData?.WorkflowFreelanceA}</a>.</p>
           </div>
         </section>
         <section className="about-container-journey">

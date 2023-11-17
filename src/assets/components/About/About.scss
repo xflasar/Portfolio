@@ -23,17 +23,19 @@
 
   .about-container{
     position: relative;
-    width: 90%;
+    width: calc(100% - 2rem);
     height: 100%;
     overflow: auto;
-    left: 4.5%;
+    left: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
     font-size: 16px;
     line-height: 1.6;
     color: #333;
     margin-bottom: 1rem;
   
     &::-webkit-scrollbar {
-      width: 0.2rem;
+      width: 0.5rem;
     }
     
     &::-webkit-scrollbar-thumb {
@@ -68,7 +70,9 @@
 
       p {
         color: #f0f0f0;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
       }
 
       &:first-child {
@@ -77,6 +81,12 @@
 
       &:last-child {
         margin-bottom: 0;
+      }
+
+      &:not(:nth-child(2)) {
+        p {
+          margin-top: 0;
+        }
       }
     }
 
@@ -96,11 +106,6 @@
         font-size: 1.3rem;
         flex: 2;
         margin-right: 10px;
-      }
-      
-      .key-description {
-        font-size: 1.2rem;
-        flex: 3;
       }
     }
   }
