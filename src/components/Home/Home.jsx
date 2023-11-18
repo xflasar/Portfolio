@@ -158,24 +158,6 @@ const Home = () => {
     return element
   }
 
-  const handlePageOutsideClick = (event) => {
-    const clickTarget = event.target
-    if (!clickTarget) return
-
-    const aboutPage = document.querySelector('.about')
-    const aboutLink = document.querySelector('.about-nav')
-    const skillsPage = document.querySelector('.skills')
-    const skillsLink = document.querySelector('.skills-nav')
-    const projectsPage = document.querySelector('.projects')
-    const projectsLink = document.querySelector('.projects-nav')
-    const contactPage = document.querySelector('.contact')
-    const contactLink = document.querySelector('.contact-nav')
-
-    if (((aboutPage && !aboutPage.contains(clickTarget)) && (aboutLink && !aboutLink.contains(clickTarget))) || ((skillsPage && !skillsPage.contains(clickTarget)) && (skillsLink && !skillsLink.contains(clickTarget))) || ((projectsPage && !projectsPage.contains(clickTarget)) && (projectsLink && !projectsLink.contains(clickTarget))) || ((contactPage && !contactPage.contains(clickTarget)) && (contactLink && !contactLink.contains(clickTarget)))) {
-      setActivePage('')
-    }
-  }
-
   const handleNavAnimation = (event) => {
     event.target.classList.add('hoverAnim')
   }
@@ -204,14 +186,6 @@ const Home = () => {
     setTimeout(() => {
       updateLinkClass(0)
     }, 2000)
-  }, [])
-
-  useEffect(() => {
-    document.addEventListener('click', handlePageOutsideClick)
-
-    return () => {
-      document.removeEventListener('click', handlePageOutsideClick)
-    }
   }, [])
 
   if (!localeData) return null

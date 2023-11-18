@@ -29,6 +29,15 @@
     scroll-behavior: smooth;
     overflow: hidden;
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #003474;
+      border-radius: 5px;
+    }
   }
 
   .projects-top {
