@@ -6,9 +6,13 @@ const Activity = () => {
   const [activity, setActivity] = useState([])
 
   async function fetchGitActivityData () {
-    const response = await fetch('https://api.github.com/users/xflasar/events')
-    const data = await response.json()
-    setActivity(formatData(data))
+    try {
+      const response = await fetch('https://api.github.com/users/xflasar/events')
+      const data = await response.json()
+      setActivity(formatData(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
   function formatData (data) {
     const activityTypes = ['PushEvent', 'CreateEvent', 'DeleteEvent']
