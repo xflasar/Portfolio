@@ -802,7 +802,7 @@ type ProjectsJson = Node & {
   readonly internal: Internal;
   readonly parent: Maybe<Node>;
   readonly projectDescription: Maybe<Scalars['String']>;
-  readonly projectImage: Maybe<Scalars['String']>;
+  readonly projectImages: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly projectLink: Maybe<Scalars['String']>;
   readonly projectName: Maybe<Scalars['String']>;
   readonly projectSkills: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
@@ -860,7 +860,7 @@ type ProjectsJsonFieldSelector = {
   readonly internal: InputMaybe<InternalFieldSelector>;
   readonly parent: InputMaybe<NodeFieldSelector>;
   readonly projectDescription: InputMaybe<FieldSelectorEnum>;
-  readonly projectImage: InputMaybe<FieldSelectorEnum>;
+  readonly projectImages: InputMaybe<FieldSelectorEnum>;
   readonly projectLink: InputMaybe<FieldSelectorEnum>;
   readonly projectName: InputMaybe<FieldSelectorEnum>;
   readonly projectSkills: InputMaybe<FieldSelectorEnum>;
@@ -873,7 +873,7 @@ type ProjectsJsonFilterInput = {
   readonly internal: InputMaybe<InternalFilterInput>;
   readonly parent: InputMaybe<NodeFilterInput>;
   readonly projectDescription: InputMaybe<StringQueryOperatorInput>;
-  readonly projectImage: InputMaybe<StringQueryOperatorInput>;
+  readonly projectImages: InputMaybe<StringQueryOperatorInput>;
   readonly projectLink: InputMaybe<StringQueryOperatorInput>;
   readonly projectName: InputMaybe<StringQueryOperatorInput>;
   readonly projectSkills: InputMaybe<StringQueryOperatorInput>;
@@ -931,7 +931,7 @@ type ProjectsJsonSortInput = {
   readonly internal: InputMaybe<InternalSortInput>;
   readonly parent: InputMaybe<NodeSortInput>;
   readonly projectDescription: InputMaybe<SortOrderEnum>;
-  readonly projectImage: InputMaybe<SortOrderEnum>;
+  readonly projectImages: InputMaybe<SortOrderEnum>;
   readonly projectLink: InputMaybe<SortOrderEnum>;
   readonly projectName: InputMaybe<SortOrderEnum>;
   readonly projectSkills: InputMaybe<SortOrderEnum>;
@@ -1123,7 +1123,7 @@ type Query_projectsJsonArgs = {
   internal: InputMaybe<InternalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
   projectDescription: InputMaybe<StringQueryOperatorInput>;
-  projectImage: InputMaybe<StringQueryOperatorInput>;
+  projectImages: InputMaybe<StringQueryOperatorInput>;
   projectLink: InputMaybe<StringQueryOperatorInput>;
   projectName: InputMaybe<StringQueryOperatorInput>;
   projectSkills: InputMaybe<StringQueryOperatorInput>;

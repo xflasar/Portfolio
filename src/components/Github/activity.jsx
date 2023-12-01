@@ -11,9 +11,10 @@ const Activity = () => {
       const data = await response.json()
       setActivity(formatData(data))
     } catch (error) {
-      console.error(error)
+      console.log(error)
     }
   }
+
   function formatData (data) {
     const activityTypes = ['PushEvent', 'CreateEvent', 'DeleteEvent']
 

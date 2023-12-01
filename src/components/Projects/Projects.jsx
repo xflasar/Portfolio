@@ -15,11 +15,11 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
       allProjectsJson {
         edges {
           node {
-            projectName,
-            projectDescription,
-            projectLink,
-            projectImage,
-            projectSkills,
+            projectName
+            projectDescription
+            projectImages
+            projectLink
+            projectSkills
             Tag
           }
         }
@@ -77,11 +77,10 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
         projectName: project.node.projectName,
         projectDescription: project.node.projectDescription,
         projectLink: project.node.projectLink,
-        projectImage: project.node.projectImage,
+        projectImages: project.node.projectImages,
         projectSkills: project.node.projectSkills,
         Tag: project.node.Tag
       }
-
       switch (projectNode.Tag) {
         case 'Personal Project':
           personalProjectsArray.push(projectNode)
@@ -89,7 +88,7 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
         case 'Freelance Project':
           freelanceProjectsArray.push(projectNode)
           break
-        case 'Side-Small Project':
+        case 'Side small Project':
           sideSmallProjectsArray.push(projectNode)
           break
         default:
@@ -101,7 +100,7 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
     setPersonalProjects(personalProjectsArray)
     setFreelanceProjects(freelanceProjectsArray)
     setSideSmallProjects(sideSmallProjectsArray)
-  }, [projectsData])
+  }, [])
 
   return (
     <section className="projects">

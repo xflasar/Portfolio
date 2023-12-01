@@ -17,11 +17,11 @@ const Skills = ({ onCloseOverlay, isMobile, antiSkillsBoxCollision, lang }) => {
       allProjectsJson {
         edges {
           node {
-            projectName,
-            projectDescription,
-            projectLink,
-            projectImage,
-            projectSkills,
+            projectName
+            projectDescription
+            projectImages
+            projectLink
+            projectSkills
             Tag
           }
         }

@@ -10,7 +10,7 @@ const Project = ({ project, index, projectClick }) => {
 
   return (
     <div className='projects-content-holder-item' key={index} onClick={(e) => handleProjectClick(e, index)}>
-      <img src={project.projectImage} alt={project.projectDescription} />
+      <img src={project.projectImages[0]} alt={project.projectDescription} />
       {/* <a href={project.projectLink} target="_blank" rel="noreferrer"/> */}
       <div className="content">
         <div className="content-title">
