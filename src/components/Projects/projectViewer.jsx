@@ -48,8 +48,12 @@ const ProjectViewer = ({ project, closeViewer }) => {
         </div>
         <div className='project-info'>
           <h2>{project.projectName}</h2>
-          <p>{project.projectDescription}</p>
-          Tech stack: <span>{project.projectSkills}</span>
+          <div className='project-info-leftside'>
+            <p>{project.projectDescription}</p>
+          </div>
+          <div className='project-info-rightside'>
+            <h3>Tech stack:</h3> {project.projectSkills && (project.projectSkills.map((skill, index) => <span key={index}>{skill}</span>))}
+          </div>
         </div>
       </div>
     </div>
