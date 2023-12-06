@@ -52,7 +52,10 @@ const ProjectViewer = ({ project, closeViewer }) => {
             <p>{project.projectDescription}</p>
           </div>
           <div className='project-info-rightside'>
-            <h3>Tech stack:</h3> {project.projectSkills && (project.projectSkills.map((skill, index) => <span key={index}>{skill}</span>))}
+            <h3>Tech stack:</h3>
+            <div className='project-tech-stack'>
+              {project.projectSkills && (project.projectSkills.map((skill, index) => <span key={index}>{skill}</span>))}
+            </div>
           </div>
         </div>
       </div>
