@@ -32,7 +32,9 @@ const ProjectViewer = ({ project, closeViewer }) => {
 
   return (
     <div className="project-viewer">
-      <button className="close-button" onClick={handleCloseViewer}>X</button>
+      <div className='close-button-container'>
+        <button className="close-button" onClick={handleCloseViewer}>X</button>
+      </div>
       <div className='project-stuff'>
         <div className={project.projectImages.length === 1 ? 'image-slider' : 'image-slider actived'}>
           <div className={project.projectImages.length > 1 ? ' sliding' : null}>
