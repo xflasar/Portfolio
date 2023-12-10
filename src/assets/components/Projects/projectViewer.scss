@@ -4,16 +4,29 @@
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 2rem 1fr;
+  animation: loadin .4s linear 1 forwards;
+
+  @keyframes loadin {
+    0% {
+      overflow: hidden;
+      height: 0;
+    }
+    100% {
+      overflow: auto;
+      height: 100%;
+    }
+  }
 
   .close-button-container {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: center;
 
     .close-button {
-      width: 5%;
+      width: 50%;
       align-items: center;
       margin-right: 1rem;
+      border-radius: 25px;
       
       &:hover {
         background-color: rgba(0, 136, 195, 0.3);
@@ -143,7 +156,7 @@
           0 -0.06em 0.1em #3930DB inset,
           0 -0.15em 0.4em #305EDB inset,
           0 0.05em 0.05em #3930DB inset;
-	        cursor: pointer;
+	        cursor: default;
           transform-style: preserve-3d;
 	        will-change: border-radius, transform;
           border-radius: 50%;
