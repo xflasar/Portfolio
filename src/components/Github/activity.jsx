@@ -14,6 +14,7 @@ const Activity = () => {
       console.error(error)
     }
   }
+
   function formatData (data) {
     const activityTypes = ['PushEvent', 'CreateEvent', 'DeleteEvent']
 
@@ -38,6 +39,7 @@ const Activity = () => {
             url: 'https://github.com/' + commit.url.match(/repos\/(.+)/)?.[1].replace('commits', 'commit')
           }
         })
+
         activityObj.payload.ref = activity.payload.ref.match(/refs\/heads\/(.+)/)?.[1]
       } else if (activity.type === 'CreateEvent') {
         if (activityObj.payload.createdType === 'repository') {
@@ -57,6 +59,7 @@ const Activity = () => {
     })
   }
 
+  // Fetching Git activity from Github API every 5 minutes
   useEffect(() => {
     fetchGitActivityData()
     const fetchActivityInterval = setInterval(async () => {
@@ -68,13 +71,15 @@ const Activity = () => {
 
   return (
     <div className="activity-container">
-      {activity && (
-        <div className="activity-list">
-          {activity.map((activity, index) => (
-            <ActivityBox key={index} activityData={activity}/>
-          ))}
-        </div>
-      )}
+      <div className="activity-holder">
+        {activity && (
+          <div className="activity-list">
+            {activity.map((activity, index) => (
+              <ActivityBox key={index} activityData={activity}/>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
