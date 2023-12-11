@@ -53,7 +53,8 @@
       width: 100%;
 
       img {
-        width: 100%;
+        object-fit: contain;
+        width: 800px;
         height: 100%;
       }
     }
@@ -81,7 +82,7 @@
 
         @keyframes scroll {
           to {
-            transform: translate(calc(-39% - 0.5rem));
+            transform: translate(-50%);
           }
         }
       }
