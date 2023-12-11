@@ -5,13 +5,13 @@ import Skills from '../Skills/Skills'
 import Projects from '../Projects/Projects'
 import Contact from '../Contact/Contact'
 import GitActivity from '../Github/activity'
+import LocaleBtn from './LocaleButton/localeBtn'
 
 // Needs refactoring
 // custom hooks
 
 const Home = () => {
   const isBrowser = typeof window !== 'undefined'
-  console.log(isBrowser)
 
   const [activePage, setActivePage] = useState('')
   const [clickedButton, setClickedButton] = useState(null)
@@ -38,9 +38,8 @@ const Home = () => {
       })
   }, [locale])
 
-  const handleLocaleChange = (e) => {
-    e.preventDefault()
-    setLocale(e.target.value)
+  const handleLocaleChange = (loc) => {
+    setLocale(loc)
   }
 
   const handleGithubActivityShow = () => {
@@ -220,38 +219,40 @@ const Home = () => {
     <>
     {handleNavbarPageRender()}
     <section className="home">
-    <div className="wrapper">
-      {/* <video autoPlay muted loop className="video">
-        <source src="../bg.mp4" type="video/mp4" />
-      </video> */}
-      <button type='button' className='locale-button' onClick={(e) => handleLocaleChange(e)} value={locale === 'en-US' ? 'cs-CZ' : 'en-US'}>{locale === 'en-US' ? 'CZ' : 'EN'}</button>
-    </div>
-        <div className="prof-image">
-          <img src="./prof-image.webp" className='profile-img' alt='Profile picture'/>
-          <div className='links'>
-            <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd}/><span className='nav-title'>{localeData?.AboutLink}</span></a>
-            <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.SkillsLink}</span></a>
-            <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.ProjectsLink}</span></a>
-            <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.ContactLink}</span></a>
-            {/* fix this style and look */ isMobile && <button type='button' className={githubActivityShow ? 'github-activity-button-show active' : 'github-activity-button-show'} onClick={handleGithubActivityShow}><img src='../assets/home/github-mark-white.webp' />GitHub Activity</button>}
-          </div>
+      <div className="wrapper">
+        {/* <video autoPlay muted loop className="video">
+          <source src="../bg.mp4" type="video/mp4" />
+        </video> */}
+      </div>
+
+      <LocaleBtn locale={locale} hndlLocaleChange={(loc) => handleLocaleChange(loc)}/>
+
+      <div className="prof-image">
+        <img src="./prof-image.webp" className='profile-img' alt='Profile picture'/>
+        <div className='links'>
+          <a href='#About' className={'about-nav load-in'} onClick={(e) => handleNavbar(e, 'about')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd}/><span className='nav-title'>{localeData?.AboutLink}</span></a>
+          <a href='#Skills' className="skills-nav load-in" onClick={(e) => handleNavbar(e, 'skills')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.SkillsLink}</span></a>
+          <a href='#Projects' className="projects-nav load-in" onClick={(e) => handleNavbar(e, 'projects')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.ProjectsLink}</span></a>
+          <a href='#Contact' className="contact-nav load-in" onClick={(e) => handleNavbar(e, 'contact')}><span className='navBubble' onMouseEnter={handleNavAnimation} onAnimationEnd={handleNavAnimationEnd} /><span className='nav-title'>{localeData?.ContactLink}</span></a>
+          {/* fix this style and look */ isMobile && <button type='button' className={githubActivityShow ? 'github-activity-button-show active' : 'github-activity-button-show'} onClick={handleGithubActivityShow}><img src='../assets/home/github-mark-white.webp' />GitHub Activity</button>}
         </div>
-        <div className={githubActivityShow ? 'github-container active' : isMobile ? 'github-container deactivated' : 'github-container'}>
-          <GitActivity />
+      </div>
+      <div className={githubActivityShow ? 'github-container active' : isMobile ? 'github-container deactivated' : 'github-container'}>
+        <GitActivity />
+      </div>
+      <div className='home-intro-container'>
+        <h1 className="home-intro-h1">{localeData.HomeIntroH1}</h1>
+        <div className="home-intro">
+          <span>
+            {localeData?.HomeIntroSpan.split('\n').map((text, index) => (
+              <React.Fragment key={index}>
+                {text}
+                {index < localeData.HomeIntroSpan.split('\n').length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </span>
         </div>
-        <div className='home-intro-container'>
-          <h1 className="home-intro-h1">{localeData.HomeIntroH1}</h1>
-          <div className="home-intro">
-            <span>
-              {localeData?.HomeIntroSpan.split('\n').map((text, index) => (
-                <React.Fragment key={index}>
-                  {text}
-                  {index < localeData.HomeIntroSpan.split('\n').length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </span>
-          </div>
-        </div>
+      </div>
     </section>
     </>
   )
