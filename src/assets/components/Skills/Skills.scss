@@ -3,7 +3,7 @@
 .skills {
   position: relative;
   width: 80%;
-  height: calc(90% - 50px);
+  height: 90vh;
   left: 10%;
   top: 5%;
   overflow: hidden;
@@ -40,179 +40,261 @@
     }
   }
 
-  .skill-cloud-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 2rem);
-    min-height: 175px;
-    max-height: 100%;
-    margin: 0 1rem;
+  .skills-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: calc(100% - 2rem);
     overflow: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
 
-    .skill-cloud {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-      gap: 1rem;
-      align-content: center;
-      justify-items: center;
-      transition: all 0.3s ease-in-out;
-      
-      .skill {
-        position: relative;
-        width: 175px;
-        height: 175px;
-        background-color: #333;
-        border-radius: 50%;
-        color: #55aaff;
-        font-size: 1.2rem;
-        text-decoration: none;
-        cursor: pointer;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        transition: all 1s ease-in-out;
-        overflow: hidden;
+    h1 {
+      grid-row: 1;
+      grid-column: 1;
+    }
 
-        &.active, &:hover {
-          background-color: rgba(51, 51, 51, 0.3);
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
 
-          .skill-overlay {
-            height: 100%; 
-            transition: height 1s ease-in;
-          }
-          
-          img {
-            opacity: 0;
-            z-index: 2;
-          }
-          
-          .skill-name {
-            opacity: 1;
-            z-index: 2;
-          }
-          
-          .experience {
-            opacity: 1;
-            z-index: 2;
-          }
-        }
-        
-        img {
-          position: absolute;
-          object-fit: contain;
-          width: 70%;
-          height: 70%;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          opacity: 1;
-          transition: opacity 0.25s ease-in-out;
-        }
-
-        .skill-overlay {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 0;
-          background-color: #003474;
-          transition: height 0.3s ease-out;
-        }
-      
-        .skill-name {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: rgb(0, 255, 255);
-          margin-bottom: 0.5rem;
-          grid-column: 1;
-          grid-row: 1;
-          opacity: 0;
-          transition: opacity 0.5s ease-in-out;
-        }
-
-        .experience {
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: rgba(255, 255, 255, 1);
-          grid-column: 1;
-          grid-row: 2;
-          opacity: 0;
-          transition: opacity 0.5s ease-in-out;
-        }
-      }
+    &::-webkit-scrollbar-thumb {
+      width: 0.5rem;
+      border-radius: 5px;
+      background-color:#003474;
     }
   }
+  .skills-top {
+    overflow: hidden;
+    overflow-y: scroll;
+    min-height: 300px;
+    grid-row: 1;
+    grid-column: 1;
 
-  .skill-project-extra {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 2rem);
-    height: calc(100% - 35% - 2rem - 4.5rem - 2rem);
-    margin: 1rem;
-    color: white;
-    flex: 1;
-
-    &.active {
-      transition: all ease-in-out 2s;
-    }
-
-    h2 {
-      position: relative;
-      text-align: center;
-      margin: 0 1rem;
-    }
-
-    &-content{
+    .skill-cloud-container {
       position: relative;
       display: block;
-      width: 100%;
-      height: 100%;
+      width: calc(100% - 2rem);
+      height: calc(100% - 6rem);
+      margin: 0 1rem;
+      top: 6rem;
       overflow: hidden;
       overflow-y: scroll;
 
       &::-webkit-scrollbar {
-        width: 0.5rem;;
+        width: 0.5rem;
       }
-
+  
       &::-webkit-scrollbar-thumb {
-        background-color: #003474;
+        width: 0.5rem;
         border-radius: 5px;
+        background-color:#003474;
       }
-    }
-
-    &-content-holder {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(350px, 1fr) repeat(auto-fit, minmax(350px, 1fr));
-      grid-template-rows: auto;
-      gap: 1rem;
-
-      .project-container {
-        animation: landingAnimI 2s linear 1s 1 forwards;
-        opacity: 0;
-
-        @keyframes landingAnimI {
-          0% {
-            opacity: 0;
+  
+      .skill-cloud {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(50px, 175px));
+        gap: 1rem;
+        align-content: center;
+        justify-items: center;
+        transition: all 0.3s ease-in-out;
+        
+        .skill {
+          position: relative;
+          width: calc(15vw - 15vh);
+          height: calc(15vw - 15vh);
+          min-width: 50px;
+          max-width: 175px;
+          min-height: 50px;
+          max-height: 175px;
+          background-color: #333;
+          border-radius: 50%;
+          color: #55aaff;
+          font-size: 1.2rem;
+          text-decoration: none;
+          cursor: pointer;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          transition: all 1s ease-in-out;
+  
+          &.active, &:hover {
+            background-color: rgba(51, 51, 51, 0.3);
+  
+            .skill-overlay-background {
+              height: 100%; 
+              transition: height 1s ease-in;
+            }
+            
+            img {
+              opacity: 0;
+              z-index: 2;
+            }
+            
+            .skill-name {
+              opacity: 1;
+              z-index: 2;
+            }
+            
+            .experience {
+              opacity: 1;
+              z-index: 2;
+            }
           }
-          100% {
+          
+          img {
+            position: absolute;
+            object-fit: contain;
+            width: 70%;
+            height: 70%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             opacity: 1;
+            transition: opacity 0.25s ease-in-out;
+          }
+  
+          .skill-overlay {
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+            width: calc(15vw - 15vh);
+            height: calc(15vw - 15vh);
+            min-width: 50px;
+            max-width: 175px;
+            min-height: 50px;
+            max-height: 175px;
+            border-radius: 50%;
+          }
+
+          .skill-overlay-background {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            transition: height 0.3s ease-out;
+          }
+        
+          .skill-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgb(0, 255, 255);
+            margin-bottom: 0.5rem;
+            grid-column: 1;
+            grid-row: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+          }
+  
+          .experience {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 1);
+            grid-column: 1;
+            grid-row: 2;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            overflow: visible;
           }
         }
       }
+    }
+  }
 
-      .projects-content-holder-item {
+  .skills-bottom {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: row;
+
+    .skills-info {
+      position: relative;
+      width:50%;
+    }
+
+    .skills-projects {
+      width:50%;
+      overflow: hidden;
+      display: block;
+      height: inherit;
+    }
+    .skill-project-extra {
+      overflow: hidden;
+      overflow-y: scroll;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: calc(100% - 2rem);
+      height: calc(100% - 2rem - 2rem - 2rem);
+      margin: 1rem;
+      color: white;
+      flex: 1;
+  
+      &.active {
+        transition: all ease-in-out 2s;
+      }
+  
+      h2 {
+        position: relative;
+        text-align: center;
+        margin: 0 1rem;
+      }
+  
+      &-content{
+        position: relative;
+        display: block;
         width: 100%;
-        transition: all 0.3s ease-in-out;
+        height: 100%;
         overflow: hidden;
+        overflow-y: scroll;
+  
+        &::-webkit-scrollbar {
+          width: 0.5rem;;
+        }
+  
+        &::-webkit-scrollbar-thumb {
+          background-color: #003474;
+          border-radius: 5px;
+        }
+      }
+  
+      &-content-holder {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1;
+        grid-template-rows: minmax(350px, 1fr) repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1rem;
+  
+        .project-container {
+          animation: landingAnimI 2s linear 1s 1 forwards;
+          opacity: 0;
+  
+          @keyframes landingAnimI {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+        }
+  
+        .projects-content-holder-item {
+          width: 100%;
+          transition: all 0.3s ease-in-out;
+          overflow: hidden;
+        }
       }
     }
   }
+
+  
+
+  
 }
 
 @media screen and (orientation: portrait) {
