@@ -14,8 +14,9 @@ require('dotenv').config({
 
 module.exports = {
   flags: {
-    DEV_SSR: true
+    DEV_SSR: false
   },
+  pathPrefix: "/Portfolio",
   graphqlTypegen: true,
   plugins: [
     {
