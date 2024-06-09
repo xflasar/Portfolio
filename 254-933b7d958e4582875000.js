@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkPortfolio=self.webpackChunkPortfolio||[]).push([[254],{2254:function(o){o.exports=JSON.parse('{"AboutLink":"About","SkillsLink":"Skills","ProjectsLink":"Projects","ContactLink":"Contact","HomeIntroH1":"I\'m Martin Flasar","HomeIntroSpan":"FRONTEND DEVELOPER\\nWITH\\nA TOUCH OF BACKEND"}')}}]);

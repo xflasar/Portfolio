@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkPortfolio=self.webpackChunkPortfolio||[]).push([[213],{7213:function(o){o.exports=JSON.parse('{"AboutLink":"O mě","SkillsLink":"Dovednosti","ProjectsLink":"Projekty","ContactLink":"Kontakt","HomeIntroH1":"Jsem Martin Flasar","HomeIntroSpan":"FRONTEND VÝVOJÁŘ\\nS\\nDOTEKEM BACKENDU"}')}}]);
