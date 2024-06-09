@@ -1,7 +1,0 @@
-*.css
-*.scss
-*.json
-node_modules
-dist
-coverage
-gatsby-types.d.ts

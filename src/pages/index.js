@@ -1,7 +1,7 @@
-import * as React from 'react'
-import Home from '../components/Home/Home'
-import Footer from '../components/Footer/Footer'
-import '../assets/index.scss'
+import * as React from 'react';
+import Home from '../components/Home/Home';
+import Footer from '../components/Footer/Footer';
+import '../assets/index.scss';
 
 export default function App () {
   return (
@@ -11,7 +11,7 @@ export default function App () {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
 export function Head () {
@@ -23,5 +23,5 @@ export function Head () {
     <link rel='manifest' href='./manifest.json' />
       <title>Martin Flasar</title>
     </>
-  )
+  );
 }

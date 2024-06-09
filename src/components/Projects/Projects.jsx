@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import '../../assets/components/Projects/Projects.scss'
-import ProjectsList from './projectsList'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import '../../assets/components/Projects/Projects.scss';
+import ProjectsList from './projectsList';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const Projects = ({ onCloseOverlay, isMobile }) => {
-  const [personalProjects, setPersonalProjects] = useState([])
-  const [freelanceProjects, setFreelanceProjects] = useState([])
-  const [sideSmallProjects, setSideSmallProjects] = useState([])
-  const [mobileProjectSelection, setMobileProjectSelection] = useState(null)
+  const [personalProjects, setPersonalProjects] = useState([]);
+  const [freelanceProjects, setFreelanceProjects] = useState([]);
+  const [sideSmallProjects, setSideSmallProjects] = useState([]);
+  const [mobileProjectSelection, setMobileProjectSelection] = useState(null);
 
   const projectsData = useStaticQuery(graphql`
     query {
@@ -25,51 +25,51 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
         }
       }
     }
-  `)
+  `);
 
   const handleProjectSelector = (e) => {
-    e.preventDefault()
-    const { innerText } = e.target
+    e.preventDefault();
+    const { innerText } = e.target;
     const projectDataE = {
       name: innerText,
       projects: []
-    }
-    let el = null
-    const topEl = document.querySelector('.projects-top')
+    };
+    let el = null;
+    const topEl = document.querySelector('.projects-top');
     switch (innerText) {
       case 'Personal Projects':
         if (isMobile) {
-          projectDataE.projects = personalProjects
-          setMobileProjectSelection(projectDataE)
+          projectDataE.projects = personalProjects;
+          setMobileProjectSelection(projectDataE);
         } else {
-          el = document.getElementById('personal-projects-container')
-          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
+          el = document.getElementById('personal-projects-container');
+          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height);
         }
-        break
+        break;
       case 'Freelance Projects':
         if (isMobile) {
-          projectDataE.projects = freelanceProjects
-          setMobileProjectSelection(projectDataE)
+          projectDataE.projects = freelanceProjects;
+          setMobileProjectSelection(projectDataE);
         } else {
-          el = document.getElementById('freelance-projects-container')
-          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
+          el = document.getElementById('freelance-projects-container');
+          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height);
         }
-        break
+        break;
       case 'Side-Small Projects':
         if (isMobile) {
-          projectDataE.projects = sideSmallProjects
-          setMobileProjectSelection(projectDataE)
+          projectDataE.projects = sideSmallProjects;
+          setMobileProjectSelection(projectDataE);
         } else {
-          el = document.getElementById('side-projects-container')
-          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height)
+          el = document.getElementById('side-projects-container');
+          return el.parentElement.scrollTo(0, el.offsetTop - topEl.getBoundingClientRect().height);
         }
     }
-  }
+  };
 
   useEffect(() => {
-    const personalProjectsArray = []
-    const freelanceProjectsArray = []
-    const sideSmallProjectsArray = []
+    const personalProjectsArray = [];
+    const freelanceProjectsArray = [];
+    const sideSmallProjectsArray = [];
 
     // Loop through the data and categorize projects
     projectsData.allProjectsJson.edges.forEach((project) => {
@@ -80,27 +80,27 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
         projectImages: project.node.projectImages,
         projectSkills: project.node.projectSkills,
         Tag: project.node.Tag
-      }
+      };
       switch (projectNode.Tag) {
         case 'Personal Project':
-          personalProjectsArray.push(projectNode)
-          break
+          personalProjectsArray.push(projectNode);
+          break;
         case 'Freelance Project':
-          freelanceProjectsArray.push(projectNode)
-          break
+          freelanceProjectsArray.push(projectNode);
+          break;
         case 'Side small Project':
-          sideSmallProjectsArray.push(projectNode)
-          break
+          sideSmallProjectsArray.push(projectNode);
+          break;
         default:
-          break
+          break;
       }
-    })
+    });
 
     // Update the state variables with the categorized projects
-    setPersonalProjects(personalProjectsArray)
-    setFreelanceProjects(freelanceProjectsArray)
-    setSideSmallProjects(sideSmallProjectsArray)
-  }, [])
+    setPersonalProjects(personalProjectsArray);
+    setFreelanceProjects(freelanceProjectsArray);
+    setSideSmallProjects(sideSmallProjectsArray);
+  }, []);
 
   return (
     <section className="projects">
@@ -133,13 +133,13 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
 Projects.propTypes = {
   projectsData: PropTypes.array,
   onCloseOverlay: PropTypes.func,
   isMobile: PropTypes.bool
-}
+};
 
-export default Projects
+export default Projects;

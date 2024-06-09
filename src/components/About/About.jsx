@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import '../../assets/components/About/About.scss'
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import '../../assets/components/About/About.scss';
 
 const About = ({ redirectTo, onCloseOverlay, locale }) => {
-  const [localeData, setLocaleData] = useState(null)
+  const [localeData, setLocaleData] = useState(null);
 
   const handleFreelancingProjectsClick = () => {
-    redirectTo('projects')
-  }
+    redirectTo('projects');
+  };
 
   // alone hook move this to hooks.js
   useEffect(() => {
-    const lang = locale
+    const lang = locale;
     import(`../../localize/About/about.${lang}.json`)
       .then((data) => {
-        setLocaleData(data)
+        setLocaleData(data);
       })
       .catch((error) => {
-        console.error(`Error loading language data: ${error.message}`)
-      })
-  }, [])
+        console.error(`Error loading language data: ${error.message}`);
+      });
+  }, []);
 
   return (
     <div className="about">
@@ -55,13 +55,13 @@ const About = ({ redirectTo, onCloseOverlay, locale }) => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
 About.propTypes = {
   redirectTo: PropTypes.func,
   onCloseOverlay: PropTypes.func,
   locale: PropTypes.string
-}
+};
 
-export default About
+export default About;

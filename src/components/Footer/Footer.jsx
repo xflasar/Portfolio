@@ -1,5 +1,5 @@
-import React from 'react'
-import '../../assets/components/Footer/Footer.scss'
+import React from 'react';
+import '../../assets/components/Footer/Footer.scss';
 
 const Footer = () => {
   return (
@@ -14,7 +14,7 @@ const Footer = () => {
         </a>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

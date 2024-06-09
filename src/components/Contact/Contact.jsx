@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import '../../assets/components/Contact/Contact.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../../assets/components/Contact/Contact.scss';
 
 const Contact = ({ onCloseOverlay }) => {
   return (
@@ -28,11 +28,11 @@ const Contact = ({ onCloseOverlay }) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
 Contact.propTypes = {
   onCloseOverlay: PropTypes.func.isRequired
-}
+};
 
-export default Contact
+export default Contact;

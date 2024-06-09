@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import '../../assets/components/Projects/project.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../../assets/components/Projects/project.scss';
 
 const Project = ({ project, index, projectClick }) => {
   const handleProjectClick = (e, index) => {
-    console.log(index)
-    projectClick(e, index)
-  }
+    console.log(index);
+    projectClick(e, index);
+  };
 
   return (
     <div className='projects-content-holder-item' key={index} onClick={(e) => handleProjectClick(e, index)}>
@@ -23,13 +23,13 @@ const Project = ({ project, index, projectClick }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 Project.propTypes = {
   project: PropTypes.object,
   index: PropTypes.number,
   projectClick: PropTypes.func
-}
+};
 
-export default Project
+export default Project;

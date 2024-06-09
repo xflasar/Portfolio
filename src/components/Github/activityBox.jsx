@@ -1,19 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import '../../assets/components/Github/activityBox.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../../assets/components/Github/activityBox.scss';
 
 const ActivityBox = ({ activityData }) => {
   function formatTimestap (timestap) {
-    return new Date(timestap).toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }) + ' ' + new Date(timestap).toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: 'numeric' })
+    return new Date(timestap).toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }) + ' ' + new Date(timestap).toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: 'numeric' });
   }
 
   const calculateDuration = timestamp => {
-    const diffInMilliseconds = new Date() - new Date(timestamp)
-    const minutes = diffInMilliseconds / (1000 * 60)
-    const hours = minutes / 60
-    const days = hours / 24
-    return days >= 1 ? `${Math.floor(days)} day${Math.floor(days) > 1 ? 's' : ''}` : hours >= 1 ? `${Math.floor(hours)} hour${Math.floor(hours) > 1 ? 's' : ''}` : `${Math.floor(minutes)} minute${Math.floor(minutes) > 1 ? 's' : ''}`
-  }
+    const diffInMilliseconds = new Date() - new Date(timestamp);
+    const minutes = diffInMilliseconds / (1000 * 60);
+    const hours = minutes / 60;
+    const days = hours / 24;
+    return days >= 1 ? `${Math.floor(days)} day${Math.floor(days) > 1 ? 's' : ''}` : hours >= 1 ? `${Math.floor(hours)} hour${Math.floor(hours) > 1 ? 's' : ''}` : `${Math.floor(minutes)} minute${Math.floor(minutes) > 1 ? 's' : ''}`;
+  };
 
   function selectRenderBoxType (activityData) {
     if (activityData.activityTitle === 'PushEvent') {
@@ -28,7 +28,7 @@ const ActivityBox = ({ activityData }) => {
             <p>{activityData.payload.commits[0].message}</p>
           </div>
         </a>
-      )
+      );
     } else if (activityData.activityTitle === 'CreateEvent') {
       return (
         <>
@@ -37,7 +37,7 @@ const ActivityBox = ({ activityData }) => {
             <h4>({calculateDuration(activityData.created_at)} ago)</h4>
           </div>
         </>
-      )
+      );
     } else if (activityData.activityTitle === 'DeleteEvent') {
       return (
         <>
@@ -46,7 +46,7 @@ const ActivityBox = ({ activityData }) => {
             <h4>({calculateDuration(activityData.created_at)} ago)</h4>
           </div>
         </>
-      )
+      );
     }
   }
 
@@ -54,11 +54,11 @@ const ActivityBox = ({ activityData }) => {
     <div className='activity-box'>
     {activityData && selectRenderBoxType(activityData)}
   </div>
-  )
-}
+  );
+};
 
 ActivityBox.propTypes = {
   activityData: PropTypes.object
-}
+};
 
-export default ActivityBox
+export default ActivityBox;

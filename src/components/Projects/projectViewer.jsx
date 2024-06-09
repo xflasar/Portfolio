@@ -1,34 +1,34 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import '../../assets/components/Projects/projectViewer.scss'
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import '../../assets/components/Projects/projectViewer.scss';
 
 function addAnimation (project) {
-  const sliding = document.querySelector('.image-slider')
-  sliding.setAttribute('data-animated', true)
+  const sliding = document.querySelector('.image-slider');
+  sliding.setAttribute('data-animated', true);
 
-  const scrollerInner = sliding.querySelector('.sliding')
+  const scrollerInner = sliding.querySelector('.sliding');
 
-  if (!scrollerInner) return
+  if (!scrollerInner) return;
 
-  const scrollerContent = Array.from(scrollerInner.children)
+  const scrollerContent = Array.from(scrollerInner.children);
 
   scrollerContent.forEach(item => {
-    const duplicateItem = item.cloneNode(true)
-    duplicateItem.setAttribute('aria-hidden', true)
-    scrollerInner.appendChild(duplicateItem)
-  })
+    const duplicateItem = item.cloneNode(true);
+    duplicateItem.setAttribute('aria-hidden', true);
+    scrollerInner.appendChild(duplicateItem);
+  });
 }
 
 const ProjectViewer = ({ project, closeViewer }) => {
   const handleCloseViewer = () => {
-    closeViewer()
-  }
+    closeViewer();
+  };
 
   useEffect(() => {
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      addAnimation(project)
+      addAnimation(project);
     }
-  }, [window])
+  }, [window]);
 
   return (
     <div className="project-viewer">
@@ -62,12 +62,12 @@ const ProjectViewer = ({ project, closeViewer }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 ProjectViewer.propTypes = {
   project: PropTypes.object.isRequired,
   closeViewer: PropTypes.func.isRequired
-}
+};
 
-export default ProjectViewer
+export default ProjectViewer;
