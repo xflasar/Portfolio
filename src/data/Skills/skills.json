@@ -4,55 +4,63 @@
     "skillUrl": "https://reactjs.org/",
     "skillImage": "./assets/skills/reactjs_img.webp",
     "skillLevelPercent": 70,
-    "skillStartDate": "2023-03-5"
+    "skillStartDate": "2023-03-5",
+    "skillDescription": "First usage is dated in BDO Grind Tracker. I used to learn on basic easy examples until decided to build a game statistics site for Black Desert Online."
   },
   {
     "skillName": "HTML5",
     "skillUrl": "https://developer.mozilla.org/en-US/docs/Glossary/HTML5",
     "skillImage": "./assets/skills/html5_img.webp",
     "skillLevelPercent": 80,
-    "skillStartDate": "2021-06-15"
+    "skillStartDate": "2021-06-15",
+    "skillDescription": "Started using it first in High school where I learned basic usage and syntax while building a simple website as a final project. Then I started to use it more as a structure for more complex websites."
   },
   {
     "skillName": "CSS3",
     "skillUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS",
     "skillImage": "./assets/skills/css3_img.svg",
     "skillLevelPercent": 75,
-    "skillStartDate": "2021-06-15"
+    "skillStartDate": "2021-06-15",
+    "skillDescription": ""
   },
   {
     "skillName": "Node.js",
     "skillUrl": "https://nodejs.org/en/",
     "skillImage": "./assets/skills/nodejs_img.webp",
     "skillLevelPercent": 60,
-    "skillStartDate": "2023-03-5"
+    "skillStartDate": "2023-03-5",
+    "skillDescription": ""
   },
   {
     "skillName": "Java",
     "skillUrl": "https://www.w3schools.com/java/",
     "skillImage": "./assets/skills/java_img.webp",
     "skillLevelPercent": 45,
-    "skillStartDate": "2023-08-1"
+    "skillStartDate": "2023-08-1",
+    "skillDescription": ""
   },
   {
     "skillName": "Vue.js",
     "skillUrl": "https://vuejs.org/",
     "skillImage": "./assets/skills/vue_img.svg",
     "skillLevelPercent": 30,
-    "skillStartDate": "2023-08-1"
+    "skillStartDate": "2023-08-1",
+    "skillDescription": ""
   },
   {
     "skillName": "MongoDB",
     "skillUrl": "https://www.mongodb.com/",
     "skillImage": "./assets/skills/mongodb_img.webp",
     "skillLevelPercent": 70,
-    "skillStartDate": "2023-02-15"
+    "skillStartDate": "2023-02-15",
+    "skillDescription": ""
   },
   {
     "skillName": "PostgreSQL",
     "skillUrl": "https://www.postgresql.org/",
     "skillImage": "./assets/skills/postgresql_img.webp",
     "skillLevelPercent": 45,
-    "skillStartDate": "2023-08-1"
+    "skillStartDate": "2023-08-1",
+    "skillDescription": ""
   }
 ]

@@ -798,6 +798,7 @@ type PageInfo = {
 };
 
 type ProjectsJson = Node & {
+  readonly Github: Maybe<Scalars['String']>;
   readonly Tag: Maybe<Scalars['String']>;
   readonly children: ReadonlyArray<Node>;
   readonly id: Scalars['ID'];
@@ -856,6 +857,7 @@ type ProjectsJsonEdge = {
 };
 
 type ProjectsJsonFieldSelector = {
+  readonly Github: InputMaybe<FieldSelectorEnum>;
   readonly Tag: InputMaybe<FieldSelectorEnum>;
   readonly children: InputMaybe<NodeFieldSelector>;
   readonly id: InputMaybe<FieldSelectorEnum>;
@@ -869,6 +871,7 @@ type ProjectsJsonFieldSelector = {
 };
 
 type ProjectsJsonFilterInput = {
+  readonly Github: InputMaybe<StringQueryOperatorInput>;
   readonly Tag: InputMaybe<StringQueryOperatorInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
   readonly id: InputMaybe<StringQueryOperatorInput>;
@@ -927,6 +930,7 @@ type ProjectsJsonGroupConnection_sumArgs = {
 };
 
 type ProjectsJsonSortInput = {
+  readonly Github: InputMaybe<SortOrderEnum>;
   readonly Tag: InputMaybe<SortOrderEnum>;
   readonly children: InputMaybe<NodeSortInput>;
   readonly id: InputMaybe<SortOrderEnum>;
@@ -1119,6 +1123,7 @@ type Query_fileArgs = {
 
 
 type Query_projectsJsonArgs = {
+  Github: InputMaybe<StringQueryOperatorInput>;
   Tag: InputMaybe<StringQueryOperatorInput>;
   children: InputMaybe<NodeFilterListInput>;
   id: InputMaybe<StringQueryOperatorInput>;
@@ -1211,6 +1216,7 @@ type Query_skillsJsonArgs = {
   id: InputMaybe<StringQueryOperatorInput>;
   internal: InputMaybe<InternalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
+  skillDescription: InputMaybe<StringQueryOperatorInput>;
   skillImage: InputMaybe<StringQueryOperatorInput>;
   skillLevelPercent: InputMaybe<IntQueryOperatorInput>;
   skillName: InputMaybe<StringQueryOperatorInput>;
@@ -2005,6 +2011,7 @@ type SkillsJson = Node & {
   readonly id: Scalars['ID'];
   readonly internal: Internal;
   readonly parent: Maybe<Node>;
+  readonly skillDescription: Maybe<Scalars['String']>;
   readonly skillImage: Maybe<Scalars['String']>;
   readonly skillLevelPercent: Maybe<Scalars['Int']>;
   readonly skillName: Maybe<Scalars['String']>;
@@ -2062,6 +2069,7 @@ type SkillsJsonFieldSelector = {
   readonly id: InputMaybe<FieldSelectorEnum>;
   readonly internal: InputMaybe<InternalFieldSelector>;
   readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly skillDescription: InputMaybe<FieldSelectorEnum>;
   readonly skillImage: InputMaybe<FieldSelectorEnum>;
   readonly skillLevelPercent: InputMaybe<FieldSelectorEnum>;
   readonly skillName: InputMaybe<FieldSelectorEnum>;
@@ -2074,6 +2082,7 @@ type SkillsJsonFilterInput = {
   readonly id: InputMaybe<StringQueryOperatorInput>;
   readonly internal: InputMaybe<InternalFilterInput>;
   readonly parent: InputMaybe<NodeFilterInput>;
+  readonly skillDescription: InputMaybe<StringQueryOperatorInput>;
   readonly skillImage: InputMaybe<StringQueryOperatorInput>;
   readonly skillLevelPercent: InputMaybe<IntQueryOperatorInput>;
   readonly skillName: InputMaybe<StringQueryOperatorInput>;
@@ -2131,6 +2140,7 @@ type SkillsJsonSortInput = {
   readonly id: InputMaybe<SortOrderEnum>;
   readonly internal: InputMaybe<InternalSortInput>;
   readonly parent: InputMaybe<NodeSortInput>;
+  readonly skillDescription: InputMaybe<SortOrderEnum>;
   readonly skillImage: InputMaybe<SortOrderEnum>;
   readonly skillLevelPercent: InputMaybe<SortOrderEnum>;
   readonly skillName: InputMaybe<SortOrderEnum>;
