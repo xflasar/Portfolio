@@ -46,6 +46,11 @@ const ProjectsSection = ({selectedSkill, projects}) => {
 		setSkillSelectedProjects(foundProjectsMatch);
 	};
 
+  // Make a way to redirect to the project in Project page into project projectViewer
+  const handleProjectClick = (project) => {
+    console.log("Not Implemented! URL:", project.projectLink);
+  }
+
   useEffect(() => {
 		if (selectedSkill && projects.length > 0) {
 			getProjectsFromSkill(selectedSkill);
@@ -93,6 +98,7 @@ const ProjectsSection = ({selectedSkill, projects}) => {
                       key={index}
                       project={project.node}
                       index={index}
+                      projectClick={handleProjectClick}
                     />
                   </div>
                 ))

@@ -11,10 +11,12 @@
 
   &:hover {
     .content {
-      max-height: 70%;
+      max-height: 100%;
+      backdrop-filter: blur(1px);
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.7) 70%);
 
       &::before {
-        box-shadow: inset 48px 48px #014e7d;
+        box-shadow: none;
       }
 
       &-description {
@@ -51,7 +53,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background: linear-gradient(90deg, #1b83c3 0, #014e7d 70%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.7) 70%);
     border-top-left-radius: 20px;
     max-height: 50px;
     height: 100%;
@@ -59,19 +61,6 @@
     display: flex;
     flex-direction: column;
     z-index: 2;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -48px;
-      right: -43px;
-      width: 100px;
-      height: 100px;
-      transform: rotate(-175deg);
-      border-radius: 50%;
-      box-shadow: inset 48px 48px #014e7d;
-      z-index: -1;
-    }
 
     &-title {
       width: 100%;

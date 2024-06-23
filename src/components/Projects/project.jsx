@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import '../../assets/components/Projects/project.scss';
 
 const Project = ({ project, index, projectClick }) => {
-  const handleProjectClick = (e, index) => {
-    console.log(index);
-    projectClick(e, index);
+  const handleProjectClick = (e) => {
+    e.preventDefault();
+    projectClick(project);
   };
 
   return (
-    <div className='projects-content-holder-item' key={index} onClick={(e) => handleProjectClick(e, index)}>
+    <div className='projects-content-holder-item' key={index} onClick={(e) => handleProjectClick(e)}>
       <img src={project.projectImages[0]} alt={project.projectDescription} />
       {/* <a href={project.projectLink} target="_blank" rel="noreferrer"/> */}
       <div className="content">

@@ -7,10 +7,8 @@ import ProjectViewer from './projectViewer';
 const ProjectsList = ({ projectsContainerName, ProjectsData, isMobile }) => {
   const [expandedProject, setExpandedProject] = useState(null);
 
-  const handleProjectClick = (e, index) => {
-    e.preventDefault();
-    console.log('Hit');
-    setExpandedProject(ProjectsData[index]);
+  const handleProjectClick = (project) => {
+    setExpandedProject(project);
   };
 
   const closeProjectViewer = () => {
