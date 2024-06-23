@@ -192,13 +192,8 @@ const Home = () => {
   return (
     <>
     {handleNavbarPageRender()}
-    <section className="home">
-      <div className="wrapper">
-        {/* <video autoPlay muted loop className="video">
-          <source src="../bg.mp4" type="video/mp4" />
-        </video> */}
-      </div>
-
+    <section className={activePage === '' ? "home" : "home noanim"}>
+      <div className="wrapper" />
       <LocaleBtn locale={locale} hndlLocaleChange={(loc) => handleLocaleChange(loc)}/>
 
       <div className="prof-image">

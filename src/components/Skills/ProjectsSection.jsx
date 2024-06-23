@@ -11,7 +11,7 @@ const ProjectsSection = ({selectedSkill, projects}) => {
   const checkScroll = () => {
     const container = projectsContainerRef.current;
     if (container) {
-      const isBottom = container.scrollHeight - container.scrollTop === container.clientHeight;
+      const isBottom = Math.floor(container.scrollHeight - container.scrollTop) === container.clientHeight;
       setIsAtBottom(isBottom);
     }
   };

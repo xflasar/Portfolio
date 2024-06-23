@@ -8,6 +8,12 @@
   overflow-y: scroll;
   animation: loadInHomeHolder 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s 1 normal forwards;
 
+  &.noanim {
+    * {
+      animation-play-state: paused !important;
+    }
+  }
+
   @keyframes loadInHomeHolder {
     0% {
       background-color: #000;
@@ -362,6 +368,7 @@
   z-index: 101;
   transform-origin: center;
   animation: expand .5s 1 forwards;
+  backdrop-filter: blur(10px);
 
   .close-button {
     all: unset;
