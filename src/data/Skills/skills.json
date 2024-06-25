@@ -3,7 +3,7 @@
     "skillName": "React.js",
     "skillUrl": "https://reactjs.org/",
     "skillImage": "./assets/skills/reactjs_img.webp",
-    "skillLevelPercent": 60,
+    "skillLevelPercent": 50,
     "skillStartDate": "2023-03-5",
     "skillDescription": "First usage is dated in BDO Grind Tracker. I used to learn on basic easy examples until decided to build a game statistics site for Black Desert Online."
   },
@@ -11,7 +11,7 @@
     "skillName": "JavaScript",
     "skillUrl": "https://www.javascript.com/",
     "skillImage": "./assets/skills/javascript_img.webp",
-    "skillLevelPercent": 70,
+    "skillLevelPercent": 60,
     "skillStartDate": "2021-06-15",
     "skillDescription": "Started using it first in High school where I learned basic usage and syntax while building a simple website as a final project. Then I started to use it more as a structure for more complex websites."
   },
@@ -35,7 +35,7 @@
     "skillName": "Node.js",
     "skillUrl": "https://nodejs.org/en/",
     "skillImage": "./assets/skills/nodejs_img.webp",
-    "skillLevelPercent": 60,
+    "skillLevelPercent": 40,
     "skillStartDate": "2023-03-5",
     "skillDescription": "When I got into a project around managing gaming server I used Node.js first as a Discord Bot developement language. Then I used it in \"Black Desert Online Tracking Tool\" as a Backend. API? Yes. Function with Database? Yes. Discord Bot working? Yes."
   },
@@ -59,7 +59,7 @@
     "skillName": "MongoDB",
     "skillUrl": "https://www.mongodb.com/",
     "skillImage": "./assets/skills/mongodb_img.webp",
-    "skillLevelPercent": 70,
+    "skillLevelPercent": 40,
     "skillStartDate": "2023-02-15",
     "skillDescription": "Started learning with React.js as a Database for \"Black Desert Online Grind Tool\" project. Basics learned. Can connect to database and use it. Most used is \"Mongoose\". No-Sql database!"
   },

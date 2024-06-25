@@ -90,8 +90,9 @@
         gap: 1rem;
         align-content: center;
         justify-items: center;
+        justify-content: space-around;
         transition: all 0.2s ease-in-out;
-        margin: 0.95rem;
+        padding: 0.95rem;
         
         .skill {
           position: relative;
@@ -100,7 +101,6 @@
           padding: 0;
           background-color: rgb(26,26,26);
           border-radius: 50%;
-          color: #55aaff;
           text-decoration: none;
           cursor: pointer;
           text-align: center;
@@ -109,6 +109,10 @@
           display: flex;
           flex-direction: column;
           transition: all 0.5s ease-in-out;
+
+          &.active {
+            outline: 2px solid #55aaff;
+          }
   
           &.active, &:hover {
             background-color: rgba(100, 100, 100, 0.3);

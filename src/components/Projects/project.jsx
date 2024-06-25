@@ -11,8 +11,8 @@ const Project = ({ project, index, projectClick }) => {
   return (
     <div className='projects-content-holder-item' key={index} onClick={(e) => handleProjectClick(e)}>
       <img src={project.projectImages[0]} alt={project.projectDescription} />
-      {/* <a href={project.projectLink} target="_blank" rel="noreferrer"/> */}
       <div className="content">
+      <a href={project.projectLink} target="_blank" rel="noreferrer">
         <div className="content-title">
           <h3>
             {project.projectName}
@@ -21,6 +21,7 @@ const Project = ({ project, index, projectClick }) => {
         <div className="content-description">
           <p>{project.projectDescription}</p>
         </div>
+        </a>
       </div>
     </div>
   );

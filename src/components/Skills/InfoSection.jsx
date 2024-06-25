@@ -29,9 +29,9 @@ const InfoSection = ({skill}) => {
 					<div className="progress-bar">
 						<div className="progress" style={{width: skill.skillLevelPercent + "%",
 													backgroundColor: `${
-														skill.skillLevelPercent < 45
+														skill.skillLevelPercent < 25
 															? "rgba(200, 20, 20, 0.5)"
-															: skill.skillLevelPercent > 75
+															: skill.skillLevelPercent > 50
 															? "rgba(20, 200, 0, 0.5)"
 															: "rgba(200, 200, 10, 0.5)"}`
 													}}></div>
@@ -44,7 +44,7 @@ const InfoSection = ({skill}) => {
 						id="skill-url"
 						href={skill.skillUrl}
 					>
-						{skill.skillName} Documentation
+						{skill.skillName} Webpage
 					</a>
 				</div>
 				<div className="info-item">

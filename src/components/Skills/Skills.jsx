@@ -5,7 +5,7 @@ import "../../assets/components/Skills/Skills.scss";
 import InfoSection from "./InfoSection"
 import ProjectSection from "./ProjectsSection";
 
-const Skills = ({ onCloseOverlay, isMobile, lang }) => {
+const Skills = ({ onCloseOverlay, lang }) => {
 	const [projectsData, setProjectsData] = useState([]);
 	const [skillsData, setSkillsData] = useState([]);
 	const [skillSelected, setSkillSelected] = useState(null);
@@ -140,9 +140,9 @@ const Skills = ({ onCloseOverlay, isMobile, lang }) => {
 												style={{
 													maxHeight: `${skill.node.skillLevelPercent}%`,
 													backgroundColor: `${
-														skill.node.skillLevelPercent < 45
+														skill.node.skillLevelPercent < 25
 															? "rgba(200, 20, 20, 0.5)"
-															: skill.node.skillLevelPercent > 75
+															: skill.node.skillLevelPercent > 50
 															? "rgba(20, 200, 0, 0.5)"
 															: "rgba(200, 200, 10, 0.5)"
 													}`,
