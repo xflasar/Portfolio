@@ -8,6 +8,7 @@ export default function App () {
     <div className="App">
       <main>
         <Home />
+        <div id='portal'></div>
       </main>
       <Footer />
     </div>

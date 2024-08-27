@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../../assets/components/About/About.scss';
+import { useLocale } from '../../hooks/useLocale';
 
-const About = ({ redirectTo, onCloseOverlay, locale }) => {
-  const [localeData, setLocaleData] = useState(null);
+const About = ({ redirectTo, onCloseOverlay }) => {
+  const { localeData } = useLocale('About')  
+
+  if(!localeData) return null
 
   const handleFreelancingProjectsClick = () => {
     redirectTo('projects');
   };
-
-  // alone hook move this to hooks.js
-  useEffect(() => {
-    const lang = locale;
-    import(`../../localize/About/about.${lang}.json`)
-      .then((data) => {
-        setLocaleData(data);
-      })
-      .catch((error) => {
-        console.error(`Error loading language data: ${error.message}`);
-      });
-  }, []);
 
   return (
     <div className="about">

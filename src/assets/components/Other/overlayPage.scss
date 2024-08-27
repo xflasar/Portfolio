@@ -1,0 +1,102 @@
+.overlay-page {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(20, 20, 20, 0.6);
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+  transform-origin: center;
+  animation: expand .5s 1 forwards;
+  backdrop-filter: blur(10px);
+
+  .close-button {
+    all: unset;
+    width: 100%;
+    height: 2rem;
+    background-color: #003474;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    transition: background-color 0.20s ease-in-out;
+
+    &:hover {
+      background-color:hsl(226, 100%, 56%);
+    }
+
+    div {
+      position: relative;
+      width: 50px;
+      height: 1.5rem;
+      display: flex;
+      justify-content: center;
+      top: 0.3rem;
+
+      span {
+        display: block;
+        position: absolute;
+        
+        &:before, &:after {
+          content: '';
+          display: inline-block;
+          height: 1.5rem;
+          width: 0.5rem;
+          background-color: white;
+          border-radius: 10px;
+          position: relative;
+          margin-top: 25%;
+        }
+        
+        &:before {
+          transform: rotate(-45deg);
+          left: 0;
+          top: -4px;
+        }
+        
+        &:after {
+          transform: rotate(45deg);
+          left: 5px;
+          top: -4px;
+        }
+      }
+    }
+  }
+
+  @keyframes expand {
+    0% {
+      width: 10%;
+      height: 10%;
+      overflow: hidden;
+    }
+    25% {
+
+    }
+    50% {
+      width: 10%;
+      height: 10%;
+      top:50%;
+      left: 50%;
+      overflow: hidden;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      overflow: auto;
+    }
+  }
+}
+
+@media (orientation: portrait) { 
+  .overlay-page {
+    .about-container{
+      padding-bottom: 1rem;
+    }
+
+    .close-button {
+      border-radius: 0;
+    }
+  }
+}

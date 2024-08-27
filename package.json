@@ -1,5 +1,5 @@
 {
-  "name": "Portfolio",
+  "name": "portfolio",
   "private": true,
   "description": "Martin Flasar Portfolio",
   "version": "0.1.0",
@@ -10,7 +10,7 @@
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "test": "jest --coverage",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public -b build",
     "lint": "eslint --fix"
   },
@@ -28,6 +28,8 @@
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-source-graphql": "^5.13.1",
     "gatsby-transformer-json": "^5.13.1",
+    "portfolio": "file:",
+    "Portfolio": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.77.4"
@@ -43,13 +45,18 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
-    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.12",
     "babel-jest": "^29.7.0",
+    "babel-preset-gatsby": "^3.13.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.2",
     "gh-pages": "^6.1.1",
-    "globals": "^15.4.0"
+    "globals": "^15.4.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }
