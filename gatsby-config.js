@@ -14,10 +14,12 @@ require('dotenv').config({
 
 module.exports = {
   flags: {
-    DEV_SSR: false
+    DEV_SSR: false,
+    FAST_DEV: true,
+    PRESERVE_FILE_DOWNLOAD_CACHE: false
   },
   pathPrefix: "/Portfolio",
-  graphqlTypegen: true,
+  graphqlTypegen: false,
   plugins: [
     {
       resolve: 'gatsby-plugin-manifest',
@@ -40,7 +42,14 @@ module.exports = {
         ]
       }
     },
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: {
+        devMode: false,
+      },
+    },
     'gatsby-plugin-sass',
+    'gatsby-plugin-image',
     'gatsby-transformer-json',
     /*
     {
@@ -64,3 +73,11 @@ module.exports = {
     }
   ]
 }
+
+exports.onCreateWebpackConfig = ({ actions, stage }) => {
+  if (stage === "develop") {
+    actions.setWebpackConfig({
+      devtool: false,
+    });
+  }
+};
