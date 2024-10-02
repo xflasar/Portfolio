@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import '../../../assets/components/Home/Home.scss';
 import { useNavbar } from '../../../hooks/useNavbar';
-import GitActivity from '../../Github/activity';
+import GitActivity from '../../Github/activityContainer';
 import { useLocale } from '../../../hooks/useLocale';
-import { useLocaleContext } from '../../../contexts/localeContext';
 
 const Navbar = ({isMobile, antiSkillsBoxCollision, githubActivityShow, handleGithubActivityShow, activePage, setActivePage }) => {
   const {

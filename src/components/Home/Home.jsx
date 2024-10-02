@@ -15,16 +15,15 @@ const Home = () => {
 		setGithubActivityShow(!githubActivityShow);
 	};
 
-	const { locale, setLocale } = useLocaleContext()
+	
 	const { localeData } = useLocale('Home')
+	const { locale, setLocale } = useLocaleContext()
 
 	if(!localeData) return null
 
 	return (
 		<section className={activePage === "" ? "home" : "home noanim"}>
-			<div className="wrapper" />
 			<LocaleBtn locale={locale} hndlLocaleChange={(locale) => setLocale(locale)} />
-
 			<Navbar
 				isMobile={isMobile}
 				antiSkillsBoxCollision={antiSkillsBoxCollision}
@@ -56,6 +55,8 @@ const Home = () => {
 const HomePage = () => {
 	return (
 		<LocaleProvider path="Home">
+			<div className="wrapper" />
+			
 			<Home />
 		</LocaleProvider>
 	);

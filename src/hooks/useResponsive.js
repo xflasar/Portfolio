@@ -13,7 +13,7 @@ export const useResponsive = () => {
   useEffect(() => {
     const handleResize = () => {
       let heightOrWidthMobile = false
-      if (window.innerHeight < 1050 || window.innerWidth < 1050) {
+      if ((window.innerHeight < 1050 || window.innerWidth < 1050) && window.matchMedia('(any-pointer:coarse)').matches) {
         setAntiSkillsBoxCollision(true);
         heightOrWidthMobile = true
       } else {

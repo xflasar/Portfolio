@@ -1,44 +1,42 @@
 .activity-box {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.3);
+  //border: 1px solid #ddd;
+  padding: 15px;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  background-color: #0F4C75; //rgba(3, 5, 36, 0.3);
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(3, 5, 36, 0.1);
+  opacity: 0;
+  overflow: hidden;
+  animation: loadInInit 0.2s linear 1 forwards;
 
-  .activity-box-header {
-    width: 100%;
-
-    h3 {
-      color: #55aaff;
+  @keyframes loadInInit {
+    0% {
+      opacity: 0;
     }
-
-    h4 {
-      font-weight: 400;
-      margin: 0;
-    }
-    
-    h5 {
-      margin: 0;
+    100% {
+      opacity: 1;
     }
   }
+}
 
-  a {
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    color: white;
+.activity-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
 
-    &:hover {
-      background-color: rgba($color: #000000, $alpha: 0.4);
-    }
-  }
-  &:last-child {
-    .activity-box-body {
-      display: flex;
-      justify-content: center;
+.activity-box p {
+  font-size: 1rem;
+  color: #555;
+}
 
-      p {
-        width: 70%;
-      }
-    }
-  }
+.activity-box-container {
+  background-color: #1B262C;//#2c2c38;
+  border-radius: 20px;
+  padding: 15px;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: calc(100% - 30px);
+  overflow: hidden;
+  overflow-y: auto;
 }

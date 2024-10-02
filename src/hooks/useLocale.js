@@ -12,7 +12,7 @@ export const useLocale = (path = 'Home') => {
     }).join('-');
 
     try {
-      const data = await import(`../localize/${path}/${path.toString().toLowerCase()}.${lang}.json`);
+      const data = await require(`../localize/${path}/${path.toString().toLowerCase()}.${lang}.json`);
       return data;
     } catch (error) {
       console.error(`Error loading language data: ${error.message}`);

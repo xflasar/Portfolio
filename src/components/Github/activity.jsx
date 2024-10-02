@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import '../../assets/components/Github/activity.scss';
-import ActivityBox from './activityBox';
+import ActivityBox from './activityBox2';
 
 const Activity = () => {
   const [activity, setActivity] = useState([]);
 
   async function fetchGitActivityData () {
     try {
-      const response = await fetch('https://api.github.com/users/xflasar/events');
+      const response = await fetch('localhost:8099/git-hub'); // https://api.github.com/users/xflasar/events
       const data = await response.json();
-      setActivity(formatData(data));
+      console.log(data)
+      // setActivity(formatData(data));
     } catch (error) {
       console.log(error);
     }

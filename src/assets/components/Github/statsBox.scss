@@ -1,0 +1,56 @@
+.github-stats-box {
+  background-color: #1B262C;//#2c2c38;
+  border-radius: 15px;
+  padding: 15px;
+  color: #ffffff;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  align-self: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: #BBE1FA;
+  }
+
+  .stats-container {
+    display: grid;
+    width: 100%;
+    height: calc(100% - 1.5rem - 1rem);
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+  }
+
+  .stat-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    left: 15px;
+    width: 100%;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      background-color: #3282B8;
+      border-radius: 50%;
+    }
+
+    .stat-details {
+      display: flex;
+      flex-direction: column;
+
+      .stat-name {
+        font-size: 1rem;
+        color: #BBE1FA;
+      }
+
+      .stat-value {
+        font-size: 0.85rem;
+        color: #a6a6a6;
+      }
+    }
+  }
+}
