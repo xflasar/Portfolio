@@ -1,5 +1,5 @@
 {
-  "name": "portfolio",
+  "name": "xflasar_portfolio",
   "private": true,
   "description": "Martin Flasar Portfolio",
   "version": "0.1.0",
@@ -25,14 +25,14 @@
     "gatsby": "^5.13.7",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
-    "gatsby-plugin-sass": "^6.13.1",
+    "gatsby-plugin-sass": "^6.0.0",
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-source-graphql": "^5.13.1",
     "gatsby-transformer-json": "^5.13.1",
-    "portfolio": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.79.4"
+    "sass": "^1.78.0",
+    "xflasar_portfolio": "file:"
   },
   "repository": {
     "type": "git",
@@ -53,7 +53,6 @@
     "babel-preset-gatsby": "^3.13.2",
     "eslint": "^9.11.1",
     "eslint-plugin-react": "^7.37.1",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.32",
     "gh-pages": "^6.1.1",
     "globals": "^15.10.0",
     "identity-obj-proxy": "^3.0.0",

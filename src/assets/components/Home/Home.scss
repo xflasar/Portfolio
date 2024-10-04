@@ -48,18 +48,7 @@
       animation: loadingAnimImg 2s cubic-bezier(0.7, 0, 0.84, 0) 0s 1 normal forwards;
       opacity: 0;
         
-      @keyframes loadingAnimImg {
-        0% {
-          transform: translateX(-120%);
-        }
-        50% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
+      
     }
 
     .links {
@@ -116,27 +105,11 @@
             transition-timing-function: ease-in-out, ease-in-out, 1s, 1s;
             will-change: border-radius, transform;
             -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
             appearance: none;
             animation: morphing 5s linear infinite alternate, spin 26s linear infinite reverse;
             border-radius: 50%;
-  
-            @keyframes morphing {
-              0% {
-                border-radius: 50%;
-              }
-              50% {
-                border-radius: 40% 60% 60% 40% / 70% 30%;
-              }
-              100% {
-                border-radius: 50%;
-              }
-            }
-            
-            @keyframes spin {
-              100% {
-                transform: rotate(0.5turn);
-              }
-            }
+            z-index: 0;
   
             &:hover {
               background-color: rgba(57, 48, 219, 0.5);
@@ -145,33 +118,13 @@
                   0 -0.15em 0.4em hsl(242, 90%, 45%) inset,
                   0 0.05em 0.05em hsl(196, 90%, 45%) inset;
             }
-  
-            -webkit-tap-highlight-color: transparent;
+            
             &, &::before, &::after {
               transition-duration: 0.2s;
             }
   
             &.hoverAnim {
               animation: openPage 2s linear 1 alternate forwards;
-  
-              @keyframes openPage {
-                0% {
-                  transform: scale(1);
-                }
-                50% {
-                  transform: scale(1.5);
-                }
-                55% {
-                  transform: scale(0);
-                  opacity: 0;
-                }
-                80% {
-                  transform: scale(1);
-                }
-                100% {
-                  opacity: 1;
-                }
-              }
             }
           }
   
@@ -194,17 +147,6 @@
               animation: loadingNavLinksAnim 1s cubic-bezier(0.075, 0.82, 0.165, 1) 3.5s 1 normal forwards;
             }
           }
-  
-          @keyframes loadingNavLinksAnim {
-            0% {
-              opacity: 0;
-            }
-            100% {
-              opacity: 1;
-            }
-          }
-          
-          z-index: 0;
   
           &.about-nav {
             position: relative;
@@ -238,6 +180,65 @@
             padding: 2.5rem 1rem 2.5rem 1rem;
           }
       }
+    }
+  }
+
+  @keyframes loadingAnimImg {
+    0% {
+      transform: translateX(-120%);
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes morphing {
+    0% {
+      border-radius: 50%;
+    }
+    50% {
+      border-radius: 40% 60% 60% 40% / 70% 30%;
+    }
+    100% {
+      border-radius: 50%;
+    }
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(0.5turn);
+    }
+  }
+
+  @keyframes loadingNavLinksAnim {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes openPage {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    55% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    80% {
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
     }
   }
 

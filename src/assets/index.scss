@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@700&display=swap");
 
 html {
-  @media screen and (prefers-reduced-motion: reduce) {
-    scroll-behavior: auto;
-  }
   scroll-behavior: smooth;
   
   // Mobile fix
@@ -38,6 +35,12 @@ h1 {
 // Style the scroll bar
 ::-webkit-scrollbar {
   width: 0px;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 // debug

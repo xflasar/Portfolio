@@ -16,7 +16,9 @@ module.exports = {
   flags: {
     DEV_SSR: false,
     FAST_DEV: true,
-    PRESERVE_FILE_DOWNLOAD_CACHE: false
+    PRESERVE_FILE_DOWNLOAD_CACHE: false,
+    PARALLEL_SOURCING: true,
+    PARTIAL_HYDRATION: true
   },
   pathPrefix: "/Portfolio",
   graphqlTypegen: false,
@@ -43,27 +45,13 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      resolve: `gatsby-plugin-sass`,
       options: {
-        devMode: false,
-      },
+        implementation: require("sass"),
+      }
     },
-    'gatsby-plugin-sass',
     'gatsby-plugin-image',
     'gatsby-transformer-json',
-    /*
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'GitHub',
-        fieldName: 'github',
-        url: 'https://api.github.com/graphql',
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-        },
-        fetchOptions: {}
-      }
-    }, */
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -73,11 +61,3 @@ module.exports = {
     }
   ]
 }
-
-exports.onCreateWebpackConfig = ({ actions, stage }) => {
-  if (stage === "develop") {
-    actions.setWebpackConfig({
-      devtool: false,
-    });
-  }
-};
