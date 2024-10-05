@@ -4,8 +4,7 @@
   position: relative;
   width: 80%;
   height: 90vh;
-  left: 10%;
-  top: 5%;
+  max-width: 2500px;
   overflow: hidden;
   color: white;
   background: #1a1a1a;
@@ -41,146 +40,138 @@
   }
 
   .skills-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    height: calc(100% - 2rem);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     overflow: hidden;
 
-    h1 {
-      grid-row: 1;
-      grid-column: 1;
+    .scrollable {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      overflow:hidden;
+      overflow-y:scroll;
     }
   }
+
   .skills-top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: 200px;
+    height: calc(100% - 2rem);
+    align-items: center;
+    margin: 1rem;
     overflow: hidden;
-    overflow-y: scroll;
-    min-height: 300px;
-    grid-row: 1;
-    grid-column: 1;
+    overflow-y: auto;
+    border-radius: 15px;
+    background-color: rgb(35,35,35);
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: 0.5rem;
+      border-radius: 5px;
+      background-color:#003474;
+    }
 
     .skill-cloud-container {
       position: relative;
-      width: calc(100% - 2rem);
-      height: calc(100% - 6rem);
-      margin: 0 1rem;
-      top: 6rem;
-      overflow: hidden;
-      overflow-y: auto;
-      background-color: rgb(35,35,35);
-      border-radius: 15px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-
-      &::-webkit-scrollbar {
-        width: 0.5rem;
-      }
-  
-      &::-webkit-scrollbar-thumb {
-        width: 0.5rem;
-        border-radius: 5px;
-        background-color:#003474;
-      }
-  
-      .skill-cloud {
+      gap: 1rem;
+      padding: 0.5rem 0 0.5rem 0;
+      transition: all 0.2s ease-in-out;
+      
+      .skill {
         position: relative;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(50px, 175px));
-        gap: 1rem;
-        align-content: center;
-        justify-items: center;
-        justify-content: space-around;
-        transition: all 0.2s ease-in-out;
-        padding: 0.95rem;
-        
-        .skill {
-          position: relative;
-          width: 100%;
-          height: 12vh;
-          padding: 0;
-          background-color: rgb(26,26,26);
-          border-radius: 50%;
-          text-decoration: none;
-          cursor: pointer;
-          text-align: center;
-          justify-content: center;
-          align-items: center;
-          display: flex;
-          flex-direction: column;
-          transition: all 0.5s ease-in-out;
-          box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        min-width: 50px;
+        max-width: 150px;
+        max-height: 150px;
+        background-color: rgba(26,26,26,1);
+        border-radius: 50%;
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.5s ease-in-out;
+        transition: outline 0s;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        aspect-ratio: 1/1;
 
-          &.active {
-            outline: 2px solid #55aaff;
-          }
-  
-          &.active, &:hover {
-            background-color: rgba(100, 100, 100, 0.3);
-  
-            .skill-overlay-background {
-              height: 100%; 
-              transition: height 0.5s ease-in;
-            }
-            
-            img {
-              object-fit: scale-down;
-              opacity: 0;
-              z-index: 2;
-            }
-            
-            .skill-name {
-              opacity: 1;
-              z-index: 2;
-            }
-            
-            .experience {
-              opacity: 1;
-              z-index: 2;
-            }
-          }
-          
-          
-          img {
-            position: absolute;
-            object-fit: scale-down;
-            width: 100%;
-            height: 5vh;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 1;
-            transition: opacity 0.2s ease-in-out;
-          }
+        &.active {
+          outline: 3px solid #55aaff;
+        }
 
-          .skill-overlay {
-            position: absolute;
-            bottom: 0;
-            overflow: hidden;
-            width: 100%;
-            height: 12vh;
-            min-width: 50px;
-            max-width: 175px;
-            min-height: 50px;
-            max-height: 175px;
-            border-radius: 50%;
-          }
+        &.active, &:hover {
+          background-color: rgba(100, 100, 100, 0.1);
 
           .skill-overlay-background {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 0;
-            transition: height 0.2s ease-out;
+            height: 100%; 
+            transition: height 0.5s ease-in;
           }
-        
-          .skill-name {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: rgb(255, 255, 255);
+          
+          img {
+            object-fit: scale-down;
             opacity: 0;
-            transition: opacity 0.25s ease-in-out;
+            z-index: 2;
           }
+          
+          .skill-name {
+            opacity: 1;
+            z-index: 2;
+          }
+          
+          .experience {
+            opacity: 1;
+            z-index: 2;
+          }
+        }
+
+        img {
+          position: absolute;
+          object-fit: contain;
+          width: calc(100% - 2rem);
+          height: calc(100% - 2rem);
+          margin: 1rem;
+          opacity: 1;
+          transition: opacity 0.2s ease-in-out;
+        }
+
+        .skill-overlay {
+          position: absolute;
+          bottom: 0;
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          min-width: 50px;
+          max-width: 175px;
+          min-height: 50px;
+          max-height: 175px;
+          border-radius: 50%;
+        }
+
+        .skill-overlay-background {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 0;
+          transition: height 0.2s ease-out;
+        }
+      
+        .skill-name {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: rgb(255, 255, 255);
+          opacity: 0;
+          transition: opacity 0.25s ease-in-out;
         }
       }
     }
@@ -189,35 +180,10 @@
   .skills-bottom {
     overflow: hidden;
     width: 100%;
-    height: 100%;
-    min-height: 450px;
-    display: flex;
-    flex-direction: row;
-
-    .skills-info {
-      position: relative;
-      width:50%;
-
-      &-top {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .skills-info-header {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        gap: 3rem;
-        justify-content: center;
-      }
-
-      .skills-info-context {
-        a {
-          text-decoration: none;
-          color: whire
-        }
-      }
-    }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40% 60%;
+    min-height: 200px;
   }
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import "../../assets/components/Skills/Skills.scss";
-import InfoSection from "./InfoSection"
+import InfoSection from "./InfoSection";
 import ProjectSection from "./ProjectsSection";
 
 const Skills = ({ onCloseOverlay, lang }) => {
@@ -45,12 +45,14 @@ const Skills = ({ onCloseOverlay, lang }) => {
 				setProjectsData(qlData.allProjectsJson.edges);
 			}
 
-			if(skillsData && qlData.allSkillsJson) {
-				const updatedSkillsData = qlData.allSkillsJson.edges.map(skill => {
-					skill.node.skillTimeSinceStarted = calculateExperience(skill.node.skillStartDate)
-					return skill 
-				})
-				setSkillsData(updatedSkillsData)
+			if (skillsData && qlData.allSkillsJson) {
+				const updatedSkillsData = qlData.allSkillsJson.edges.map((skill) => {
+					skill.node.skillTimeSinceStarted = calculateExperience(
+						skill.node.skillStartDate
+					);
+					return skill;
+				});
+				setSkillsData(updatedSkillsData);
 			}
 		}
 	}, [qlData]);
@@ -116,49 +118,48 @@ const Skills = ({ onCloseOverlay, lang }) => {
 			</button>
 			<div className="skills-container">
 				<h1>Skills</h1>
-				<section className="skills-top">
-					<div className="skill-cloud-container">
-						<div
-							className="skill-cloud non-main"
-						>
-							{skillsData.map((skill) => {
-								return (
-									<div
-										onClick={() => handleSkillClick(skill.node)}
-										key={skill.node.skillName}
-										className={
-											skillSelected === skill.node
-												? "skill active"
-												: "skill"
-										}
-										title={`Learning since ${skill.node.skillStartDate}`}
-									>
-										<img src={skill.node.skillImage} />
-										<div className="skill-overlay">
-											<div
-												className="skill-overlay-background"
-												style={{
-													maxHeight: `${skill.node.skillLevelPercent}%`,
-													backgroundColor: `${
-														skill.node.skillLevelPercent < 25
-															? "rgba(200, 20, 20, 0.5)"
-															: skill.node.skillLevelPercent > 50
-															? "rgba(20, 200, 0, 0.5)"
-															: "rgba(200, 200, 10, 0.5)"
-													}`,
-												}}
-											/>
+				<section className="scrollable">
+					<section className="skills-top">
+						<div className="skill-cloud-container">
+						{skillsData.map((skill) => {
+									return (
+										<div
+											onClick={() => handleSkillClick(skill.node)}
+											key={skill.node.skillName}
+											className={
+												skillSelected === skill.node ? "skill active" : "skill"
+											}
+											title={`Learning since ${skill.node.skillStartDate}`}
+										>
+											<img src={skill.node.skillImage} />
+											<div className="skill-overlay">
+												<div
+													className="skill-overlay-background"
+													style={{
+														maxHeight: `${skill.node.skillLevelPercent}%`,
+														backgroundColor: `${
+															skill.node.skillLevelPercent < 25
+																? "rgba(200, 20, 20, 0.5)"
+																: skill.node.skillLevelPercent > 50
+																? "rgba(20, 200, 0, 0.5)"
+																: "rgba(200, 200, 10, 0.5)"
+														}`,
+													}}
+												/>
+											</div>
+											<span className="skill-name">{skill.node.skillName}</span>
 										</div>
-										<span className="skill-name">{skill.node.skillName}</span>
-									</div>
-								);
-							})}
+									);
+								})}
 						</div>
-					</div>
-				</section>
-				<section className="skills-bottom">
-					<ProjectSection selectedSkill={skillSelected} projects={projectsData} />
-					<InfoSection skill={skillSelected} />
+					</section>
+					<section className="skills-bottom">
+						<ProjectSection
+							selectedSkill={skillSelected}
+							projects={projectsData}
+						/>
+						<InfoSection skill={skillSelected} />
+					</section>
 				</section>
 			</div>
 		</section>
