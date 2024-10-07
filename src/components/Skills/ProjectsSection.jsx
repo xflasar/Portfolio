@@ -85,9 +85,9 @@ const ProjectsSection = ({ selectedSkill, projects }) => {
 				}
 			>
 				{skillSelectedProjects ? (
-				<div className="skill-project-container-content" ref={projectsContainerRef}>
+				<div className={skillSelectedProjects.length > 1 ? "skill-project-container-content" : "skill-project-container-content oneitem"} ref={projectsContainerRef}>
 						{skillSelectedProjects.length === 0 ? (
-							<p>No Projects assigned!</p>
+							<p className="empty-project-list">No Projects assigned!</p>
 						) : (
 							skillSelectedProjects.map((project, index) => (
 								<div
@@ -104,7 +104,6 @@ const ProjectsSection = ({ selectedSkill, projects }) => {
 								</div>
 							))
 						)}
-					)
 				</div>
 				) : (
 					<div className="skills-projects-notselected">

@@ -2,13 +2,13 @@ import React from "react";
 import "../../assets/components/Skills/InfoSection.scss";
 const InfoSection = ({ skill }) => {
 	const calcExperienceState = (percent) => {
-		if (percent > 75) {
+		if (percent > 90) {
 			return "Senior";
-		} else if (percent >= 70 && percent <= 75) {
+		} else if (percent >= 85 && percent <= 90) {
 			return "Medior/Senior";
-		} else if (percent > 50) {
+		} else if (percent > 60) {
 			return "Medior";
-		} else if (percent >= 45 && percent <= 50) {
+		} else if (percent >= 55 && percent <= 60) {
 			return "Junior/Medior";
 		} else if (percent > 15) {
 			return "Junior";
