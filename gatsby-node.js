@@ -2,6 +2,10 @@ exports.onCreateWebpackConfig = ({ actions, stage }) => {
   if (stage === "develop") {
     actions.setWebpackConfig({
       devtool: false,
+      watchOptions: {
+        aggregateTimeout: 200,
+        poll: 1000,
+      },
       module: {
         rules: [
           {
