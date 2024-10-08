@@ -1,38 +1,117 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../../assets/components/Contact/Contact.scss';
+import React, { useState } from 'react'
+import '../../assets/components/Contact/Contact.scss'
+import CloseButton from '../closeButton'
 
-const Contact = ({ onCloseOverlay }) => {
+const sendContact = async (data) => {
+  /* try {
+    const response = await fetch('/api/contact-me', {
+      method: POST,
+      body: JSON.stringify(data)
+    })
+
+    if (response.ok) {
+      const data = response.json()
+      return data
+    } else {
+      console.log('SOmetihng happend.')
+    }
+  } catch (err){
+    console.log('Error in contactme fetch: ' + err)
+    return null
+  } */
+
+    return 'Worked!'
+}
+
+const Contact = ({onCloseOverlay}) => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [sendStatus, setSendStatus] = useState('')
+
+  const onChangeName = (e) => {
+    setName(e.target.value)
+  }
+  
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  
+  const onChangeMessage = (e) => {
+    setMessage(e.target.value)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(name + " " + email + " " + message)
+
+    if (name == '' || email == '' || message == '') {
+      setSendStatus('Failed!')
+      setTimeout(() => {
+        setSendStatus('')
+      }, 5000)
+      return
+    }
+
+    const status = await sendContact({name, email, message})
+    setSendStatus(status)
+    setTimeout(() => {
+      setSendStatus('')
+    }, 5000)
+  }
+
+  const handleEmail = () => {
+    if (name == '' || email == '' || message == '') {
+      setSendStatus('Failed!')
+      setTimeout(() => {
+        setSendStatus('')
+      }, 5000)
+      return
+    }
+
+    const subject = 'Contact Me';
+    const body = `${message}\n\nBest regards,\n${name}\nEmail: ${email}`;
+    
+    window.open(`mailto:xflasar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+  };
+
   return (
-    <div className="contact">
-      <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
-      <form name='contact' method="POST" data-netlify="true" data-netlify-honeypot='bot-field'>
-        <h1>Contact Me</h1>
-        <label className='form-group'>
-          <input type="text" className='form-control' name="name" id="name" placeholder=' ' required />
-          <span htmlFor='name'>Your name</span>
-          <span className='border' />
-        </label>
-        <label className='form-group'>
-          <input type="email" className='form-control' name="email" id="email" placeholder=' ' required />
-          <span htmlFor='email'>Your email</span>
-          <span className='border' />
-        </label>
-        <label className='form-group'>
-          <textarea className='form-control' name="message" id="message" placeholder=' ' required></textarea>
-          <span htmlFor='message'>Your message</span>
-        </label>
-        <div className='buttons' >
+    <div className="contact-overlay">
+      <CloseButton onCloseOverlay={onCloseOverlay} />
+      <h2>Contact Me</h2>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your name"
+          value={name}
+          onChange={onChangeName}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          value={email}
+          onChange={onChangeEmail}
+        />
+        <textarea
+          name="message"
+          placeholder="Your message"
+          value={message}
+          onChange={onChangeMessage}
+        />
+        <div className="submit-buttons">
           <button type="submit">Send</button>
-          <button type="button" disabled>Send via email client</button>
+          <button type="button" onClick={handleEmail}>
+            Send via Email Client
+          </button>
         </div>
       </form>
+      <div className={sendStatus ? 'alert-box active' : 'alert-box'}>
+          {sendStatus}
+      </div>
     </div>
-  );
-};
+  )
+}
 
-Contact.propTypes = {
-  onCloseOverlay: PropTypes.func.isRequired
-};
-
-export default Contact;
+export default Contact
