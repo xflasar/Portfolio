@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../../assets/components/About/About.scss';
 import { useLocale } from '../../hooks/useLocale';
+import CloseButton from '../closeButton';
 
 const About = ({ redirectTo, onCloseOverlay }) => {
   const { localeData } = useLocale('About')  
@@ -14,7 +15,7 @@ const About = ({ redirectTo, onCloseOverlay }) => {
 
   return (
     <div className="about">
-      <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
+      <CloseButton onCloseOverlay={onCloseOverlay} />
       <h1>{localeData?.AboutH1}</h1>
       <div className="about-container">
         <section className="about-container-intro">

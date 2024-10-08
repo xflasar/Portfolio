@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../../assets/components/Projects/Projects.scss';
 import ProjectsList from './projectsList';
+import CloseButton from '../closeButton';
 import { useStaticQuery, graphql } from 'gatsby';
 
-const Projects = ({ onCloseOverlay, isMobile }) => {
+const Projects = ({isMobile }) => {
   const [personalProjects, setPersonalProjects] = useState([]);
   const [freelanceProjects, setFreelanceProjects] = useState([]);
   const [sideSmallProjects, setSideSmallProjects] = useState([]);
@@ -105,7 +106,7 @@ const Projects = ({ onCloseOverlay, isMobile }) => {
   return (
     <section className="projects">
       <div className='projects-top'>
-        <button type='button' className='close-button' onClick={onCloseOverlay}><div><span/></div></button>
+      <CloseButton onCloseOverlay={onCloseOverlay} />
         <h1>Projects</h1>
         <div className='projects-selector'>
           <button type='button' className='projects-selector-button' onClick={handleProjectSelector}>Personal Projects</button>

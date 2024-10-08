@@ -56,7 +56,6 @@ const HomePage = () => {
 	return (
 		<LocaleProvider path="Home">
 			<div className="wrapper" />
-			
 			<Home />
 		</LocaleProvider>
 	);

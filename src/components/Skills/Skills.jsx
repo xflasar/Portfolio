@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import "../../assets/components/Skills/Skills.scss";
 import InfoSection from "./InfoSection";
 import ProjectSection from "./ProjectsSection";
+import CloseButton from "../closeButton";
 
 const Skills = ({ onCloseOverlay, lang }) => {
 	const [projectsData, setProjectsData] = useState([]);
@@ -111,11 +112,7 @@ const Skills = ({ onCloseOverlay, lang }) => {
 
 	return (
 		<section className="skills">
-			<button type="button" className="close-button" onClick={onCloseOverlay}>
-				<div>
-					<span />
-				</div>
-			</button>
+			<CloseButton onCloseOverlay={onCloseOverlay} />
 			<div className="skills-container">
 				<h1>Skills</h1>
 				<section className="scrollable">
