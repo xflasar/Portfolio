@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../assets/components/Home/Home.scss";
 import Navbar from "./Navbar/Navbar";
 import LocaleBtn from "./LocaleButton/localeBtn";
+import Intro from "./Intro/Intro";
 import { useResponsive } from "../../hooks/useResponsive";
 import { LocaleProvider, useLocaleContext } from "../../contexts/localeContext";
 import { useLocale } from '../../hooks/useLocale';
@@ -34,19 +35,7 @@ const Home = () => {
 			/>
 
 			<div className="home-intro-container">
-				<h1 className="home-intro-h1">{localeData?.HomeIntroH1}</h1>
-				<div className="home-intro">
-					<span>
-						{localeData.HomeIntroSpan.split("\n").map((text, index) => (
-							<React.Fragment key={index}>
-								{text}
-								{index < localeData.HomeIntroSpan.split("\n").length - 1 && (
-									<br />
-								)}
-							</React.Fragment>
-						))}
-					</span>
-				</div>
+				<Intro />
 			</div>
 		</section>
 	);

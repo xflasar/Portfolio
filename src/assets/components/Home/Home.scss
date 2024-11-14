@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .home {
   position: relative;
   width: 100%;
@@ -8,7 +10,7 @@
   overflow-y: scroll;
   animation: loadInHomeHolder 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s 1 normal forwards;
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 50% 50%;
   grid-template-rows: 70% 30%;
 
   &.noanim {
@@ -246,9 +248,6 @@
     position: relative;
     grid-column: 2;
     grid-row: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
     height: 100%;
     animation: loadIn 2s cubic-bezier(0.075, 0.82, 0.165, 1) 1.5s 1 normal forwards;
@@ -362,7 +361,7 @@
 .wrapper {
   height: 100%;
   width: 100vw;
-  background: linear-gradient(180deg, #04fafd, 5%, #119dff, 50%, #030423);
+  background: $color-bg;
   position: absolute;
   overflow: hidden;
   z-index: 0;
