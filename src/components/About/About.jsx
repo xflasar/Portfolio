@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../../assets/components/About/About.scss';
 import { useLocale } from '../../hooks/useLocale';
 import CloseButton from '../closeButton';
+import AboutCard from './AboutCards';
 
 const About = ({ redirectTo, onCloseOverlay }) => {
   const { localeData } = useLocale('About')  
@@ -16,34 +17,19 @@ const About = ({ redirectTo, onCloseOverlay }) => {
   return (
     <div className="about">
       <CloseButton onCloseOverlay={onCloseOverlay} />
-      <h1>{localeData?.AboutH1}</h1>
+      <h1>{localeData?.Title}</h1>
       <div className="about-container">
-        <section className="about-container-intro">
-          <h2>{localeData?.IntroH2}</h2>
-          <p>{localeData?.IntroP}</p>
+        <section className='top'>
+          <AboutCard data={localeData.Intro} className='intro'/>
+          <AboutCard data={localeData.Journey} className='journey'/>
         </section>
-        <section className="about-container-workflow">
-          <h2>{localeData?.WorkflowH2}</h2>
-          <div className="key-point">
-            <span className="key-word">Frontend</span>
-            <p className="key-description">{localeData?.WorkflowFrontendKD}</p>
-          </div>
-          <div className="key-point">
-            <span className="key-word">Backend</span>
-            <p className="key-description">{localeData?.WorkflowBackendKD}</p>
-          </div>
-          <div className="key-point">
-            <span className="key-word">Freelancing</span>
-            <p className="key-description">{localeData?.WorkflowFreelanceKD}<a onClick={handleFreelancingProjectsClick}>{localeData?.WorkflowFreelanceA}</a>.</p>
-          </div>
+        <section className='middle'>
+          <AboutCard data={localeData.Frontend} className='frontend'/>
+          <AboutCard data={localeData.Backend} className='backend'/>
+          <AboutCard data={localeData.Freelancing} className='freelancing'/>
         </section>
-        <section className="about-container-journey">
-          <h2>{localeData?.JourneyH2}</h2>
-          <p>{localeData?.JourneyP}</p>
-        </section>
-        <section className="about-container-motivation">
-          <h2>{localeData?.MotivationH2}</h2>
-          <p>{localeData?.MotivationP}</p>
+        <section className='bottom'>
+          <AboutCard data={localeData.Motivation} className='motivation'/>
         </section>
       </div>
     </div>

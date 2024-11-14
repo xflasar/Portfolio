@@ -1,0 +1,50 @@
+@import '../../variables';
+
+.about-card {
+  border-radius: 10px;
+  background-color: $color-bg;
+  box-shadow: inset 0 0 10px 10px rgba(49, 49, 49, 1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 10px 10px rgba(0, 150, 0, 0.2);
+  }
+ 
+  &-content {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20% 80%;
+  }
+
+  .about-card-title {
+    font-size: 2.5rem;
+    color: #CDDC39;
+    margin-bottom: 1rem;
+  }
+
+  .about-card-section {
+    margin-bottom: 2rem;
+
+    .about-card-subheader {
+      font-size: 2rem;
+      color: #aeee00;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .about-card-description {
+    position: relative;
+    font-size: 1.2rem;
+    color:  #757575;
+    text-align: center;
+    width: 95%;
+    left: 2.5%;
+    align-self: center;
+  }
+}
